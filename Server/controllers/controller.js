@@ -1,4 +1,3 @@
-var MongoClient = require('mongodb').MongoClient
 const db = require('./../db')
 
 
@@ -12,7 +11,9 @@ const db = require('./../db')
 exports.insertData = function (req, res, next) {
   const coll = db.get().collection('foods')
 
-  coll.insert({ name: 'tubel', tasty: true })  
+  let ins = coll.insert({ name: 'tubel', tasty: true })  
+  res.send(ins)
+
   
 
     // collection.insert({ name: 'taco', tasty: true }, function (err, result) {
