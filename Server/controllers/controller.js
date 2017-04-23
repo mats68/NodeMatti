@@ -11,8 +11,8 @@ const db = require('./../db')
 exports.insertData = function (req, res, next) {
   const coll = db.get().collection(req.params.collection)
 
-  coll.insert({ name: 'tubel', tasty: true }, (err, res) => {
-    console.log(res)
+  coll.insert({ name: 'tubel', tasty: true }, (err, result) => {
+    res.send(result)
   })  
   
 
