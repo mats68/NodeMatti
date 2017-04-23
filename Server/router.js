@@ -9,9 +9,6 @@ module.exports = function(app) {
   app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './index.html'))
   })
-  app.get('/about', (req, res) => {
-    res.sendFile(path.join(__dirname, './about.html'))
-  })
   
   app.use('/api', apiRoutes)
   apiRoutes.post('/insert/:collection', controller.insertData)
