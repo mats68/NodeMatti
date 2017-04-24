@@ -7,9 +7,11 @@ module.exports = function(app) {
 
   //routes will go here
   app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './index.html'))
+    res.json({message: "API initialized!"})
   })
   
   app.use('/api', apiRoutes)
+  apiRoutes.get('/:collection', controller.queryData)
   apiRoutes.post('/insert/:collection', controller.insertData)
+  
 }

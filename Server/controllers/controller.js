@@ -14,16 +14,13 @@ exports.insertData = function (req, res, next) {
   coll.insert({ name: 'tubel', tasty: true }, (err, result) => {
     res.send(result)
   })  
-  
+}
 
-  
+exports.queryData = function (req, res, next) {
+  const coll = db.get().collection(req.params.collection)
+  console.log(coll)
 
-    // collection.insert({ name: 'taco', tasty: true }, function (err, result) {
-    //   collection.find({ name: 'taco' }).toArray(function (err, docs) {
-    //     console.log(docs[0])
-    //     db.close()
-    //   })
-    // })
-  
-
+  coll.find({}, (err, result) => {
+    res.send(result)
+  })  
 }
