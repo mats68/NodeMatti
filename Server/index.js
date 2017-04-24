@@ -5,7 +5,7 @@ const app = express()
 const router = require('./router')
 const db = require('./db')
 
-var port = process.env.API_PORT || 3001;
+var port = process.env.API_PORT || 3001
 
 
 db.connect('mongodb://localhost:27017/mydatabase', function (err) {
