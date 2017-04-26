@@ -11,7 +11,9 @@ module.exports = function(app) {
   })
   
   app.use('/api', apiRoutes)
-  apiRoutes.get('/:collection', controller.queryData)
+  apiRoutes.get('/query/:collection', controller.queryData)
   apiRoutes.post('/insert/:collection', controller.insertData)
+  apiRoutes.put('/update/:collection/:id', controller.updateData)
+  apiRoutes.delete('/update/:collection/:id', controller.deleteData)
   
 }
