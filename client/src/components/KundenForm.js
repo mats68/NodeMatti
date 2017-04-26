@@ -8,7 +8,6 @@ export default class KundenForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.insertKunde(this.state)
-        console.log(this.state)
         this.setState({name: '', vorname: ''});  
     }
     handleChange = (e) => {

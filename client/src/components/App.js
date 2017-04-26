@@ -9,20 +9,22 @@ class App extends Component {
 
    }
    insertKunde = (data) => {
-       /hier mach body 
-      console.log(data)
       axios.post(this.props.url + 'insert/kunden', data)
+      .then(res => {  
+        this.setState((prevState) => {  
+          let newList = prevState.data
+          newList.push(data) 
+          return {data: newList}
+        })
+      })
       .catch(err => {
         console.error(err);
-        //this.setState({ data: comments });
       });      
    }
 
    loadCommentsFromServer = () => {
-     //console.log('was denn', this)
     axios.get(this.props.url + 'kunden' )
       .then(res => {
-        console.log(res)
         this.setState({ data: res.data });
       })
    }
@@ -44,9 +46,10 @@ class App extends Component {
 
 
 const Liste = (props) => {
+
   return (
      <ul>
-        {props.list.map(l => <li>{l.name}</li>)} 
+        {props.list.map(l => <li key={l._id}>{l.name}</li>)} 
      </ul>
      
 
