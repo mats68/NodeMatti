@@ -11,9 +11,10 @@ class App extends Component {
    insertKunde = (data) => {
       axios.post(this.props.url + 'insert/kunden', data)
       .then(res => {  
+        console.log(res.data.ops[0])
         this.setState((prevState) => {  
           let newList = prevState.data
-          newList.push(data) 
+          newList.push(res.data.ops[0]) 
           return {data: newList}
         })
       })
