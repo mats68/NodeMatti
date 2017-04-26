@@ -29,4 +29,6 @@
   git checkout [name_of_your_new_branch] 
 
 
-  
+  # mobx
+  https://github.com/mobxjs/mobx/issues/521
+  You can add the transform-decorators-legacy yourself in node_modules/react-scripts/config/babel.dev.js
