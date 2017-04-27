@@ -2,11 +2,18 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import KundenForm from './KundenForm'
 
+import './../app.css'
+
+const kundenSchema = {
+  _id: '',
+  name: '',
+  vorname: ''
+}
+
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = { data: [], selectedId: 0 }
-
   }
   handleListItemClicked = (id) => {
     this.setState({ selectedId: id })
@@ -16,36 +23,40 @@ class App extends Component {
     if (id !== 0) {
       axios.delete(this.props.url + 'delete/kunden/' + id)
         .then(res => {
-          console.log('hey')
           this.setState((prevState) => {
-          let newList = prevState.data.filter((item) => {
-            return item._id !== id
-          })
-          console.log('newList', newList)
-          return { data: newList }
+            let newList = prevState.data.filter((item) => {
+              return item._id !== id
+            })
+            return { data: newList }
           })
         })
         .catch(err => {
           console.error(err);
         })
 
-
     }
   }
 
-  insertKunde = (data) => {
-    axios.post(this.props.url + 'insert/kunden', data)
-      .then(res => {
-        //console.log(res.data.ops[0])
-        this.setState((prevState) => {
-          let newList = prevState.data
-          newList.push(res.data.ops[0])
-          return { data: newList }
+  handleForm = (data) => {
+    console.log('insert', data)
+    if (!data._id) {
+      //insert record
+      axios.post(this.props.url + 'insert/kunden', data)
+        .then(res => {
+          //console.log(res.data.ops[0])
+          this.setState((prevState) => {
+            let newList = prevState.data
+            newList.push(res.data.ops[0])
+            return { data: newList }
+          })
         })
-      })
-      .catch(err => {
-        console.error(err);
-      });
+        .catch(err => {
+          console.error(err);
+        });
+    } else {
+      //update record
+      console.log('update record', data)
+    }
   }
 
   loadCommentsFromServer = () => {
@@ -62,8 +73,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Liste list={this.state.data} selectedId={this.state.selectedId} handleListItemClicked={this.handleListItemClicked} handleListItemDelete={this.handleListItemDelete} />
-        <KundenForm insertKunde={this.insertKunde} />
+        <Liste list={this.state.data} selectedId={this.state.selectedId} handleListItemClicked={this.handleListItemClicked} handleListItemDelete={this.handleListItemDelete} handleForm={this.handleForm} />
+        <KundenForm schema={kundenSchema} handleForm={this.handleForm} />
       </div>
     )
   }
@@ -74,24 +85,45 @@ class App extends Component {
 const Liste = (props) => {
   return (
     <ul>
-      {props.list.map(l => <ListItem key={l._id} item={l} selectedId={props.selectedId} handleListItemClicked={props.handleListItemClicked} handleListItemDelete={props.handleListItemDelete} />)}
+      {props.list.map(l => {
+        return (
+          <ListItem
+            key={l._id}
+            item={l}
+            selectedId={props.selectedId}
+            handleListItemClicked={props.handleListItemClicked}
+            handleListItemDelete={props.handleListItemDelete}
+            handleForm={props.handleForm}
+          />
+        )
+      }
+      )}
     </ul>
   )
 }
 
 
 const ListItem = (props) => {
-  const showBtns = () => {
+  const showItems = () => {
     if (props.selectedId === props.item._id)
       return (
-       <span>
-         <span className="btn btn-success"> <i className="fa fa-pencil" /> </span> 
-         <span className="btn btn-danger" onClick={(e) => { props.handleListItemDelete(props.item._id)  }}> <i className="fa fa-trash" /> </span>
-       </span>
+        <div>
+          <span>
+            <span className="btn btn-danger" onClick={(e) => { props.handleListItemDelete(props.item._id) }}> <i className="fa fa-trash" /> </span>
+            <span className="btn" onClick={(e) => { props.handleListItemClicked(0) }}> <i className="fa fa-times" /> </span>
+          </span>
+          <div>
+            <KundenForm schema={props.item} handleForm={props.handleForm} />
+          </div>
+        </div>
       )
   }
+
+
   return (
-    <li onClick={(e) => props.handleListItemClicked(props.item._id)}>{props.item.name}  {showBtns()} </li>
+    <div>
+      <li className="editabelItem" onClick={(e) => props.handleListItemClicked(props.item._id)}>{props.item.name}</li> {showItems()}
+    </div>
   )
 }
 
