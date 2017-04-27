@@ -1,4 +1,15 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-    "files.associations": {"**/client/**/*.js" : "javascriptreact"}
+    "files.associations": {
+        "**/client/**/*.js": "javascriptreact"
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/node_modules": true
+    },
+    
 }
