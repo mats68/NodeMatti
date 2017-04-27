@@ -8,7 +8,6 @@ exports.queryData = function (req, res, next) {
 }
 
 exports.insertData = function (req, res, next) {
-  console.log('insert')
   const coll = db.get().collection(req.params.collection)
   coll.insert(req.body, (err, result) => {
     if (err) { return res.send(err) }
@@ -17,15 +16,16 @@ exports.insertData = function (req, res, next) {
 }
 
 exports.updateData = function (req, res, next) {
-  console.log('update')
+  let data = req.body
+  delete data._id
+  console.log('update', data)
   const coll = db.get().collection(req.params.collection)
-  coll.findOne(req.params.id, (err, result) => {
-
-
-    if (err) { return res.send(err) }
-    //if (err) { return res.send(err) }
-    //console.log(result)
-    //res.send(result)
+  coll.update({_id: new mongodb.ObjectID(req.params.id)},data,function (err, count, ok) {
+     if (err) { return res.send(err) }
+     //console.log('count',count)
+     //console.log('ok',ok)
+     res.send('update ok')
+    
   })
 }
 

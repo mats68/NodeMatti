@@ -56,6 +56,15 @@ class App extends Component {
     } else {
       //update record
       console.log('update record', data)
+
+      axios.put(this.props.url + 'update/kunden/' + data._id , data)
+        .then(res => {
+          //console.log(res.data.ops[0])
+        })
+        .catch(err => {
+          console.error(err);
+        });
+      
     }
   }
 
