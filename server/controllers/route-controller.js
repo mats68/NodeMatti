@@ -20,11 +20,11 @@ exports.updateData = function (req, res, next) {
   delete data._id
   console.log('update', data)
   const coll = db.get().collection(req.params.collection)
-  coll.update({_id: new mongodb.ObjectID(req.params.id)},data,function (err, count, ok) {
+  coll.update({_id: new mongodb.ObjectID(req.params.id)},{$set:data},function (err, count, ok) {
      if (err) { return res.send(err) }
      //console.log('count',count)
      //console.log('ok',ok)
-     res.send('update ok')
+     res.send(req.body)
     
   })
 }

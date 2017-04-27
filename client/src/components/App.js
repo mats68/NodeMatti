@@ -59,7 +59,7 @@ class App extends Component {
 
       axios.put(this.props.url + 'update/kunden/' + data._id , data)
         .then(res => {
-          //console.log(res.data.ops[0])
+          console.log(res.data)
         })
         .catch(err => {
           console.error(err);
