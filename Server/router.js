@@ -1,5 +1,5 @@
 const express = require('express')
-const controller = require('./controllers/controller')
+const controller = require('./controllers/route-controller')
 const path  = require('path')
 
 module.exports = function(app) {
@@ -14,6 +14,6 @@ module.exports = function(app) {
   apiRoutes.get('/query/:collection', controller.queryData)
   apiRoutes.post('/insert/:collection', controller.insertData)
   apiRoutes.put('/update/:collection/:id', controller.updateData)
-  apiRoutes.delete('/update/:collection/:id', controller.deleteData)
+  apiRoutes.delete('/delete/:collection/:id', controller.deleteData)
   
 }
