@@ -55,10 +55,10 @@ export default class KundenForm extends Component {
         return (
             <form onSubmit={this.handleSubmit}>
                 {this.showTitle()}
-                <label>Name</label>
-                <input type='text' value={this.state.name} onChange={this.handleChangeName} />
-                <label>Vorname</label>
-                <input type='text' value={this.state.vorname} onChange={this.handleChangeVorName} />
+                <label className="labelItem">Name</label>
+                <input type='text' value={this.state.name} onChange={this.handleChangeName} className="editItem"/>
+                <label className="labelItem">Vorname</label>
+                <input type='text' value={this.state.vorname} onChange={this.handleChangeVorName}  className="editItem"/>
                 <button type="Submit" className="btn btn-success">Submit</button>
                 {this.showCancelBtn()}
             </form>

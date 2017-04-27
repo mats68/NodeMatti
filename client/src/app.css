@@ -5,3 +5,11 @@ body {
 .editabelItem {
   cursor: pointer;
 }
+
+.labelItem {
+  margin: 3px;
+}
+
+.editItem {
+  margin: 5px;
+}

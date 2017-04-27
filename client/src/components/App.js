@@ -13,9 +13,13 @@ const kundenSchema = {
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { data: [], selectedId: 0 }
+    this.state = { data: [], selectedId: '' }
   }
   handleListItemClicked = (id) => {
+    console.log('state', this.state)
+    if (id === this.state.selectedId) {
+      return this.setState({ selectedId: '' })
+    }
     this.setState({ selectedId: id })
   }
 
@@ -41,6 +45,8 @@ class App extends Component {
     console.log('insert', data)
     if (!data._id) {
       //insert record
+      //todo optimistic  update
+      //todo markdown
       axios.post(this.props.url + 'insert/kunden', data)
         .then(res => {
           //console.log(res.data.ops[0])
@@ -49,6 +55,7 @@ class App extends Component {
             newList.push(res.data.ops[0])
             return { data: newList }
           })
+          this.setState({ selectedId: '' })
         })
         .catch(err => {
           console.error(err);
@@ -60,6 +67,17 @@ class App extends Component {
       axios.put(this.props.url + 'update/kunden/' + data._id , data)
         .then(res => {
           console.log(res.data)
+          this.setState({ selectedId: '' })
+          this.setState((prevState) => {
+            let newList = prevState.data.map((item) => {
+              if (item._id !== data._id) {
+                return item
+              } else {
+                return data
+              }
+            })
+            return { data: newList }
+          })
         })
         .catch(err => {
           console.error(err);
@@ -81,7 +99,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container-fluid">
         <Liste list={this.state.data} selectedId={this.state.selectedId} handleListItemClicked={this.handleListItemClicked} handleListItemDelete={this.handleListItemDelete} handleForm={this.handleForm} />
         <KundenForm schema={kundenSchema} handleForm={this.handleForm} />
       </div>
@@ -93,7 +111,7 @@ class App extends Component {
 
 const Liste = (props) => {
   return (
-    <ul>
+    <ul className="list-group">
       {props.list.map(l => {
         return (
           <ListItem
@@ -130,8 +148,10 @@ const ListItem = (props) => {
 
 
   return (
-    <div>
-      <li className="editabelItem" onClick={(e) => props.handleListItemClicked(props.item._id)}>{props.item.name}</li> {showItems()}
+    <div className="row">
+      <div className="col-md-4"> 
+      <li className="list-group-item editabelItem" onClick={(e) => props.handleListItemClicked(props.item._id)}>Name: {props.item.name},  Vorname: {props.item.vorname}</li> {showItems()}
+      </div>
     </div>
   )
 }
