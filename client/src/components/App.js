@@ -1,20 +1,17 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import KundenForm from './KundenForm'
-import SchemaForm from './SchemaForm'
+import SchemaForm from './schemaForm/SchemaForm'
+import {dataFilled,schema,uischema} from './schemaForm/schemaExampleData'
 
 import './../app.css'
+
+
 
 const kundenSchema = {
   _id: '',
   name: '',
   vorname: ''
-}
-
-const kundenSchemaFill = {
-  _id: '922',
-  name: 'Thaler',
-  vorname: 'Matthias'
 }
 
 
@@ -110,7 +107,7 @@ class App extends Component {
       <div className="container-fluid">
         <Liste list={this.state.data} selectedId={this.state.selectedId} handleListItemClicked={this.handleListItemClicked} handleListItemDelete={this.handleListItemDelete} handleForm={this.handleForm} />
         <KundenForm schema={kundenSchema} handleForm={this.handleForm} />
-        <SchemaForm data={kundenSchemaFill}/>
+        <SchemaForm data={dataFilled} schema={schema} uischema={uischema}/>
       </div>
     )
   }
