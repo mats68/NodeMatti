@@ -59,7 +59,7 @@ export default class KundenForm extends Component {
                 <input type='text' value={this.state.name} onChange={this.handleChangeName} className="editItem"/>
                 <label className="labelItem">Vorname</label>
                 <input type='text' value={this.state.vorname} onChange={this.handleChangeVorName}  className="editItem"/>
-                <button type="Submit" className="btn btn-success">Submit</button>
+                <button type="Submit" className="btn btn-success"> <i className="fa fa-check"/>  </button>
                 {this.showCancelBtn()}
             </form>
         )

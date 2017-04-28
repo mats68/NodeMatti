@@ -1,6 +1,12 @@
-let x = 1
+let person = {name: '', vorname: ''}
 
-x = x + 200
+let p2 = Object.assign({},person)
 
-y = 3 / 1
+p2.name = 'thaler'
+
+p2.vorname = 'matti'
+
+
+
+
 
