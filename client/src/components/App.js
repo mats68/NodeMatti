@@ -11,6 +11,13 @@ const kundenSchema = {
   vorname: ''
 }
 
+const kundenSchemaFill = {
+  _id: '922',
+  name: 'Thaler',
+  vorname: 'Matthias'
+}
+
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -103,7 +110,7 @@ class App extends Component {
       <div className="container-fluid">
         <Liste list={this.state.data} selectedId={this.state.selectedId} handleListItemClicked={this.handleListItemClicked} handleListItemDelete={this.handleListItemDelete} handleForm={this.handleForm} />
         <KundenForm schema={kundenSchema} handleForm={this.handleForm} />
-        <SchemaForm data={kundenSchema}/>
+        <SchemaForm data={kundenSchemaFill}/>
       </div>
     )
   }
