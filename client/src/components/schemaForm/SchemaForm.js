@@ -6,8 +6,9 @@ class SchemaForm extends Component {
   constructor(props) {
     super(props)
     this.data = props.data
-    this.items = mergeRecursive({},props.schema,props.uischema)
-    //console.dir(this.items)
+    //console.dir(...props.implements)
+    this.items = mergeRecursive({},props.schema,props.uischema,...props.implements)
+    // console.dir(this.items)
 
   }
 
@@ -23,8 +24,8 @@ class SchemaForm extends Component {
   addInput = (item) => {
     //console.log(props.data,name)
 
-    console.log(JSON.stringify(item))
-    console.log(this.data[item.id])
+     console.log(JSON.stringify(item))
+    // console.log(this.data[item.id])
     
     return <Input key={item.id} item={item} value={this.data[item.id]} handleChange={this.handleChange} />
   }

@@ -20,7 +20,7 @@ class Input extends Component {
     return (
       <div className="form-group">
         <label htmlFor={id}>{label}</label>
-        <input id={id} type="text" className="form-control" value={this.state.value} onChange={this.handleChange}></input>
+        <input id={id} type={type} className="form-control" value={this.state.value} onChange={this.handleChange}></input>
       </div>
     );
   }

@@ -3,19 +3,17 @@
 const dataEmpty = {
   _id: '',
   name: '',
-  vorname: ''
+  vorname: '',
 }
+
 
 
 const dataFilled = {
-}
-
-/*const dataFilled = {
   _id: '100',
   name: 'Thaler',
   vorname: 'Fritz'
 }
-*/
+
 const schema =  {
   _id: {
     type: "string"
@@ -44,6 +42,25 @@ const uischema =  {
     max: 100
   }
 }
+
+const schema2 =  {
+  todo: {
+    type: "string"
+  },
+  age: {
+    type: "number"
+  }
+}
+
+const uischema2 =  {
+  todo: {
+    label: "Todo"
+  },
+  age: {
+    label: "Age"
+  }
+}
+
 
 //let merged = Object.assign(schema,uischema)
 
@@ -89,4 +106,4 @@ const uischema =  {
 // console.log('merged',merged)
 
 
-export {dataEmpty,dataFilled,schema,uischema}
+export {dataEmpty,dataFilled,schema,schema2,uischema,uischema2}
