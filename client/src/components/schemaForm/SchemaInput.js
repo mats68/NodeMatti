@@ -8,8 +8,8 @@ class Input extends Component {
 
   handleChange = (e) => {
     let val = e.target.value
-    let key = e.target.id
-    //console.log(e.target.value)
+    let key = e.target.id; //.split('.')
+
     this.setState({value: val})
     this.props.handleChange(key,val)
   }
@@ -20,7 +20,7 @@ class Input extends Component {
     return (
       <div className="form-group">
         <label htmlFor={id}>{label}</label>
-        <input id={id} type={type} className="form-control" value={this.state.value} onChange={this.handleChange}></input>
+        <input id={id} ref={id} type={type} className="form-control" value={this.state.value} onChange={this.handleChange}></input>
       </div>
     );
   }

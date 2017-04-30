@@ -31,3 +31,23 @@ export function mergeRecursive() {
   }
   return out;
 }
+
+export function setValueFromDottedKey(key,data,value) {
+  let k = key.split('.')
+  let obj = data
+  for (let i = 0; i < (k.length - 1); i++) {
+    obj = obj[k[i]] || {}
+  }
+  obj[k[k.length - 1]] = value
+  
+}
+
+export function getValueFromDottedKey(key,data) {
+  let k = key.split('.')
+  let obj = data
+  for (let i = 0; i < (k.length - 1); i++) {
+    obj = obj[k[i]] || {}
+  }
+  return obj[k[k.length - 1]]
+  
+}

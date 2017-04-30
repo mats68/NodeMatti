@@ -1,5 +1,10 @@
+/*todo check names:
+The field name _id is reserved for use as a primary key; its value must be unique in the collection, is immutable, and may be of any type other than an array.
+The field names cannot start with the dollar sign ($) character.
+The field names cannot contain the dot (.) character.
+The field names cannot contain the null character.
 
-
+*/
 const dataEmpty = {
   _id: '',
   name: '',
@@ -11,10 +16,40 @@ const dataEmpty = {
 const dataFilled = {
   _id: '100',
   name: 'Thaler',
-  vorname: 'Fritz'
+  vorname: 'Fritz',
+  Adresse: {
+    Strasse: 'hofegg',
+    PLZ: '9202',
+    Ort: 'Gossau'
+  }
 }
 
-const schema =  {
+
+const subschemaAdress = {
+  Strasse: {
+    type: "string"
+  },
+  PLZ: {
+    type: "string"
+  },
+  Ort: {
+    type: "string"
+  }
+}
+
+const uisubschemaAdress = {
+  Strasse: {
+    label: "Strasse"
+  },
+  PLZ: {
+    label: "PLZ"
+  },
+  Ort: {
+    label: "Ort"
+  }
+}
+
+const schema = {
   _id: {
     type: "string"
   },
@@ -23,10 +58,25 @@ const schema =  {
   },
   vorname: {
     type: "string"
+  },
+  Adresse:
+  {
+    type: subschemaAdress,
+    uischema: {
+      Strasse: {
+        label: "Strasse"
+      },
+      PLZ: {
+        label: "PLZ"
+      },
+      Ort: {
+        label: "Ort"
+      }
+    }
   }
 }
 
-const uischema =  {
+const uischema = {
   _id: {
     label: "Id",
     rows: "2"
@@ -43,7 +93,7 @@ const uischema =  {
   }
 }
 
-const schema2 =  {
+const schema2 = {
   todo: {
     type: "string"
   },
@@ -52,7 +102,7 @@ const schema2 =  {
   }
 }
 
-const uischema2 =  {
+const uischema2 = {
   todo: {
     label: "Todo"
   },
@@ -60,6 +110,7 @@ const uischema2 =  {
     label: "Age"
   }
 }
+
 
 
 //let merged = Object.assign(schema,uischema)
@@ -106,4 +157,4 @@ const uischema2 =  {
 // console.log('merged',merged)
 
 
-export {dataEmpty,dataFilled,schema,schema2,uischema,uischema2}
+export { dataEmpty, dataFilled, schema, schema2, uischema, uischema2 }
