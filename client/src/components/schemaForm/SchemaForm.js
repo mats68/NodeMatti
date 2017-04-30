@@ -30,13 +30,16 @@ class SchemaForm extends Component {
     return <Input key={item.id} item={item} value={this.data[item.id]} handleChange={this.handleChange} />
   }
 
-  render() {
+  renderItems() {
     let items = []
+    Object.keys(this.items).forEach(name => {this.items[name].id = name; items.push(this.items[name])} )
+    return items.map(item => this.addInput(item))
+  }
+
+  render() {
     return (
       <form>
-        <p>dada</p>
-        {Object.keys(this.items).forEach(name => {this.items[name].id = name; items.push(this.items[name])} )}
-        {items.map(item => this.addInput(item))}
+        {this.renderItems()}
       </form>
     )
   }
