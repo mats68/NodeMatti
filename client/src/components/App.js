@@ -107,7 +107,7 @@ class App extends Component {
       <div className="container-fluid">
         <Liste list={this.state.data} selectedId={this.state.selectedId} handleListItemClicked={this.handleListItemClicked} handleListItemDelete={this.handleListItemDelete} handleForm={this.handleForm} />
         <KundenForm schema={kundenSchema} handleForm={this.handleForm} />
-        <SchemaForm data={dataFilled} implements={[schema2,uischema2]} schema={schema} uischema={uischema}/>
+        <SchemaForm data={dataFilled} schemas={[schema, uischema, schema2,uischema2]}/>
       </div>
     )
   }

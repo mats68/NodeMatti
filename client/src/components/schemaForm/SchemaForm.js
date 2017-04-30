@@ -7,7 +7,7 @@ class SchemaForm extends Component {
     super(props)
     this.data = props.data
     //console.dir(...props.implements)
-    this.items = mergeRecursive({},props.schema,props.uischema,...props.implements)
+    this.items = mergeRecursive({},...props.schemas)
     // console.dir(this.items)
 
   }
