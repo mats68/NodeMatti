@@ -8,10 +8,11 @@ class SchemaForm extends Component {
   constructor(props) {
     super(props)
     this.data = props.data
-    this.items = props.schema
+    //this.items = props.schema.schema
 
     //todo check same names of schemas
     //this.items = mergeRecursive({}, ...props.schemas)
+    this.items = mergeRecursive({}, props.schema.schema, ...props.schema.implements)
     console.dir(JSON.stringify(this.items))
 
 
@@ -40,6 +41,7 @@ class SchemaForm extends Component {
   fillItemsRecursive(itemList, renderitems, data, prefix) {
     Object.keys(itemList).forEach(name => {
       if (typeof itemList[name].type === 'object') {
+        this.fillItemsRecursive(itemList[name].type, renderitems, data, name + '.')
 
         /*        if (itemList[name].uischema) {
                   itemList[name].type = mergeRecursive({}, itemList[name].type, itemList[name].uischema)
