@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
 import Input from './SchemaInput'
-import { mergeRecursive,setValueFromDottedKey, getValueFromDottedKey } from './utils'
+import { mergeRecursive, setValueFromDottedKey, getValueFromDottedKey } from './utils'
+import * as Const from './Constants'
 
 
 class SchemaForm extends Component {
   constructor(props) {
     super(props)
     this.data = props.data
-    //console.dir(...props.implements)
+    this.items = props.schema
+
     //todo check same names of schemas
-    this.items = mergeRecursive({}, ...props.schemas)
-    //console.dir(JSON.stringify(this.items))
+    //this.items = mergeRecursive({}, ...props.schemas)
+    console.dir(JSON.stringify(this.items))
+
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -27,50 +30,44 @@ class SchemaForm extends Component {
 
   handleChange = (key, value) => {
     let data = this.data
-    setValueFromDottedKey(key,data,value)
-/*    let obj = this.data
-    let i = 1
-    for (let i = 0; i < (key.length - 1); i++) {
-      obj = obj[key[i]] || {}
-    }
-    obj[key[key.length - 1]] = value
-*/
- }
-
-  addInput = (item) => {
-    //console.log(props.data,name)
-
-    // console.log(JSON.stringify(item))
-    // console.log(this.data[item.id])
-
-    return <Input key={item.id} item={item} value={item.value} handleChange={this.handleChange.bind(this)} />
+    setValueFromDottedKey(key, data, value)
   }
 
-  fillItemsRecursive(itemList, renderitems, data,prefix) {
+  addInput = (item) => {
+    return <Input key={item.id} item={item} value={item.value} handleChange={this.handleChange} />
+  }
+
+  fillItemsRecursive(itemList, renderitems, data, prefix) {
     Object.keys(itemList).forEach(name => {
       if (typeof itemList[name].type === 'object') {
-        if (itemList[name].uischema) {
-          itemList[name].type = mergeRecursive({}, itemList[name].type, itemList[name].uischema)
-          //todo else load default uischema 
-          //todo load default data values subschema
-        }
-        this.fillItemsRecursive(itemList[name].type, renderitems, data, name + '.')
+
+        /*        if (itemList[name].uischema) {
+                  itemList[name].type = mergeRecursive({}, itemList[name].type, itemList[name].uischema)
+                  //todo else load default uischema 
+                  //todo load default data values subschema
+                }
+                this.fillItemsRecursive(itemList[name].type, renderitems, data, name + '.')
+        */
       } else {
-        let fullname = prefix + name;
-        itemList[name].id = fullname;
-        itemList[name].value = getValueFromDottedKey(fullname,data)
-        renderitems.push(itemList[name]);
+        if (name !== Const.ui) {
+          let item = {}
+          item = itemList[name]
+          let fullname = prefix + name;
+          item.id = fullname;
+          item.value = getValueFromDottedKey(fullname, data)
+          item[Const.ui] = itemList[Const.ui][name]
+          renderitems.push(item)
+        }
       }
     }
     )
   }
   renderItems() {
-    let items = []
-    this.fillItemsRecursive(this.items, items, this.data,'')
-    //Object.keys(this.items).forEach(name => { this.items[name].id = name; items.push(this.items[name]) })
-    //Object.keys(this.items).forEach(name => { this.items[name].id = name; items.push(this.items[name]) })
-    //console.log(items)
-    return items.map(item => this.addInput(item))
+    let renderItems = []
+    let itemList = mergeRecursive({},this.items)
+    this.fillItemsRecursive(itemList, renderItems, this.data, '')
+    console.log('this.teims',this.items)
+    return renderItems.map(item => this.addInput(item))
   }
 
   render() {

@@ -1,5 +1,12 @@
 import React, { Component } from 'react'
 
+/*const kundenSchema = {
+  _id: '',
+  name: '',
+  vorname: ''
+}
+
+*/
 export default class KundenForm extends Component {
     constructor(props) {
         super(props)

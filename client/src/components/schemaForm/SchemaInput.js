@@ -16,7 +16,8 @@ class Input extends Component {
   
 
   render() {
-    const {id,type,label,rows,min,max} = this.props.item
+    const {id,type} = this.props.item
+    const {label} = this.props.item._ui
     return (
       <div className="form-group">
         <label htmlFor={id}>{label}</label>
