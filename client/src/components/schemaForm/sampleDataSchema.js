@@ -57,26 +57,31 @@ export const schemaUi = {
   fields: {
     name: {
       label: "Name",
-      rows: "3"
+      cols: [4]
     },
     vorname: {
       label: "Vorname",
-      rows: "4",
+      cols: [4],
       min: 1,
       max: 100
     },
     _container: {
       options: {
         type: "panel",
-        label: "Kontakt-Info",
-        showHeader: true
+        cols: [4],
+        headerText: "Kontakt-Info",
+        showHeader: true,
+        footerText: "Fusstext",
+        showFooter: true
       },
       fields: {
         email: {
-          label: "Email"
+          label: "Email",
+          cols: [6]
         },
         tel: {
-          label: "Telefon"
+          label: "Telefon",
+          cols: [6]
         }
       }
     }

@@ -1,5 +1,6 @@
 import React from 'react'
 import * as Const from './Constants'
+import { getColumnWidths } from './utils'
 
 
 const Container = (props) => {
@@ -7,16 +8,17 @@ const Container = (props) => {
   console.log(options)
   if (options.type === Const.panel) {
     return (
-      <div className="card">
-        <div className="card-header">{options.label}</div>
-        <div className="card-block">
-          <div className="row">
-            {props.children}
+      <div className={getColumnWidths(options.cols)}>
+        <div className="card">
+          {options.showHeader ? <div className="card-header">{options.headerText}</div> : null}
+          <div className="card-block">
+            <div className="row">
+              {props.children}
+            </div>
           </div>
+          {options.showFooter ? <div className="card-footer">{options.footerText}</div> : null}
         </div>
-        <div className="card-footer">{options.label}</div>
       </div>
-
     )
   }
 }

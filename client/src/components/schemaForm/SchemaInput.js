@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { getColumnWidths } from './utils'
 
 class Input extends Component {
   constructor(props) {
@@ -16,12 +17,14 @@ class Input extends Component {
 
 
   render() {
-    const { id, type, label } = this.props.item
-    
+    const { id, type, label, cols } = this.props.item
+
     return (
-      <div className="form-group">
-        <label htmlFor={id}>{label}</label>
-        <input id={id} ref={id} type={type} className="form-control" value={this.state.value} onChange={this.handleChange}></input>
+      <div className={getColumnWidths(cols)}>
+        <div className="form-group">
+          <label htmlFor={id}>{label}</label>
+          <input id={id} ref={id} type={type} className="form-control" value={this.state.value} onChange={this.handleChange}></input>
+        </div>
       </div>
     );
   }

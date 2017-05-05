@@ -51,3 +51,23 @@ export function getValueFromDottedKey(key,data) {
   return obj[k[k.length - 1]]
   
 }
+
+export function getColumnWidths(colsArray) {
+  // Max container width	None (auto)	540px	720px	960px	1140px
+  // Class prefix	.col-	.col-sm-	.col-md-	.col-lg-	.col-xl-
+  const check = (ind,suff) => {
+    return colsArray && colsArray.length > ind ? `col-${suff}-${colsArray[ind]} ` : `col-${suff}-12 `  
+  }
+  let res = check(0,'xl')
+  res += check(1,'lg')
+  res += check(2,'md')
+  res += check(3,'sm')
+  console.log(res)
+  return res
+
+  
+  
+
+  
+}
+
