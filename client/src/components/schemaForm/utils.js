@@ -62,7 +62,6 @@ export function getColumnWidths(colsArray) {
   res += check(1,'lg')
   res += check(2,'md')
   res += check(3,'sm')
-  console.log(res)
   return res
 
   

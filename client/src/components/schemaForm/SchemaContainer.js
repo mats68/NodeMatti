@@ -5,7 +5,6 @@ import { getColumnWidths } from './utils'
 
 const Container = (props) => {
   const { options } = props.item
-  console.log(options)
   if (options.type === Const.panel) {
     return (
       <div className={getColumnWidths(options.cols)}>

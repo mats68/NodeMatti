@@ -12,8 +12,8 @@ class SchemaForm extends Component {
     //todo check same names of schemas
     this.items = mergeRecursive({}, props.schema.schema, ...props.schema.implements)
     //console.dir(JSON.stringify(this.items))
-    console.dir(this.items)
     this.uiItems = []
+    this.containerCount = 0;
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -41,7 +41,8 @@ class SchemaForm extends Component {
     Object.keys(_uiItems).forEach(name => {
       let item = {}
       if (name === Const.container) {
-        item.id = Const.container + uiItems.length.toString()
+        this.containerCount ++;
+        item.id = Const.container + this.containerCount.toString()
         item.type = Const.container
         item.options = _uiItems[name].options
         item.items = []
@@ -124,9 +125,10 @@ class SchemaForm extends Component {
   }
 
   render() {
+    this.containerCount = 0;
     let uiItemList = [];
     this.buildItemsRecursive(this.items, uiItemList, '')
-    //console.log('uilist', uiItemList)
+    console.log('uilist', uiItemList)
     return (
       <form onSubmit={this.handleSubmit} >
         <div className="row">

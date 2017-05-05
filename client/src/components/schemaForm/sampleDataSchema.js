@@ -15,8 +15,8 @@ export const dataFilled = {
     plz: '9202',
     ort: 'Gossau'
   },
-  bemerkung1: 'wichtige Bemerkung: mache das',
-  bemerkung2: ''
+  bem1: 'wichtige Bemerkung: mache das',
+  bem2: ''
 }
 
 export const adress = {
@@ -49,6 +49,14 @@ export const schema = {
     },
     adresse: {
       type: adress
+    },
+    bem1: {
+      type: "text"
+
+    },
+    bem2: {
+      type: "text"
+
     }
   }
 }
@@ -72,7 +80,7 @@ export const schemaUi = {
         headerText: "Kontakt-Info",
         showHeader: true,
         footerText: "Fusstext",
-        showFooter: true
+        showFooter: false
       },
       fields: {
         email: {
@@ -82,7 +90,28 @@ export const schemaUi = {
         tel: {
           label: "Telefon",
           cols: [6]
+        },
+        _container: {
+          options: {
+            type: "panel",
+            cols: [12],
+            headerText: "Sub-Info",
+            showHeader: true,
+            footerText: "",
+            showFooter: false
+          },
+          fields: {
+            bem1: {
+              label: "Bem1",
+              cols: [6]
+            },
+            bem2: {
+              label: "Bem2",
+              cols: [6]
+            }
+          }
         }
+
       }
     }
   }
@@ -109,6 +138,10 @@ export const implementedSchemaUi = {
     },
     zusatz2: {
       label: "Zusatz2"
+    },
+    nummer: {
+      label: "Nummer",
+      cols: [2, 3, 4, 5]
     }
   }
 }
@@ -120,10 +153,12 @@ export const adressUi = {
       label: "Strasse"
     },
     plz: {
-      label: "PLZ"
+      label: "PLZ",
+      cols: [2, 3, 4, 5]
     },
     ort: {
-      label: "Ort"
+      label: "Ort",
+      cols: [10, 9, 8, 7]
     }
   }
 }
