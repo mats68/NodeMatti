@@ -66,7 +66,11 @@ export const schemaUi = {
       max: 100
     },
     _container: {
-      label: "Container",
+      options: {
+        type: "panel",
+        label: "Kontakt-Info",
+        showHeader: true
+      },
       fields: {
         email: {
           label: "Email"

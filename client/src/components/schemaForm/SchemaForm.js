@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Input from './SchemaInput'
+import Container from './SchemaContainer'
 import { mergeRecursive, setValueFromDottedKey, getValueFromDottedKey } from './utils'
 import * as Const from './Constants'
 
@@ -40,7 +41,9 @@ class SchemaForm extends Component {
     Object.keys(_uiItems).forEach(name => {
       let item = {}
       if (name === Const.container) {
+        item.id = Const.container + uiItems.length.toString()
         item.type = Const.container
+        item.options = _uiItems[name].options
         item.items = []
         this.buildItemsFromUISchema(_schemaItems, _uiItems[Const.container][Const.fields], item.items, prefix)
         uiItems.push(item)
@@ -65,7 +68,7 @@ class SchemaForm extends Component {
     let schemaList = items[Const.fields]
     let uiList = items[Const.ui][Const.fields]
     // let list = mergeRecursive({}, schemaList,uiList)
-    this.buildItemsFromUISchema(schemaList, uiList, uiItems,prefix)
+    this.buildItemsFromUISchema(schemaList, uiList, uiItems, prefix)
 
     Object.keys(schemaList).forEach(name => {
       if (typeof schemaList[name].type === 'object') {
@@ -105,12 +108,9 @@ class SchemaForm extends Component {
   renderItem(item) {
     if (item[Const.type] === Const.container) {
       return (
-        <div className="panel panel-default">
-          <div className="panel-heading">Panel Heading</div>
-          <div className="panel-body">
-            {this.renderItems(item.items)}
-          </div>
-        </div>
+        <Container key={item.id} item={item}>
+          {this.renderItems(item.items)}
+        </Container>
       )
     } else {
       return this.addInput(item)
@@ -126,11 +126,13 @@ class SchemaForm extends Component {
   render() {
     let uiItemList = [];
     this.buildItemsRecursive(this.items, uiItemList, '')
-    console.log('uilist', uiItemList)
+    //console.log('uilist', uiItemList)
     return (
       <form onSubmit={this.handleSubmit} >
-        {this.renderItems(uiItemList)}
-        < button type="submit" className="btn btn-success" > OK</button >
+        <div className="row">
+          {this.renderItems(uiItemList)}
+          < button type="submit" className="btn btn-success" > OK</button >
+        </div>
       </form >
     )
   }
