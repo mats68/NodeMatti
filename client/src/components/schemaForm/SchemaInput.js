@@ -3,21 +3,21 @@ import React, { Component } from 'react'
 class Input extends Component {
   constructor(props) {
     super(props)
-    this.state = {value: props.value}
+    this.state = { value: props.value }
   }
 
   handleChange = (e) => {
     let val = e.target.value
     let key = e.target.id; //.split('.')
 
-    this.setState({value: val})
-    this.props.handleChange(key,val)
+    this.setState({ value: val })
+    this.props.handleChange(key, val)
   }
-  
+
 
   render() {
-    const {id,type} = this.props.item
-    const {label} = this.props.item._ui
+    const { id, type, label } = this.props.item
+    
     return (
       <div className="form-group">
         <label htmlFor={id}>{label}</label>

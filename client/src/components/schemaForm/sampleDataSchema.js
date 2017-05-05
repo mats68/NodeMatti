@@ -4,7 +4,6 @@ The field name _id is reserved for use as a primary key; its value must be uniqu
 The field names cannot start with the dollar sign ($) character.
 The field names cannot contain the dot (.) character.
 The field names cannot contain the null character.
-
 */
 
 export const dataFilled = {
@@ -15,93 +14,108 @@ export const dataFilled = {
     strasse: 'hofegg',
     plz: '9202',
     ort: 'Gossau'
-  }
+  },
+  bemerkung1: 'wichtige Bemerkung: mache das',
+  bemerkung2: ''
 }
 
 export const adress = {
-  strasse: {
-    type: "string"
-  },
-  plz: {
-    type: "string"
-  },
-  ort: {
-    type: "string"
+  fields: {
+    strasse: {
+      type: "text"
+    },
+    plz: {
+      type: "text"
+    },
+    ort: {
+      type: "text"
+    }
   }
 }
 
 export const schema = {
-  name: {
-    type: "string"
-  },
-  vorname: {
-    type: "string"
-  },
-  adresse: {
-    type: adress
+  fields: {
+    name: {
+      type: "text"
+    },
+    vorname: {
+      type: "text"
+    },
+    email: {
+      type: "text"
+    },
+    tel: {
+      type: "text"
+    },
+    adresse: {
+      type: adress
+    }
   }
 }
 
 export const schemaUi = {
-  name: {
-    label: "Name",
-    rows: "3"
-  },
-  vorname: {
-    label: "Vorname",
-    rows: "4",
-    min: 1,
-    max: 100
+  fields: {
+    name: {
+      label: "Name",
+      rows: "3"
+    },
+    vorname: {
+      label: "Vorname",
+      rows: "4",
+      min: 1,
+      max: 100
+    },
+    _container: {
+      label: "Container",
+      fields: {
+        email: {
+          label: "Email"
+        },
+        tel: {
+          label: "Telefon"
+        }
+      }
+    }
   }
 }
 
 export const implementedSchema = {
-  zusatz1: {
-    type: "string"
-  },
-  zusatz2: {
-    type: "string"
+  fields: {
+    zusatz1: {
+      type: "text"
+    },
+    zusatz2: {
+      type: "text"
+    },
+    nummer: {
+      type: "number"
+    }
   }
 }
 
 export const implementedSchemaUi = {
-  zusatz1: {
-    label: "Zusatz1"
-  },
-  zusatz2: {
-    label: "Zusatz2"
+  fields: {
+    zusatz1: {
+      label: "Zusatz1"
+    },
+    zusatz2: {
+      label: "Zusatz2"
+    }
   }
 }
-
-export const implementedSchema2 = {
-  bemerkung1: {
-    type: "string"
-  },
-  bemerkung2: {
-    type: "string"
-  }
-}
-
-export const implementedSchema2Ui = {
-  bemerkung1: {
-    label: "Bemerkung1"
-  },
-  bemerkung2: {
-    label: "Bemerkung2"
-  }
-}
-
 
 
 export const adressUi = {
-  strasse: {
-    label: "Strasse"
-  },
-  plz: {
-    label: "PLZ"
-  },
-  ort: {
-    label: "Ort"
+  fields: {
+    strasse: {
+      label: "Strasse"
+    },
+    plz: {
+      label: "PLZ"
+    },
+    ort: {
+      label: "Ort"
+    }
   }
 }
 
