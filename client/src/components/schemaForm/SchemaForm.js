@@ -42,7 +42,7 @@ class SchemaForm extends Component {
       if (name === Const.container) {
         item.type = Const.container
         item.items = []
-        this.buildItemsFromUISchema(_schemaItems, _uiItems[Const.container][Const.fields], item.items, name + '.')
+        this.buildItemsFromUISchema(_schemaItems, _uiItems[Const.container][Const.fields], item.items, prefix)
         uiItems.push(item)
       } else {
         item = mergeRecursive({}, _schemaItems[name], _uiItems[name])
@@ -60,16 +60,16 @@ class SchemaForm extends Component {
     })
   }
 
-  buildItemsRecursive(items, uiItems) {
+  buildItemsRecursive(items, uiItems, prefix) {
     if (!items[Const.fields] || !items[Const.ui] || !items[Const.ui][Const.fields]) { return }
-    // let schemaList = items[Const.fields]
-    // let uiList = items[Const.ui][Const.fields]
+    let schemaList = items[Const.fields]
+    let uiList = items[Const.ui][Const.fields]
     // let list = mergeRecursive({}, schemaList,uiList)
-    this.buildItemsFromUISchema(items[Const.fields], items[Const.ui][Const.fields], uiItems,'')
+    this.buildItemsFromUISchema(schemaList, uiList, uiItems,prefix)
 
-    Object.keys(items).forEach(name => {
-      if (typeof items[name].type === 'object') {
-        this.buildItemsRecursive(items[name].type, uiItems)
+    Object.keys(schemaList).forEach(name => {
+      if (typeof schemaList[name].type === 'object') {
+        this.buildItemsRecursive(schemaList[name].type, uiItems, name + '.')
       }
     })
   }
@@ -125,7 +125,7 @@ class SchemaForm extends Component {
 
   render() {
     let uiItemList = [];
-    this.buildItemsRecursive(this.items, uiItemList)
+    this.buildItemsRecursive(this.items, uiItemList, '')
     console.log('uilist', uiItemList)
     return (
       <form onSubmit={this.handleSubmit} >
