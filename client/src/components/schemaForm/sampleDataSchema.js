@@ -19,6 +19,63 @@ export const dataFilled = {
   bem2: ''
 }
 
+export const tabShema = {
+  fields: {
+    name: {
+      type: "text"
+    },
+    vorname: {
+      type: "text"
+    },
+    strasse: {
+      type: "text"
+    }
+  }
+}
+
+
+export const tabShemaUi = {
+  fields: {
+    tab: {
+      type: "_container",
+      options: {
+        type: "tab"
+      },
+      fields: {
+        tab1: {
+          type: "_container",
+          options: {
+            type: "tabPanel",
+            title: "Tab 1"
+          },
+          fields: {
+            name: {
+              label: "Name"
+            },
+            vorname: {
+              label: "Vorname"
+            }
+          }
+        },
+        tab2: {
+          type: "_container",
+          options: {
+            type: "tabPanel",
+            title: "Tab 2"
+          },
+          fields: {
+            strasse: {
+              label: "Strasse"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
 export const adress = {
   fields: {
     strasse: {
@@ -93,75 +150,71 @@ export const schemaUi = {
         },
         _container: {
           options: {
-            type: "panel",
-            cols: [12],
-            headerText: "Sub-Info",
-            showHeader: true,
-            footerText: "",
-            showFooter: false
+            type: "tab",
+            cols: [12]
           },
           fields: {
-            bem1: {
-              label: "Bem1",
-              cols: [6]
-            },
-            bem2: {
-              label: "Bem2",
-              cols: [6]
+            _container: {
+              options: {
+                type: "tabPanel"
+              },
+              fields: {
+                bem1: {
+                  label: "Bamerkung1"
+                }
+              }
             }
           }
         }
-
       }
     }
   }
 }
-
 export const implementedSchema = {
-  fields: {
-    zusatz1: {
-      type: "text"
-    },
-    zusatz2: {
-      type: "text"
-    },
-    nummer: {
-      type: "number"
+    fields: {
+      zusatz1: {
+        type: "text"
+      },
+      zusatz2: {
+        type: "text"
+      },
+      nummer: {
+        type: "number"
+      }
     }
   }
-}
 
 export const implementedSchemaUi = {
-  fields: {
-    zusatz1: {
-      label: "Zusatz1"
-    },
-    zusatz2: {
-      label: "Zusatz2"
-    },
-    nummer: {
-      label: "Nummer",
-      cols: [2, 3, 4, 5]
+    fields: {
+      zusatz1: {
+        label: "Zusatz1"
+      },
+      zusatz2: {
+        label: "Zusatz2"
+      },
+      nummer: {
+        label: "Nummer",
+        cols: [2, 3, 4, 5]
+      }
     }
   }
-}
 
 
 export const adressUi = {
-  fields: {
-    strasse: {
-      label: "Strasse"
-    },
-    plz: {
-      label: "PLZ",
-      cols: [2, 3, 4, 5]
-    },
-    ort: {
-      label: "Ort",
-      cols: [10, 9, 8, 7]
+    fields: {
+      strasse: {
+        label: "Strasse"
+      },
+      plz: {
+        label: "PLZ",
+        cols: [2, 3, 4, 5]
+      },
+      ort: {
+        label: "Ort",
+        cols: [10, 9, 8, 7]
+      }
     }
   }
-}
 
 
 

@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import Input from './SchemaInput'
-import Container from './SchemaContainer'
+import { Panel } from './SchemaContainer'
 import { mergeRecursive, setValueFromDottedKey, getValueFromDottedKey } from './utils'
 import * as Const from './Constants'
+import * as renderer from './renderItems'
 
 
 class SchemaForm extends Component {
@@ -10,10 +11,11 @@ class SchemaForm extends Component {
     super(props)
     this.data = props.data
     //todo check same names of schemas
-    this.items = mergeRecursive({}, props.schema.schema, ...props.schema.implements)
+    //if (props.schema.implements) {
+    this.items = mergeRecursive({}, props.schema.schema, ...props.schema.implements || {})
+    //}
     //console.dir(JSON.stringify(this.items))
     this.uiItems = []
-    this.containerCount = 0;
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -40,13 +42,13 @@ class SchemaForm extends Component {
     if (!_schemaItems || !_uiItems) { return }
     Object.keys(_uiItems).forEach(name => {
       let item = {}
-      if (name === Const.container) {
-        this.containerCount ++;
-        item.id = Const.container + this.containerCount.toString()
+      if (_uiItems[name].type === Const.container) {
+        this.containerCount++;
+        item.id = name + this.containerCount.toString()
         item.type = Const.container
         item.options = _uiItems[name].options
         item.items = []
-        this.buildItemsFromUISchema(_schemaItems, _uiItems[Const.container][Const.fields], item.items, prefix)
+        this.buildItemsFromUISchema(_schemaItems, _uiItems[name][Const.fields], item.items, prefix)
         uiItems.push(item)
       } else {
         item = mergeRecursive({}, _schemaItems[name], _uiItems[name])
@@ -79,40 +81,20 @@ class SchemaForm extends Component {
   }
 
 
-  /*fillItemsRecursive(itemList, renderitems, data, prefix) {
-    Object.keys(itemList).forEach(name => {
-      if (typeof itemList[name].type === 'object') {
-        this.fillItemsRecursive(itemList[name].type, renderitems, data, name + '.')
-      } else {
-        if (name !== Const.ui) {
-          let item = {}
-          item = itemList[name]
-          let fullname = prefix + name;
-          item.id = fullname;
-          let val = getValueFromDottedKey(fullname, data)
-          if (!val) {
-            val = ''
-            setValueFromDottedKey(fullname, data, val)
-          }
-          item.value = val
-          item[Const.ui] = itemList[Const.ui][name]
-          renderitems.push(item)
-        }
-      }
-    }
-    )
-  }*/
   addInput(item) {
     return <Input key={item.id} item={item} value={item.value} handleChange={this.handleChange} />
   }
 
   renderItem(item) {
-    if (item[Const.type] === Const.container) {
-      return (
-        <Container key={item.id} item={item}>
-          {this.renderItems(item.items)}
-        </Container>
-      )
+    if (item.type === Const.container) {
+
+      if (item.options.type === Const.panel) {
+        return (
+          <Panel key={item.id} item={item}>
+            {this.renderItems(item.items)}
+          </Panel>
+        )
+      } 
     } else {
       return this.addInput(item)
     }
@@ -127,12 +109,13 @@ class SchemaForm extends Component {
   render() {
     this.containerCount = 0;
     let uiItemList = [];
+    // console.log(this.items)
     this.buildItemsRecursive(this.items, uiItemList, '')
-    console.log('uilist', uiItemList)
+    // console.log('uilist', uiItemList)
     return (
       <form onSubmit={this.handleSubmit} >
         <div className="row">
-          {this.renderItems(uiItemList)}
+          {renderer.renderItems(uiItemList)}
           < button type="submit" className="btn btn-success" > OK</button >
         </div>
       </form >
