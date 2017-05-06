@@ -5,9 +5,11 @@ class Input extends Component {
   constructor(props) {
     super(props)
     this.state = { value: props.value }
+
+    this.handleChange = this.handleChange.bind(this)
   }
 
-  handleChange = (e) => {
+  handleChange(e) {
     let val = e.target.value
     let key = e.target.id; //.split('.')
 

@@ -21,6 +21,9 @@ export const dataFilled = {
 
 export const tabShema = {
   fields: {
+    id: {
+      type: "text"
+    },
     name: {
       type: "text"
     },
@@ -36,6 +39,9 @@ export const tabShema = {
 
 export const tabShemaUi = {
   fields: {
+    id: {
+      label: "Id"
+    },
     tab: {
       type: "_container",
       options: {

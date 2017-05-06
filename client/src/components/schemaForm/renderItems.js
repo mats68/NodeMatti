@@ -4,9 +4,13 @@ import { Panel } from './SchemaContainer'
 import * as Const from './Constants'
 import { Tab } from './Tab'
 
+export const events =
+  {
+    handleChange: {}
+  }
 
-export function addInput(item, handleChange) {
-  return <Input key={item.id} item={item} value={item.value} handleChange={handleChange} />
+export function addInput(item) {
+  return <Input key={item.id} item={item} value={item.value} handleChange={events.handleChange} />
 }
 
 export function renderItem(item) {
@@ -22,7 +26,7 @@ export function renderItem(item) {
       return (
         <Tab key={item.id} item={item}></Tab>
       )
-    } 
+    }
   } else {
     return addInput(item)
   }

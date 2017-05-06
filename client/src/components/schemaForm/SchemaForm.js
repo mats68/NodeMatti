@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import Input from './SchemaInput'
-import { Panel } from './SchemaContainer'
 import { mergeRecursive, setValueFromDottedKey, getValueFromDottedKey } from './utils'
 import * as Const from './Constants'
 import * as renderer from './renderItems'
@@ -19,10 +17,8 @@ class SchemaForm extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.addInput = this.addInput.bind(this)
+    renderer.events.handleChange = this.handleChange
     //this.fillItemsRecursive = this.fillItemsRecursive.bind(this)
-    this.renderItems = this.renderItems.bind(this)
-    this.renderItem = this.renderItem.bind(this)
     this.buildItemsFromUISchema = this.buildItemsFromUISchema.bind(this)
     this.buildItemsRecursive = this.buildItemsRecursive.bind(this)
 
@@ -78,32 +74,6 @@ class SchemaForm extends Component {
         this.buildItemsRecursive(schemaList[name].type, uiItems, name + '.')
       }
     })
-  }
-
-
-  addInput(item) {
-    return <Input key={item.id} item={item} value={item.value} handleChange={this.handleChange} />
-  }
-
-  renderItem(item) {
-    if (item.type === Const.container) {
-
-      if (item.options.type === Const.panel) {
-        return (
-          <Panel key={item.id} item={item}>
-            {this.renderItems(item.items)}
-          </Panel>
-        )
-      } 
-    } else {
-      return this.addInput(item)
-    }
-
-  }
-
-
-  renderItems(items) {
-    return items.map(item => this.renderItem(item))
   }
 
   render() {
