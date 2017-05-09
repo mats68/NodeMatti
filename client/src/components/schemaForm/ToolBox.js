@@ -1,11 +1,9 @@
 import React from 'react';
+import AddItemModal from '../modals/AddItemModal';
 
 const ToolBox = (props) => {
-  const handleAddClick = () => {
-    let name = prompt('Name:')
-    if (name) {
-      props.handleAddClick(name)
-    }
+  const handleAddItemModal = () => {
+    props.handleAddItemModal()
   }
   const handleUndoClick = () => {
     props.handleUndoClick()
@@ -18,7 +16,7 @@ const ToolBox = (props) => {
     <div className="container-fluid">
       <div className="row">
         <div className="col-lg-1">
-          <button className="btn btn-success" onClick={handleAddClick}>
+          <button className="btn btn-success" onClick={handleAddItemModal}>
             Add Item
           </button>
         </div>
@@ -39,8 +37,11 @@ const ToolBox = (props) => {
           </div>
         </div>
       </div>
+      <AddItemModal isOpen={props.designerOptions.newItem.ModalIsOpen} onClose={props.handleCloseAddItemModal}></AddItemModal>
     </div>
   )
 }
 
 export default ToolBox
+
+ 
