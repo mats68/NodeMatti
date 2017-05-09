@@ -27,9 +27,7 @@ function iterateSchemaRecursive(schema, uischema, fun, args) {
       iterateSchemaRecursive(schema[name].type[Const.fields], schema[name].type[Const.ui][Const.fields], fun, args)
     }
   })
-
   iterateUiSchemaRecursive(uischema, {}, '', fun, args)
-
 }
 
 function updatePosMal10(item, id, parent,parentName, itemInfo) {
@@ -43,8 +41,12 @@ function updatePosMal10(item, id, parent,parentName, itemInfo) {
     itemInfo.sourceItemParent = parent 
     itemInfo.sourceItemParentName = parentName
   }
-
 }
+
+function fillArry(item, id, parent,parentName, arr) {
+  arr.push(item)
+}  
+
 
 function changePos(item, id, parent, parentName,itemInfo, dropBefore) {
   if (id === itemInfo.sourceItemId) {
@@ -73,7 +75,7 @@ function updateSortPos(newState, data) {
     targetItemParentName: {}
   }
   iterateSchemaRecursive(schema, uischema, updatePosMal10, [itemInfo])
-  console.log('itemInfo',itemInfo)
+  // console.log('itemInfo',itemInfo)
   iterateSchemaRecursive(schema, uischema, changePos, [itemInfo,dropBefore])
   
   if (itemInfo.sourceItemParentName !== itemInfo.targetItemParentName) {
@@ -88,10 +90,22 @@ function updateSortPos(newState, data) {
       delete itemInfo.sourceItemParent[itemInfo.sourceItemParentName][Const.fields][itemInfo.sourceItemId]
     }
   }
-  console.log('uistate',uischema)
+  // console.log('uistate',uischema)
+  let arr = []
+  iterateSchemaRecursive(schema, uischema, fillArry, [arr])
+  arr.sort((a,b) => {
+    return a.pos - b.pos
+  })
+  //console.log('arr',arr)
+  for (let i = 0; i < arr.length; i++) {
+    arr[i].pos = i+1 
+  }
+ 
+  
   return newState
 
 }
+
 
 const reducer = (state = initialState, action) => {
   let newState
