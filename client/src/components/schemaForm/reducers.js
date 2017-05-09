@@ -102,8 +102,11 @@ const reducer = (state = initialState, action) => {
   }
 }
 
+//export default reducer
+
 const undoableReducer = undoable(reducer, {
   filter: excludeAction([Const.CHANGE_SELECTED_ID])
 })
 export default undoableReducer
+
 

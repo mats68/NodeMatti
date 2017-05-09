@@ -6,7 +6,7 @@ import * as renderer from './renderItems'
 
 class SchemaForm extends Component {
   constructor(props) {
-    console.log('props',props)
+    console.log('props', props)
     super(props)
     this.data = props.data
     //todo check same names of schemas
@@ -49,6 +49,10 @@ class SchemaForm extends Component {
         item.options = _uiItems[name].options
         item.items = []
         this.buildItemsFromUISchema(_schemaItems, _uiItems[name][Const.fields], item.items, prefix)
+        item.items.sort((a, b) => {
+          return a.pos - b.pos
+
+        })
         uiItems.push(item)
       } else {
         item = mergeRecursive({}, _schemaItems[name], _uiItems[name])
@@ -62,7 +66,7 @@ class SchemaForm extends Component {
         item.value = val
 
         uiItems.push(item)
-        console.log('item',item)
+        console.log('item', item)
       }
     })
   }
@@ -73,9 +77,9 @@ class SchemaForm extends Component {
     let uiList = items[Const.ui][Const.fields]
     // let list = mergeRecursive({}, schemaList,uiList)
     this.buildItemsFromUISchema(schemaList, uiList, uiItems, prefix)
-    uiItems.sort((a,b) => {
+    uiItems.sort((a, b) => {
       return a.pos - b.pos
-      
+
     })
 
     Object.keys(schemaList).forEach(name => {
