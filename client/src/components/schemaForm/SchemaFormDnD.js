@@ -4,8 +4,14 @@ import HTML5Backend from 'react-dnd-html5-backend'
 import SchemaForm from './SchemaForm'
 
 const SchemaFormDnD = (props) => {
+
+  const handleDrop = (sourceItem, targetItem, dropBefore) => {
+    const data = { sourceItem, targetItem, dropBefore }
+    this.props.handleSwitchPosition(data)
+  }
+  
   return (
-    <SchemaForm {...props}/>
+    <SchemaForm designerMode={true} {...props}/>
   )
 }
 

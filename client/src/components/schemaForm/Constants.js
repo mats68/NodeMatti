@@ -9,4 +9,6 @@ export const tab = 'tab'
 export const tabPanel = 'tabPanel'
 
 
+export const INPUT = 'input'
+
 

@@ -1,16 +1,22 @@
 import React from 'react'
 import Input from './SchemaInput'
+import InputDnD from './SchemaInputDnD'
 import { Panel } from './SchemaContainer'
 import * as Const from './constants'
 import { Tab } from './Tab'
 
 export const events =
   {
-    handleChange: {}
+    handleChange: {},
+    designerMode: false
   }
 
 export function addInput(item) {
-  return <Input key={item.id} item={item} value={item.value} handleChange={events.handleChange} />
+  if (events.designerMode) {
+    return <InputDnD key={item.id} item={item} value={item.value} handleChange={events.handleChange} />
+  } else {
+    return <Input key={item.id} item={item} value={item.value} handleChange={events.handleChange} />
+  }
 }
 
 export function renderItem(item) {

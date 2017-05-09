@@ -6,10 +6,10 @@ import * as renderer from './renderItems'
 
 class SchemaForm extends Component {
   constructor(props) {
+    console.log('props',props)
     super(props)
     this.data = props.data
     //todo check same names of schemas
-    //if (props.schema.implements) {
     this.items = mergeRecursive({}, props.schema.schema, ...props.schema.implements || {})
     //}
     //console.dir(JSON.stringify(this.items))
@@ -18,10 +18,11 @@ class SchemaForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
     renderer.events.handleChange = this.handleChange
+    renderer.events.designerMode = props.designerMode
+
     //this.fillItemsRecursive = this.fillItemsRecursive.bind(this)
     this.buildItemsFromUISchema = this.buildItemsFromUISchema.bind(this)
     this.buildItemsRecursive = this.buildItemsRecursive.bind(this)
-
   }
 
   handleSubmit(e) {

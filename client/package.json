@@ -6,6 +6,7 @@
     "axios": "^0.16.1",
     "bootstrap": "4.0.0-alpha.6",
     "font-awesome": "^4.7.0",
+    "lodash": "^4.17.4",
     "marked": "^0.3.6",
     "react": "^15.5.4",
     "react-dnd": "^2.3.0",
