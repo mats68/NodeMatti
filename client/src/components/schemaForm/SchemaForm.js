@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { mergeRecursive, setValueFromDottedKey, getValueFromDottedKey } from './utils'
-import * as Const from './Constants'
+import * as Const from './constants'
 import * as renderer from './renderItems'
 
 

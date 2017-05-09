@@ -1,5 +1,5 @@
 import * as data from './sampleDataSchema'
-import * as Const from './Constants'
+import * as Const from './constants'
 
 data.schema[Const.ui] = data.schemaUi
 data.schema.fields.adresse.type[Const.ui] = data.adressUi

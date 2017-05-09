@@ -1,7 +1,7 @@
 import React from 'react'
 import Input from './SchemaInput'
 import { Panel } from './SchemaContainer'
-import * as Const from './Constants'
+import * as Const from './constants'
 import { Tab } from './Tab'
 
 export const events =
