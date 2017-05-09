@@ -21,7 +21,16 @@ export const dataFilled = {
 
 export const tabShema = {
   fields: {
-    id: {
+    klein1: {
+      type: "text"
+    },
+    klein2: {
+      type: "text"
+    },
+    klein3: {
+      type: "text"
+    },
+    klein4: {
       type: "text"
     },
     name: {
@@ -39,9 +48,21 @@ export const tabShema = {
 
 export const tabShemaUi = {
   fields: {
-    id: {
-      label: "Id",
+    klein1: {
+      label: "klein1",
       pos: 1
+    },
+    klein2: {
+      label: "klein2",
+      pos: 2
+    },
+    klein3: {
+      label: "klein3",
+      pos: 3
+    },
+    klein4: {
+      label: "klein4",
+      pos: 4
     },
     tab: {
       type: "_container",
@@ -184,50 +205,50 @@ export const schemaUi = {
   }
 }
 export const implementedSchema = {
-    fields: {
-      zusatz1: {
-        type: "text"
-      },
-      zusatz2: {
-        type: "text"
-      },
-      nummer: {
-        type: "number"
-      }
+  fields: {
+    zusatz1: {
+      type: "text"
+    },
+    zusatz2: {
+      type: "text"
+    },
+    nummer: {
+      type: "number"
     }
   }
+}
 
 export const implementedSchemaUi = {
-    fields: {
-      zusatz1: {
-        label: "Zusatz1"
-      },
-      zusatz2: {
-        label: "Zusatz2"
-      },
-      nummer: {
-        label: "Nummer",
-        cols: [2, 3, 4, 5]
-      }
+  fields: {
+    zusatz1: {
+      label: "Zusatz1"
+    },
+    zusatz2: {
+      label: "Zusatz2"
+    },
+    nummer: {
+      label: "Nummer",
+      cols: [2, 3, 4, 5]
     }
   }
+}
 
 
 export const adressUi = {
-    fields: {
-      strasse: {
-        label: "Strasse"
-      },
-      plz: {
-        label: "PLZ",
-        cols: [2, 3, 4, 5]
-      },
-      ort: {
-        label: "Ort",
-        cols: [10, 9, 8, 7]
-      }
+  fields: {
+    strasse: {
+      label: "Strasse"
+    },
+    plz: {
+      label: "PLZ",
+      cols: [2, 3, 4, 5]
+    },
+    ort: {
+      label: "Ort",
+      cols: [10, 9, 8, 7]
     }
   }
+}
 
 
 

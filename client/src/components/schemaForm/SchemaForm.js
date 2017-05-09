@@ -10,10 +10,11 @@ class SchemaForm extends Component {
     super(props)
     this.data = props.data
     //todo check same names of schemas
-    this.items = mergeRecursive({}, props.formSchema.schema, ...props.formSchema.implements || {})
+    this.items = {}
+    this.uiItems = []
+    this.containerCount = 0;
     //}
     //console.dir(JSON.stringify(this.items))
-    this.uiItems = []
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -61,6 +62,7 @@ class SchemaForm extends Component {
         item.value = val
 
         uiItems.push(item)
+        console.log('item',item)
       }
     })
   }
@@ -71,6 +73,10 @@ class SchemaForm extends Component {
     let uiList = items[Const.ui][Const.fields]
     // let list = mergeRecursive({}, schemaList,uiList)
     this.buildItemsFromUISchema(schemaList, uiList, uiItems, prefix)
+    uiItems.sort((a,b) => {
+      return a.pos - b.pos
+      
+    })
 
     Object.keys(schemaList).forEach(name => {
       if (typeof schemaList[name].type === 'object') {
@@ -81,6 +87,8 @@ class SchemaForm extends Component {
 
   render() {
     this.containerCount = 0;
+    this.items = mergeRecursive({}, this.props.formSchema.schema, ...this.props.formSchema.implements || {})
+    this.uiItems = []
     let uiItemList = [];
     // console.log(this.items)
     this.buildItemsRecursive(this.items, uiItemList, '')
