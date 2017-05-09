@@ -35,7 +35,7 @@ const ToolBox = (props) => {
         <div className="col-lg-2">
           <div className="form-group">
             <label htmlFor="selid">Selected ID</label>
-            <input type="text" id='selid' value={props.selectedId} className="form-control" />
+            <input type="text" id='selid' value={props.designerOptions.selectedItemText} className="form-control" />
           </div>
         </div>
       </div>

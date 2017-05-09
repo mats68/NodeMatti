@@ -14,7 +14,7 @@ export const INPUT = 'input'
 
 export const ADD_INPUT = 'ADD_INPUT'
 export const SWITCH_POSITION = 'SWITCH_POSITION';
-export const CHANGE_SELECTED_ID = 'CHANGE_SELECTED_ID';
+export const CHANGE_SELECTED_ITEM = 'CHANGE_SELECTED_ITEM';
 
 
 

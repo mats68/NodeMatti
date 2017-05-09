@@ -5,7 +5,7 @@ import ToolBox from './ToolBox';
 
 const mapStateToProps = (state) => {
   return {
-    designOptions: state.present.designOptions,
+    designerOptions: state.present.designerOptions,
     canUndo: state.past.length > 0,
     canRedo: state.future.length > 0
   }

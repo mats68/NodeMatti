@@ -21,6 +21,7 @@ class SchemaForm extends Component {
     this.handleChange = this.handleChange.bind(this)
     //todo renderer schlecht
     renderer.events.handleChange = this.handleChange
+   
     renderer.events.designerMode = props.designerMode
     renderer.events.funktionen = props.funktionen
 
@@ -110,7 +111,7 @@ class SchemaForm extends Component {
           </div>
           <div className="row">
             <div className={getColumnWidths([1,2,3,4])}>
-              < button type="submit" className="btn btn-success" > OK</button >
+              <button type="submit" className="btn btn-success" > OK</button >
             </div>
           </div>
         </div>

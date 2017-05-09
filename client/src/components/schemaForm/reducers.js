@@ -8,8 +8,10 @@ import { dataFilled } from './sampleDataSchema'
 const initialState = {
   data: dataFilled,
   formSchema: formSchema,
-  designOptions: {
-    selectedInputId: ''
+  designerOptions: {
+    selectedItemId: 0,
+    selectedItemLabel: '',
+
   }
 }
 
@@ -117,9 +119,11 @@ const reducer = (state = initialState, action) => {
     case Const.SWITCH_POSITION:
       newState = mergeRecursive({}, state)
       return updateSortPos(newState, action.data)
-    case Const.CHANGE_SELECTED_ID:
-      return state
-
+    case Const.CHANGE_SELECTED_ITEM:
+      newState = mergeRecursive({}, state)
+      newState.designerOptions.selectedItemId = action.data.id
+      newState.designerOptions.selectedItemText = action.data.label
+      return newState
     default:
       return state
   }
@@ -128,7 +132,7 @@ const reducer = (state = initialState, action) => {
 //export default reducer
 
 const undoableReducer = undoable(reducer, {
-  filter: excludeAction([Const.CHANGE_SELECTED_ID])
+  filter: excludeAction([Const.CHANGE_SELECTED_ITEM])
 })
 export default undoableReducer
 

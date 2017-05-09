@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { handleSwitchPosition } from './actions';
+import { handleSwitchPosition, handleChangeSelectedItem } from './actions';
 
 import SchemaFormDnD from './SchemaFormDnD'
 
@@ -16,7 +16,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     funktionen: {
       handleSwitchPosition: (data) => {
         dispatch(handleSwitchPosition(data))
-      }
+      },
+      handleChangeSelectedItem: (data) => {
+        dispatch(handleChangeSelectedItem(data))
+      },
+
     }
 
   }

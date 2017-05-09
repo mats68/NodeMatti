@@ -7,3 +7,11 @@ export function handleSwitchPosition(data) {
     data
   }
 }
+
+export function handleChangeSelectedItem(data) {
+  return {
+    type: Const.CHANGE_SELECTED_ITEM,
+    data
+  }
+}
+
