@@ -12,10 +12,11 @@ const initialState = {
 
 function iterateUiSchemaRecursive(schema, parentSchema, parentId, fun, args) {
   Object.keys(schema).forEach(name => {
+    fun(schema[name], name, parentSchema, parentId, ...args)
     if (schema[name].type === Const.container) {
       iterateUiSchemaRecursive(schema[name][Const.fields], schema, name, fun, args)
     } else {
-      fun(schema[name], name, parentSchema, parentId, ...args)
+    //  fun(schema[name], name, parentSchema, parentId, ...args)
     }
   })
 }
