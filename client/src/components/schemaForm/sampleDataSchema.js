@@ -66,40 +66,40 @@ export const tabShemaUi = {
     },
     tab: {
       type: "_container",
+      pos: 5,
       options: {
         type: "tab",
-        pos: 2
       },
       fields: {
         tab1: {
           type: "_container",
+          pos: 6,
           options: {
             type: "tabPanel",
-            title: "Tab 1",
-            pos: 3
+            title: "Tab 1"
           },
           fields: {
             name: {
               label: "Name",
-              pos: 4
+              pos: 7
             },
             vorname: {
               label: "Vorname",
-              pos: 5
+              pos: 8
             }
           }
         },
         tab2: {
           type: "_container",
+          pos: 9,
           options: {
             type: "tabPanel",
-            title: "Tab 2",
-            pos: 7
+            title: "Tab 2"
           },
           fields: {
             strasse: {
               label: "Strasse",
-              pos: 8
+              pos: 10
             }
           }
         }

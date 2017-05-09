@@ -10,12 +10,12 @@ const initialState = {
   formSchema: formSchema
 }
 
-function iterateUiSchemaRecursive(schema, fun, args) {
+function iterateUiSchemaRecursive(schema, parentSchema, parentId, fun, args) {
   Object.keys(schema).forEach(name => {
     if (schema[name].type === Const.container) {
-      iterateUiSchemaRecursive(schema[name][Const.fields], fun, args)
+      iterateUiSchemaRecursive(schema[name][Const.fields], schema, name, fun, args)
     } else {
-      fun(schema[name], name, ...args)
+      fun(schema[name], name, parentSchema, parentId, ...args)
     }
   })
 }
@@ -27,21 +27,30 @@ function iterateSchemaRecursive(schema, uischema, fun, args) {
     }
   })
 
-  iterateUiSchemaRecursive(uischema, fun, args)
+  iterateUiSchemaRecursive(uischema, {}, '', fun, args)
 
 }
 
-function updatePosMal10(item, id, targetPos) {
+function updatePosMal10(item, id, parent,parentName, itemInfo) {
   item.pos *= 10
-  if (id === targetPos.id) { targetPos.pos = item.pos }
+  if (id === itemInfo.targetItemId) { 
+    itemInfo.targetItem = item
+    itemInfo.targetItemParent = parent 
+    itemInfo.targetItemParentName = parentName
+  } else if (id === itemInfo.sourceItemId) {
+    itemInfo.sourceItem = item
+    itemInfo.sourceItemParent = parent 
+    itemInfo.sourceItemParentName = parentName
+  }
+
 }
 
-function changePos(item, id, sourceId, targetPos, dropBefore) {
-  if (id === sourceId) {
+function changePos(item, id, parent, parentName,itemInfo, dropBefore) {
+  if (id === itemInfo.sourceItemId) {
     if (dropBefore) {
-      item.pos = targetPos - 1
+      item.pos = itemInfo.targetItem.pos - 1
     } else {
-      item.pos = targetPos + 1
+      item.pos = itemInfo.targetItem.pos + 1
     }
   }
 }
@@ -52,39 +61,35 @@ function updateSortPos(newState, data) {
   let schema = newState.formSchema.schema[Const.fields]
   let uischema = newState.formSchema.schema[Const.ui][Const.fields]
   //let pos = 1
-  let targetPos = { id: targetItem.id, pos: 0 }
-
-  iterateSchemaRecursive(schema, uischema, updatePosMal10, [targetPos])
-  iterateSchemaRecursive(schema, uischema, changePos, [sourceItem.id,targetPos.pos,dropBefore])
-
-
-  //let temp = Object.assign({}, state)
-  /*  let list = newState.inputs.map((item) => {
-      item.pos *= 10
-      if (item.id === targetItem.id) { targetItemPos = item.pos }
-      return item
-    })
+  let itemInfo = {
+    sourceItemId: sourceItem.id,
+    sourceItem: {},
+    sourceItemParentName: '',
+    sourceItemParent: {},
+    targetItemId: targetItem.id,
+    targetItem: {},
+    targetItemParent: {},
+    targetItemParentName: {}
+  }
+  iterateSchemaRecursive(schema, uischema, updatePosMal10, [itemInfo])
+  console.log('itemInfo',itemInfo)
+  iterateSchemaRecursive(schema, uischema, changePos, [itemInfo,dropBefore])
   
-    list = list.map((item) => {
-      if (item.id === sourceItem.id) {
-        if (dropBefore) {
-          item.pos = targetItemPos - 1
-        } else {
-          item.pos = targetItemPos + 1
-        }
-      }
-      return item
-    })
-    
-    list.sort((a, b) => {
-      return a.pos - b.pos
-    })
-    for (let i = 0; i < list.length; i++) {
-      list[i].pos = i + 1
+  if (itemInfo.sourceItemParentName !== itemInfo.targetItemParentName) {
+    if (itemInfo.targetItemParentName === '') {
+       uischema[itemInfo.sourceItemId] = itemInfo.sourceItem 
+    } else {
+      itemInfo.targetItemParent[itemInfo.targetItemParentName][Const.fields][itemInfo.sourceItemId] =  itemInfo.sourceItem 
     }
-    newState.inputs = list
-  */  //console.log(list,state)
+    if (itemInfo.sourceItemParentName === '') {
+      delete uischema[itemInfo.sourceItemId]
+    } else {
+      delete itemInfo.sourceItemParent[itemInfo.sourceItemParentName][Const.fields][itemInfo.sourceItemId]
+    }
+  }
+  console.log('uistate',uischema)
   return newState
+
 }
 
 const reducer = (state = initialState, action) => {

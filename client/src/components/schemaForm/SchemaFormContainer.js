@@ -7,7 +7,6 @@ import SchemaFormDnD from './SchemaFormDnD'
 
 
 const mapStateToProps = (state) => {
-  console.log('ss', state)
   return state.present
 
 }

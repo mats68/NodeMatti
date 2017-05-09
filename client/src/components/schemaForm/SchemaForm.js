@@ -46,12 +46,12 @@ class SchemaForm extends Component {
         this.containerCount++;
         item.id = name + this.containerCount.toString()
         item.type = Const.container
+        item.pos = _uiItems[name].pos
         item.options = _uiItems[name].options
         item.items = []
         this.buildItemsFromUISchema(_schemaItems, _uiItems[name][Const.fields], item.items, prefix)
         item.items.sort((a, b) => {
           return a.pos - b.pos
-
         })
         uiItems.push(item)
       } else {
@@ -96,7 +96,8 @@ class SchemaForm extends Component {
     let uiItemList = [];
     // console.log(this.items)
     this.buildItemsRecursive(this.items, uiItemList, '')
-    // console.log('uilist', uiItemList)
+
+    console.log('uilist', uiItemList)
     return (
       <form onSubmit={this.handleSubmit} >
         <div className="row">
