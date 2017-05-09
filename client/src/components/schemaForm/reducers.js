@@ -7,7 +7,10 @@ import { dataFilled } from './sampleDataSchema'
 
 const initialState = {
   data: dataFilled,
-  formSchema: formSchema
+  formSchema: formSchema,
+  designOptions: {
+    selectedInputId: ''
+  }
 }
 
 function iterateUiSchemaRecursive(schema, parentSchema, parentId, fun, args) {

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { mergeRecursive, setValueFromDottedKey, getValueFromDottedKey } from './utils'
 import * as Const from './constants'
 import * as renderer from './renderItems'
+import {getColumnWidths} from './utils';
 
 
 class SchemaForm extends Component {
@@ -100,9 +101,18 @@ class SchemaForm extends Component {
     console.log('uilist', uiItemList)
     return (
       <form onSubmit={this.handleSubmit} >
-        <div className="row">
-          {renderer.renderItems(uiItemList)}
-          < button type="submit" className="btn btn-success" > OK</button >
+        <div className="container-fluid">
+          <div className="row">
+            {renderer.renderItems(uiItemList)}
+          </div>
+          <div className="row">
+            <p></p>
+          </div>
+          <div className="row">
+            <div className={getColumnWidths([1,2,3,4])}>
+              < button type="submit" className="btn btn-success" > OK</button >
+            </div>
+          </div>
         </div>
       </form >
     )
