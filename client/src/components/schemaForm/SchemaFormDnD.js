@@ -5,11 +5,6 @@ import SchemaForm from './SchemaForm'
 
 const SchemaFormDnD = (props) => {
 
-  const handleDrop = (sourceItem, targetItem, dropBefore) => {
-    const data = { sourceItem, targetItem, dropBefore }
-    this.props.funktionen.handleSwitchPosition(data)
-  }
-  
   return (
     <SchemaForm designerMode={true} {...props}/>
   )

@@ -27,7 +27,6 @@ const inputTarget = {
     const sourceItemProps = monitor.getItem().props
     const sourceItem = sourceItemProps.item
     if (targetItem.id === sourceItem.id) { return }
-    debugger
 
     let dropBefore = true;
     if (targetItem.pos === (sourceItem.pos + 1)) {

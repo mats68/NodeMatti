@@ -40,26 +40,31 @@ export const tabShema = {
 export const tabShemaUi = {
   fields: {
     id: {
-      label: "Id"
+      label: "Id",
+      pos: 1
     },
     tab: {
       type: "_container",
       options: {
-        type: "tab"
+        type: "tab",
+        pos: 2
       },
       fields: {
         tab1: {
           type: "_container",
           options: {
             type: "tabPanel",
-            title: "Tab 1"
+            title: "Tab 1",
+            pos: 3
           },
           fields: {
             name: {
-              label: "Name"
+              label: "Name",
+              pos: 4
             },
             vorname: {
-              label: "Vorname"
+              label: "Vorname",
+              pos: 5
             }
           }
         },
@@ -67,11 +72,13 @@ export const tabShemaUi = {
           type: "_container",
           options: {
             type: "tabPanel",
-            title: "Tab 2"
+            title: "Tab 2",
+            pos: 7
           },
           fields: {
             strasse: {
-              label: "Strasse"
+              label: "Strasse",
+              pos: 8
             }
           }
         }
