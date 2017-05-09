@@ -13,7 +13,9 @@ const App = (props) => {
         <div className="content">
           <SchemaFormContainer />
         </div>
-        <ToolBoxContainer />
+        <div className="footer">
+          <ToolBoxContainer />
+        </div>
       </div>
     </Provider>
   )

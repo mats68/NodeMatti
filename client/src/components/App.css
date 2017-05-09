@@ -5,5 +5,9 @@
 }
 
 .content {
-  flex: 1;
+  flex: 1 0 auto;
+}
+.header,
+.footer {
+  flex-shrink: 0;
 }

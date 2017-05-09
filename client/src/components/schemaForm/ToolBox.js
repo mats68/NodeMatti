@@ -17,18 +17,26 @@ const ToolBox = (props) => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <button className="btn btn-success" onClick={handleAddClick}>
-          Add Item
+        <div className="col-lg-1">
+          <button className="btn btn-success" onClick={handleAddClick}>
+            Add Item
+          </button>
+        </div>
+        <div className="col-lg-1">
+          <button className="btn btn-success" disabled={!props.canUndo} onClick={handleUndoClick}>
+            Undo
         </button>
-        <button className="btn btn-success" disabled={!props.canUndo} onClick={handleUndoClick}>
-          Undo
+        </div>
+        <div className="col-lg-1">
+          <button className="btn btn-success" disabled={!props.canRedo} onClick={handleRedoClick}>
+            Redo
         </button>
-        <button className="btn btn-success" disabled={!props.canRedo} onClick={handleRedoClick}>
-          Redo
-        </button>
-        <div className="form-group">
-          <label htmlFor="selid">Selected ID</label>
-          <input type="text" id='selid' value={props.selectedId} className="form-control" />
+        </div>
+        <div className="col-lg-2">
+          <div className="form-group">
+            <label htmlFor="selid">Selected ID</label>
+            <input type="text" id='selid' value={props.selectedId} className="form-control" />
+          </div>
         </div>
       </div>
     </div>
