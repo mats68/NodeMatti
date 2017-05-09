@@ -24,8 +24,10 @@ const inputTarget = {
 
   drop(props, monitor, component) {
     const targetItem = props.item
-    const sourceItem = monitor.getItem().props.item
+    const sourceItemProps = monitor.getItem().props
+    const sourceItem = sourceItemProps.item
     if (targetItem.id === sourceItem.id) { return }
+    debugger
 
     let dropBefore = true;
     if (targetItem.pos === (sourceItem.pos + 1)) {
@@ -34,18 +36,15 @@ const inputTarget = {
       dropBefore = true;
     } else {
       const hoverBoundingRect = component.decoratedComponentInstance.node.getBoundingClientRect();
-      //const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
-      // Determine mouse position
       const clientOffset = monitor.getClientOffset();
-
-      // console.log(hoverBoundingRect, clientOffset)
       let middle = ((hoverBoundingRect.right - hoverBoundingRect.left) / 2) + hoverBoundingRect.left
       if (clientOffset.x > middle) {
         dropBefore = false;
       }
     }
-
-    sourceItem.handleDrop(sourceItem, targetItem, dropBefore)
+    const data = {sourceItem, targetItem, dropBefore}
+    sourceItemProps.funktionen.handleSwitchPosition(data)
+    //sourceItem.handleDrop(sourceItem, targetItem, dropBefore)
   }
 
 };
@@ -67,15 +66,17 @@ function collectSource(connect, monitor) {
   }
 }
 
-
-const InputDnD = (props) => {
-  const { connectDragSource, connectDropTarget } = props;
-  return connectDragSource(connectDropTarget(
-    <div>
-      <Input {...props} />
-    </div>
-  ))
+class InputDnD extends Component {
+  render() {
+    const { connectDragSource, connectDropTarget } = this.props;
+    return connectDragSource(connectDropTarget(
+      <div ref={node => (this.node = node)}>
+        <Input {...this.props} />
+      </div>
+    ))
+  }
 }
+
 
 
 export default flow(

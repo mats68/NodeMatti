@@ -1,19 +1,18 @@
-import React, { Component } from 'react'
-import SchemaFormDnD from './schemaForm/SchemaFormDnD'
-import { formSchema } from './schemaForm/sampleDataForm'
-import { dataFilled } from './schemaForm/sampleDataSchema'
+import React from 'react'
+import { Provider } from 'react-redux';
+import SchemaFormContainer from './schemaForm/SchemaFormContainer';
 
-class App extends Component {
-  render() {
-    return (
+import store from './schemaForm/configureStore';
+
+
+const App = (props) => {
+  return (
+    <Provider store={store}>
       <div className="container-fluid">
-        <SchemaFormDnD data={dataFilled} schema={formSchema} />
-
+        <SchemaFormContainer />
       </div>
-
-
-    )
-  }
+    </Provider>
+  )
 }
 
 

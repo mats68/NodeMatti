@@ -7,7 +7,7 @@ const SchemaFormDnD = (props) => {
 
   const handleDrop = (sourceItem, targetItem, dropBefore) => {
     const data = { sourceItem, targetItem, dropBefore }
-    this.props.handleSwitchPosition(data)
+    this.props.funktionen.handleSwitchPosition(data)
   }
   
   return (

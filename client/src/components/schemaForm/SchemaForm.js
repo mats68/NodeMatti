@@ -10,15 +10,17 @@ class SchemaForm extends Component {
     super(props)
     this.data = props.data
     //todo check same names of schemas
-    this.items = mergeRecursive({}, props.schema.schema, ...props.schema.implements || {})
+    this.items = mergeRecursive({}, props.formSchema.schema, ...props.formSchema.implements || {})
     //}
     //console.dir(JSON.stringify(this.items))
     this.uiItems = []
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    //todo renderer schlecht
     renderer.events.handleChange = this.handleChange
     renderer.events.designerMode = props.designerMode
+    renderer.events.funktionen = props.funktionen
 
     //this.fillItemsRecursive = this.fillItemsRecursive.bind(this)
     this.buildItemsFromUISchema = this.buildItemsFromUISchema.bind(this)

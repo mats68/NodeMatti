@@ -23,7 +23,7 @@ class Input extends Component {
 
     return (
       <div className={getColumnWidths(cols)}>
-        <div className="form-group">
+        <div className="form-group" >
           <label htmlFor={id}>{label}</label>
           <input id={id} ref={id} type={type} className="form-control" value={this.state.value} onChange={this.handleChange}></input>
         </div>
