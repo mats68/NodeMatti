@@ -6,6 +6,7 @@ import { mergeRecursive } from './utils';
 
 import { formSchema } from './sampleDataForm'
 
+//todo save ui of subschema in general ui
 const initialState = {
   formSchema: formSchema
 }
@@ -126,7 +127,7 @@ function updateSortPos(newState, data) {
 
 }
 
-//todo refactor mehrere reducers
+//todo save ui of subschema in general ui
 const reducer = (state = initialState, action) => {
   let newState
   switch (action.type) {
@@ -136,6 +137,14 @@ const reducer = (state = initialState, action) => {
     case Const.ADD_ITEM:
       newState = mergeRecursive({}, state)
       addNewItem(newState,action.data)
+      return newState
+    case Const.ADD_SCHEMA:
+      newState = mergeRecursive({}, state)
+      newState.formSchema = {}
+      newState.formSchema.schema = {}
+      newState.formSchema.schema[Const.fields] = {}
+      newState.formSchema.schema[Const.ui] = {}
+      newState.formSchema.schema[Const.ui][Const.fields] = {}
       return newState
     default:
       return state

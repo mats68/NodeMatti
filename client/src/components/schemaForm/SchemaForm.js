@@ -111,7 +111,7 @@ class SchemaForm extends Component {
           </div>
           <div className="row">
             <div className={getColumnWidths([1,2,3,4])}>
-              <button type="submit" className="btn btn-success" > OK</button >
+              <button type="submit" className="btn btn-success" > Save</button >
             </div>
           </div>
         </div>

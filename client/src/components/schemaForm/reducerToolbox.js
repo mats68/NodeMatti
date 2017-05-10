@@ -4,6 +4,7 @@ import { mergeRecursive } from './utils';
 
 
 const initialState = {
+  saving: false,
   selectedItemId: 0,
   selectedItemLabel: '',
   newItem: {
@@ -19,15 +20,22 @@ const reducer = (state = initialState, action) => {
   let newState = mergeRecursive({}, state)  //todo ev lodash _.merge({},state)
   switch (action.type) {
     case Const.CHANGE_SELECTED_ITEM:
-      newState.designerOptions.selectedItemId = action.data.id
-      newState.designerOptions.selectedItemText = action.data.label
+      newState.selectedItemId = action.data.id
+      newState.selectedItemText = action.data.label
       return newState
     case Const.ADD_ITEM_MODAL:
-      newState.designerOptions.newItem.ModalIsOpen = true
+      newState.newItem.ModalIsOpen = true
       return newState
     case Const.CLOSE_ADD_ITEM_MODAL:
-      newState.designerOptions.newItem.ModalIsOpen = false
+      newState.newItem.ModalIsOpen = false
       return newState
+    case Const.SAVE_SCHEMA_START:
+      newState.saving = true
+      return newState
+    case Const.SAVE_SCHEMA_END:
+      newState.saving = false
+      return newState
+      
     default:
       return state
   }

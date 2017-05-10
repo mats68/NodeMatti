@@ -8,7 +8,7 @@ import store from './schemaForm/configureStore';
 
 const App = (props) => {
   return (
-    <Provider store={store}>
+    <Provider store={store} url={props.url}>
       <div className="main">
         <div className="content">
           <SchemaFormContainer />
