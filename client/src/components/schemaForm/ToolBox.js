@@ -13,30 +13,18 @@ const ToolBox = (props) => {
   }
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-lg-1">
-          <button className="btn btn-success" onClick={handleAddItemModal}>
-            Add Item
+    <div className="form-inline">
+      <button className="btn btn-primary mb-2 mr-2 ml-2" onClick={handleAddItemModal}>
+        Add Item
           </button>
-        </div>
-        <div className="col-lg-1">
-          <button className="btn btn-success" disabled={!props.canUndo} onClick={handleUndoClick}>
-            Undo
+      <button className="btn btn-primary  mb-2 mr-2 ml-2" disabled={!props.canUndo} onClick={handleUndoClick}>
+        Undo
         </button>
-        </div>
-        <div className="col-lg-1">
-          <button className="btn btn-success" disabled={!props.canRedo} onClick={handleRedoClick}>
-            Redo
+      <button className="btn btn-primary  mb-2 mr-2 ml-2" disabled={!props.canRedo} onClick={handleRedoClick}>
+        Redo
         </button>
-        </div>
-        <div className="col-lg-2">
-          <div className="form-group">
-            <label htmlFor="selid">Selected ID</label>
-            <input type="text" id='selid' value={props.designerOptions.selectedItemText} className="form-control" />
-          </div>
-        </div>
-      </div>
+      <label htmlFor="selid" className="mb-2 mr-2 ml-2">Selected ID</label>
+      <input type="text" id='selid' value={props.designerOptions.selectedItemText} className="form-control mb-2 mr-2 ml-2" />
       <AddItemModal isOpen={props.designerOptions.newItem.ModalIsOpen} onClose={props.handleCloseAddItemModal}></AddItemModal>
     </div>
   )
@@ -44,4 +32,3 @@ const ToolBox = (props) => {
 
 export default ToolBox
 
- 

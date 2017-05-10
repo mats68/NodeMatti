@@ -6,6 +6,21 @@ The field names cannot contain the dot (.) character.
 The field names cannot contain the null character.
 */
 
+
+export const adress = {
+  fields: {
+    strasse: {
+      type: "text"
+    },
+    plz: {
+      type: "text"
+    },
+    ort: {
+      type: "text"
+    }
+  }
+}
+
 export const dataFilled = {
   _id: '100',
   name: 'Thaler',
@@ -41,7 +56,10 @@ export const tabShema = {
     },
     strasse: {
       type: "text"
-    }
+    },
+    adresse: {
+      type: adress
+    },
   }
 }
 
@@ -110,19 +128,6 @@ export const tabShemaUi = {
 
 
 
-export const adress = {
-  fields: {
-    strasse: {
-      type: "text"
-    },
-    plz: {
-      type: "text"
-    },
-    ort: {
-      type: "text"
-    }
-  }
-}
 
 export const schema = {
   fields: {
@@ -235,20 +240,36 @@ export const implementedSchemaUi = {
 
 
 export const adressUi = {
+
   fields: {
-    strasse: {
-      label: "Strasse"
-    },
-    plz: {
-      label: "PLZ",
-      cols: [2, 3, 4, 5]
-    },
-    ort: {
-      label: "Ort",
-      cols: [10, 9, 8, 7]
+    tab: {
+      type: '_container',
+      pos: 100,
+      options: {
+        type: "panel",
+        cols: [4],
+        headerText: "Kontakt-Info",
+        showHeader: true,
+        footerText: "Fusstext",
+        showFooter: false
+      },
+      fields: {
+        strasse: {
+          label: "Strasse",
+          pos: 101
+        },
+        plz: {
+          label: "PLZ",
+          pos: 102,
+          cols: [5, 3, 4, 5]
+        },
+        ort: {
+          label: "Ort",
+          pos: 103,
+          cols: [10, 9, 8, 7]
+        }
+      }
     }
   }
 }
-
-
 
