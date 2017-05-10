@@ -2,11 +2,13 @@ import React from 'react'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import SchemaForm from './SchemaForm'
+import { dataFilled } from './sampleDataSchema'
+
 
 const SchemaFormDnD = (props) => {
-
+  
   return (
-    <SchemaForm designerMode={true} {...props}/>
+    <SchemaForm data={dataFilled} designerMode={true} {...props}/>
   )
 }
 

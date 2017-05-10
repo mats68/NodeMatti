@@ -1,24 +1,13 @@
 import * as Const from './constants'
 import undoable, { excludeAction } from 'redux-undo'
 import { mergeRecursive } from './utils';
-import merge from 'lodash/merge'
+//import merge from 'lodash/merge'
 
 
 import { formSchema } from './sampleDataForm'
-import { dataFilled } from './sampleDataSchema'
 
 const initialState = {
-  data: dataFilled,
-  formSchema: formSchema,
-  designerOptions: {
-    selectedItemId: 0,
-    selectedItemLabel: '',
-    newItem: {
-      ModalIsOpen: false,
-      id: '',
-      label: ''
-    }
-  }
+  formSchema: formSchema
 }
 
 function iterateUiSchemaRecursive(schema, parentSchema, parentId, fun, args) {
@@ -85,11 +74,6 @@ function addNewItem(newState, data) {
   let newUiSchemaItem = {label: data.label, pos: data.pos}
   schema[data.id] = newSchemaItem
   uischema[data.id] = newUiSchemaItem
-  
-
-
-  // merge(schema,newSchemaItem)
-  // merge(uischema,newUiSchemaItem)
 }
 
 
@@ -149,19 +133,6 @@ const reducer = (state = initialState, action) => {
     case Const.SWITCH_POSITION:
       newState = mergeRecursive({}, state)
       return updateSortPos(newState, action.data)
-    case Const.CHANGE_SELECTED_ITEM:
-      newState = mergeRecursive({}, state)
-      newState.designerOptions.selectedItemId = action.data.id
-      newState.designerOptions.selectedItemText = action.data.label
-      return newState
-    case Const.ADD_ITEM_MODAL:
-      newState = mergeRecursive({}, state)
-      newState.designerOptions.newItem.ModalIsOpen = true
-      return newState
-    case Const.CLOSE_ADD_ITEM_MODAL:
-      newState = mergeRecursive({}, state)
-      newState.designerOptions.newItem.ModalIsOpen = false
-      return newState
     case Const.ADD_ITEM:
       newState = mergeRecursive({}, state)
       addNewItem(newState,action.data)
@@ -171,7 +142,6 @@ const reducer = (state = initialState, action) => {
   }
 }
 
-//export default reducer
 
 const undoableReducer = undoable(reducer, {
   filter: excludeAction([Const.CHANGE_SELECTED_ITEM, Const.ADD_ITEM_MODAL, Const.CLOSE_ADD_ITEM_MODAL])

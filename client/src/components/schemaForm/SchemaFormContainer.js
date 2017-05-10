@@ -7,7 +7,9 @@ import SchemaFormDnD from './SchemaFormDnD'
 
 
 const mapStateToProps = (state) => {
-  return state.present
+  return {
+    formSchema: state.formSchema.present.formSchema
+  }
 
 }
 
