@@ -2,7 +2,8 @@ import React from 'react'
 import Input from './SchemaInput'
 import InputDnD from './SchemaInputDnD'
 import { Panel } from './SchemaPanel'
-import * as Const from './constants'
+import {cn} from '../../imports'
+
 import { Tab } from './Tab'
 
 export const events =
@@ -21,15 +22,15 @@ export function addInput(item) {
 }
 
 export function renderItem(item) {
-  if (item.type === Const.container) {
+  if (item.type === cn.container) {
 
-    if (item.options.type === Const.panel) {
+    if (item.options.type === cn.panel) {
       return (
         <Panel key={item.id} item={item}>
           {renderItems(item.items)}
         </Panel>
       )
-    } else if (item.options.type === Const.tab) {
+    } else if (item.options.type === cn.tab) {
       return (
         <Tab key={item.id} item={item}></Tab>
       )

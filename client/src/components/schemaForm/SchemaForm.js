@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import { mergeRecursive, setValueFromDottedKey, getValueFromDottedKey } from './utils'
-import * as Const from './constants'
+import {cn, utils} from '../../imports'
 import * as renderer from './renderItems'
-import {getColumnWidths} from './utils';
 
 
 class SchemaForm extends Component {
@@ -37,33 +35,33 @@ class SchemaForm extends Component {
 
   handleChange(key, value) {
     let data = this.data
-    setValueFromDottedKey(key, data, value)
+    utils.setValueFromDottedKey(key, data, value)
   }
 
   buildItemsFromUISchema(_schemaItems, _uiItems, uiItems, prefix) {
     if (!_schemaItems || !_uiItems) { return }
     Object.keys(_uiItems).forEach(name => {
       let item = {}
-      if (_uiItems[name].type === Const.container) {
+      if (_uiItems[name].type === cn.container) {
         this.containerCount++;
         item.id = name + this.containerCount.toString()
-        item.type = Const.container
+        item.type = cn.container
         item.pos = _uiItems[name].pos
         item.options = _uiItems[name].options
         item.items = []
-        this.buildItemsFromUISchema(_schemaItems, _uiItems[name][Const.fields], item.items, prefix)
+        this.buildItemsFromUISchema(_schemaItems, _uiItems[name][cn.fields], item.items, prefix)
         item.items.sort((a, b) => {
           return a.pos - b.pos
         })
         uiItems.push(item)
       } else {
-        item = mergeRecursive({}, _schemaItems[name], _uiItems[name])
+        item = utils.mergeRecursive({}, _schemaItems[name], _uiItems[name])
         let fullname = prefix + name
         item.id = fullname
-        let val = getValueFromDottedKey(fullname, this.data)
+        let val = utils.getValueFromDottedKey(fullname, this.data)
         if (!val) {
           val = ''
-          setValueFromDottedKey(fullname, this.data, val)
+          utils.setValueFromDottedKey(fullname, this.data, val)
         }
         item.value = val
 
@@ -74,9 +72,9 @@ class SchemaForm extends Component {
   }
 
   buildItemsRecursive(items, uiItems, prefix) {
-    if (!items[Const.fields] || !items[Const.ui] || !items[Const.ui][Const.fields]) { return }
-    let schemaList = items[Const.fields]
-    let uiList = items[Const.ui][Const.fields]
+    if (!items[cn.fields] || !items[cn.ui] || !items[cn.ui][cn.fields]) { return }
+    let schemaList = items[cn.fields]
+    let uiList = items[cn.ui][cn.fields]
     // let list = mergeRecursive({}, schemaList,uiList)
     this.buildItemsFromUISchema(schemaList, uiList, uiItems, prefix)
     uiItems.sort((a, b) => {
@@ -93,7 +91,7 @@ class SchemaForm extends Component {
 
   render() {
     this.containerCount = 0;
-    this.items = mergeRecursive({}, this.props.formSchema.schema, ...this.props.formSchema.implements || {})
+    this.items = utils.mergeRecursive({}, this.props.formSchema.schema, ...this.props.formSchema.implements || {})
     this.uiItems = []
     let uiItemList = [];
     // console.log(this.items)
@@ -110,7 +108,7 @@ class SchemaForm extends Component {
             <p></p>
           </div>
           <div className="row">
-            <div className={getColumnWidths([1,2,3,4])}>
+            <div className={utils.getColumnWidths([1,2,3,4])}>
               <button type="submit" className="btn btn-success" > Save</button >
             </div>
           </div>

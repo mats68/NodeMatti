@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { DragSource, DropTarget } from 'react-dnd'
 import flow from 'lodash/flow'
+
+import {cn} from '../../imports'
 import Input from './SchemaInput'
-import * as Const from './constants'
+
 
 
 const inputSource = {
@@ -79,7 +81,7 @@ class InputDnD extends Component {
 
 
 export default flow(
-  DragSource(Const.INPUT, inputSource, collectSource),
-  DropTarget(Const.INPUT, inputTarget, collectTarget)
+  DragSource(cn.INPUT, inputSource, collectSource),
+  DropTarget(cn.INPUT, inputTarget, collectTarget)
 
 )(InputDnD);

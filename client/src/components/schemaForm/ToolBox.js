@@ -1,6 +1,6 @@
 import React from 'react';
 import AddItemModal from '../modals/AddItemModal';
-import {handleNewSchema,handleSaveSchema,handleSaveSchemaEnd,handleSaveSchemaErrorClose} from './actions';
+import { actions } from './../../imports'
 import ModalMessage from '../modals/ModalMessage'
 
 const ToolBox = (props) => {
@@ -14,17 +14,17 @@ const ToolBox = (props) => {
     props.handleRedoClick()
   }
   const addNewSchema = () => {
-    props.dispatch(handleNewSchema())
+    props.dispatch(actions.handleNewSchema())
   }
   const saveSchema = (e) => {
     let val = prompt('Name:')
     if (val) {
-    props.dispatch(handleSaveSchema(val,props.formSchema))
+    props.dispatch(actions.handleSaveSchema(val,props.formSchema))
     }
   }
   const closeError = () => {
-    props.dispatch(handleSaveSchemaErrorClose())
-    props.dispatch(handleSaveSchemaEnd())
+    props.dispatch(actions.handleSaveSchemaErrorClose())
+    props.dispatch(actions.handleSaveSchemaEnd())
     
   }
 

@@ -1,7 +1,8 @@
 import React from 'react'
 import './Tab.css'
 import * as renderer from './renderItems'
-import { getColumnWidths } from './utils'
+import {utils} from '../../imports'
+
 
 
 
@@ -54,7 +55,7 @@ export class Tab extends React.Component {
 
   render() {
     return (
-      <div className={getColumnWidths(this.props.item.options.cols)}>
+      <div className={utils.getColumnWidths(this.props.item.options.cols)}>
         <ul className="nav nav-tabs">
           {this.renderTabs()}
         </ul>

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { ActionCreators as UndoActionCreators } from 'redux-undo'
-import { handleAddItemModal, handleCloseAddItemModal, handleAddItem } from './actions';
+import { actions } from './../../imports'
 import ToolBox from './ToolBox';
 
 const mapStateToProps = (state) => {
@@ -16,12 +16,12 @@ const mapDispatchToProps = (dispatch) => {
   return {
     dispatch,
     handleAddItemModal: () => {
-      dispatch(handleAddItemModal())
+      dispatch(actions.handleAddItemModal())
     },
     handleCloseAddItemModal: (data) => {
-      dispatch(handleCloseAddItemModal(data))
+      dispatch(actions.handleCloseAddItemModal(data))
       if (data.isOK) {
-        dispatch(handleAddItem(data))
+        dispatch(actions.handleAddItem(data))
       }
     },
     handleUndoClick: () => {
