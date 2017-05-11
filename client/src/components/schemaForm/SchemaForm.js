@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {cn, utils} from '../../imports'
-import * as renderer from './renderItems'
+import { cn, utils } from '../../imports'
+import SchemaGroup from './SchemaGroup';
 
 
 class SchemaForm extends Component {
@@ -18,10 +18,10 @@ class SchemaForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
     //todo renderer schlecht
-    renderer.events.handleChange = this.handleChange
-   
-    renderer.events.designerMode = props.designerMode
-    renderer.events.funktionen = props.funktionen
+    // renderer.events.handleChange = this.handleChange
+
+    // renderer.events.designerMode = props.designerMode
+    // renderer.events.funktionen = props.funktionen
 
     //this.fillItemsRecursive = this.fillItemsRecursive.bind(this)
     this.buildItemsFromUISchema = this.buildItemsFromUISchema.bind(this)
@@ -97,18 +97,16 @@ class SchemaForm extends Component {
     // console.log(this.items)
     this.buildItemsRecursive(this.items, uiItemList, '')
 
-    console.log('uilist', uiItemList)
+    //console.log('uilist', uiItemList)
     return (
       <form onSubmit={this.handleSubmit} >
         <div className="container-fluid">
-          <div className="row">
-            {renderer.renderItems(uiItemList)}
-          </div>
+          <SchemaGroup items={uiItemList} handleChange={this.handleChange} designFunktionen={this.props.designFunktionen} designerMode={this.props.designerMode}></SchemaGroup>
           <div className="row">
             <p></p>
           </div>
           <div className="row">
-            <div className={utils.getColumnWidths([1,2,3,4])}>
+            <div className={utils.getColumnWidths([1, 2, 3, 4])}>
               <button type="submit" className="btn btn-success" > Save</button >
             </div>
           </div>

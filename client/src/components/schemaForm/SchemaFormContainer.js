@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    funktionen: {
+    designFunktionen: {
       handleSwitchPosition: (data) => {
         dispatch(actions.handleSwitchPosition(data))
       },

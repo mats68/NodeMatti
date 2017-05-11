@@ -44,7 +44,7 @@ const inputTarget = {
       }
     }
     const data = { sourceItem, targetItem, dropBefore }
-    sourceItemProps.funktionen.handleSwitchPosition(data)
+    sourceItemProps.designFunktionen.handleSwitchPosition(data)
     //sourceItem.handleDrop(sourceItem, targetItem, dropBefore)
   }
 
@@ -71,7 +71,7 @@ class InputDnD extends Component {
   render() {
     const { connectDragSource, connectDropTarget } = this.props;
     return connectDragSource(connectDropTarget(
-      <div ref={node => (this.node = node)} onClick={(e) => {this.props.funktionen.handleChangeSelectedItem(this.props.item) }}>
+      <div ref={node => (this.node = node)} onClick={(e) => {this.props.designFunktionen.handleChangeSelectedItem(this.props.item) }}>
         <Input {...this.props} />
       </div>
     ))

@@ -1,9 +1,6 @@
 import React from 'react'
 import './Tab.css'
-import * as renderer from './renderItems'
-import {utils} from '../../imports'
-
-
+import { utils } from '../../imports'
 
 
 export class Tab extends React.Component {
@@ -45,13 +42,12 @@ export class Tab extends React.Component {
       // console.log('it', item)
       return (
         <div key={item.id} className={this.state.activeTab === ind ? "" : "hide-true"}>
-        {renderer.renderItems(item.items)}
+          {this.props.renderItems(item.items)}
         </div>
       )
     })
 
   }
-
 
   render() {
     return (
