@@ -1,5 +1,5 @@
 import React from 'react'
-import {cn, utils} from '../../imports'
+import {utils} from '../../imports'
 
 
 export const Panel = (props) => {

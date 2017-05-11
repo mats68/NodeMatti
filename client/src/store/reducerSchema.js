@@ -1,6 +1,6 @@
 import undoable, { excludeAction } from 'redux-undo'
-import { cn, utils,actions } from '../imports'
-import {formSchema} from '../data/sampleDataForm'
+import { cn, utils } from '../imports'
+import { formSchema } from '../data/sampleDataForm'
 //import merge from 'lodash/merge'
 
 
@@ -10,58 +10,98 @@ const initialState = {
   formSchema: formSchema
 }
 
-function iterateUiSchemaRecursive(schema, parentSchema, parentId, fun, args) {
-  Object.keys(schema).forEach(name => {
-    fun(schema[name], name, parentSchema, parentId, ...args)
-    if (schema[name].type === cn.container) {
-      iterateUiSchemaRecursive(schema[name][cn.fields], schema, name, fun, args)
-    } else {
-      //  fun(schema[name], name, parentSchema, parentId, ...args)
+let UIFieldInfo = {
+  uiField: {},
+  uiFieldId: '',
+  uiParentSchema: {},
+  uiParentSchemaId: {},
+  fieldId: '',
+  schema: {},
+  uiSchema: {}
+}
+
+function iterateUiSchemaRecursive(UIschema, parentSchema, parentId, schema, fun, args) {
+  Object.keys(UIschema).forEach(name => {
+    let fi = {}
+    fi.uiField = UIschema[name]
+    fi.uiFieldId = name
+    fi.uiParentSchema = parentSchema
+    fi.uiParentSchemaId = parentId
+    fi.schema = schema
+    fi.uiSchema = UIschema
+
+    fun(fi, ...args)
+    if (UIschema[name].type === cn.container) {
+      iterateUiSchemaRecursive(UIschema[name][cn.fields], parentSchema, name, schema, fun, args)
     }
   })
 }
 
-function iterateSchemaRecursive(schema, uischema, fun, args) {
+function iterateSchemaRecursive(schema, uischema, fun, args, execFunOnUISchema = true, parentId = '') {
   Object.keys(schema).forEach(name => {
+    if (!execFunOnUISchema) {
+      let fi = {}
+      fi.schema = schema
+      fi.uiSchema = uischema
+      fi.fieldId = name
+      fi.parentId = parentId
+
+      fun(fi, ...args)
+    }
     if (typeof schema[name].type === 'object') {
-      iterateSchemaRecursive(schema[name].type[cn.fields], schema[name].type[cn.ui][cn.fields], fun, args)
+      iterateSchemaRecursive(schema[name].type[cn.fields], schema[name].type[cn.ui][cn.fields], fun, args, name )
     }
   })
-  iterateUiSchemaRecursive(uischema, {}, '', fun, args)
-}
-
-function updatePosMal10(item, id, parent, parentName, itemInfo) {
-  item.pos *= 10
-  if (id === itemInfo.targetItemId) {
-    itemInfo.targetItem = item
-    itemInfo.targetItemParent = parent
-    itemInfo.targetItemParentName = parentName
-  } else if (id === itemInfo.sourceItemId) {
-    itemInfo.sourceItem = item
-    itemInfo.sourceItemParent = parent
-    itemInfo.sourceItemParentName = parentName
+  if (execFunOnUISchema) {
+    iterateUiSchemaRecursive(uischema, {}, '', schema, fun, args)
   }
 }
 
-function fillArry(item, id, parent, parentName, arr) {
-  arr.push(item)
+function updatePosMal10(fInf, itemInfo) {
+  fInf.uiField.pos *= 10
+  if (fInf.uiFieldId === itemInfo.targetItemId) {
+    itemInfo.targetItem = fInf.uiField
+    itemInfo.targetItemParent = fInf.uiParentSchema
+    itemInfo.targetItemParentName = fInf.uiParentSchemaId
+  } else if (fInf.uiFieldId === itemInfo.sourceItemId) {
+    itemInfo.sourceItem = fInf.uiField
+    itemInfo.sourceItemParent = fInf.uiParentSchema
+    itemInfo.sourceItemParentName = fInf.uiParentSchemaId
+  }
 }
 
-function changePos(item, id, parent, parentName, itemInfo, dropBefore) {
-  if (id === itemInfo.sourceItemId) {
+function fillArry(fInf, arr) {
+  arr.push(fInf.uiField)
+}
+
+function changePos(fInf, itemInfo, dropBefore) {
+  if (fInf.uiFieldId === itemInfo.sourceItemId) {
     if (dropBefore) {
-      item.pos = itemInfo.targetItem.pos - 1
+      fInf.uiFieldId.pos = itemInfo.targetItem.pos - 1
     } else {
-      item.pos = itemInfo.targetItem.pos + 1
+      fInf.uiFieldId.pos = itemInfo.targetItem.pos + 1
     }
   }
 }
 
-function getHighPos(item, id, parent, parentName, newitem) {
-  if (item.pos > newitem.pos) {
-    newitem.pos = item.pos
+function getHighPos(fInf, newitem) {
+  if (fInf.uiField.pos > newitem.pos) {
+    newitem.pos = fInf.uiField.pos
   }
 }
+
+
+function checkUIField(fInf, UIFields, uiSchema, pos) {
+  //todo if not schema.inherits...
+  let name = fInf.parentId ? fInf.parentId + '.' + fInf.fieldId : fInf.fieldId
+  let v = utils.getValueFromDottedKey(name,UIFields)
+  if (!v) {
+    uiSchema[name] = {label: name, pos}
+    pos++
+  }
+}
+
+
 
 function addNewItem(newState, data) {
   //todo test name vorhanden
@@ -76,8 +116,24 @@ function addNewItem(newState, data) {
   uischema[data.id] = newUiSchemaItem
 }
 
-
-
+function repairSchema(newState) {
+  let schema = newState.formSchema.schema[cn.fields]
+  if (!newState.formSchema.schema[cn.ui]) {
+    newState.formSchema.schema[cn.ui] = {}
+  }
+  if (!newState.formSchema.schema[cn.ui][cn.fields]) {
+    newState.formSchema.schema[cn.ui][cn.fields] = {}
+  }
+  let uischema = newState.formSchema.schema[cn.ui][cn.fields]
+  let item = { pos: 0 }
+  iterateSchemaRecursive(schema, uischema, getHighPos, [item.pos])
+  item.pos++
+  //let tempSchema = utils.mergeRecursive({}, schema)
+  let UIFields = []
+  iterateSchemaRecursive(schema, uischema, fillArry, [UIFields])
+  iterateSchemaRecursive(schema, uischema, checkUIField, [UIFields, uischema, item.pos], false)
+  
+}
 
 function updateSortPos(newState, data) {
   const { sourceItem, targetItem, dropBefore } = data
@@ -121,9 +177,7 @@ function updateSortPos(newState, data) {
     arr[i].pos = i + 1
   }
 
-
   return newState
-
 }
 
 //todo save ui of subschema in general ui
@@ -144,6 +198,10 @@ const reducer = (state = initialState, action) => {
       newState.formSchema.schema[cn.fields] = {}
       newState.formSchema.schema[cn.ui] = {}
       newState.formSchema.schema[cn.ui][cn.fields] = {}
+      return newState
+    case cn.REPAIR_SCHEMA:
+      newState = utils.mergeRecursive({}, state)
+      repairSchema(newState)
       return newState
     default:
       return state

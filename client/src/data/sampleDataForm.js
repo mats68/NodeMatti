@@ -9,7 +9,7 @@ data.tabShema[cn.ui] = data.tabShemaUi
 data.tabShema.fields.adresse.type[cn.ui] = data.adressUi
 
 export const formSchema = {
-  schema: data.tabShema
+  schema: data.adress
 }
 
 

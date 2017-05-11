@@ -45,6 +45,13 @@ const functions = {
     }
   },
 
+  handleRepairSchema: function (data) {
+    return {
+      type: cn.REPAIR_SCHEMA,
+      data
+    }
+  },
+
   handleSaveSchemaStart: function (data) {
     return {
       type: cn.SAVE_SCHEMA_START,

@@ -16,6 +16,9 @@ const ToolBox = (props) => {
   const addNewSchema = () => {
     props.dispatch(actions.handleNewSchema())
   }
+  const repairSchema = () => {
+    props.dispatch(actions.handleRepairSchema())
+  }
   const saveSchema = (e) => {
     let val = prompt('Name:')
     if (val) {
@@ -32,6 +35,9 @@ const ToolBox = (props) => {
     <div className="form-inline">
       <button className="btn btn-primary mb-2 mr-2 ml-2" onClick={addNewSchema}>
         Add new Schemna
+      </button>
+      <button className="btn btn-primary mb-2 mr-2 ml-2" onClick={repairSchema}>
+        Repair Schemna
       </button>
       <button className="btn btn-primary mb-2 mr-2 ml-2" onClick={addItemModal}>
         Add Item
