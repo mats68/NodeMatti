@@ -11,7 +11,11 @@ const initialState = {
     ModalIsOpen: false,
     id: '',
     label: ''
-
+  },
+  errorItem: {
+    ModalIsOpen: false,
+    title: '',
+    message: ''
   }
 }
 
@@ -35,7 +39,17 @@ const reducer = (state = initialState, action) => {
     case Const.SAVE_SCHEMA_END:
       newState.saving = false
       return newState
-      
+    case Const.SAVE_SCHEMA_ERROR:
+      newState.errorItem.ModalIsOpen = true
+      newState.errorItem.title = 'Error'
+      newState.errorItem.message = action.data
+      return newState
+    case Const.SAVE_SCHEMA_ERROR_CLOSE:
+      newState.errorItem.ModalIsOpen = false
+      newState.errorItem.title = ''
+      newState.errorItem.message = ''
+      return newState
+     
     default:
       return state
   }

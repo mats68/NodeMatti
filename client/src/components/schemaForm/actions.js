@@ -61,6 +61,21 @@ export function handleSaveSchemaEnd(data) {
 }
 
 
+export function handleSaveSchemaError(data) {
+  return {
+    type: Const.SAVE_SCHEMA_ERROR,
+    data
+  }
+}
+
+export function handleSaveSchemaErrorClose(data) {
+  return {
+    type: Const.SAVE_SCHEMA_ERROR_CLOSE,
+    data
+  }
+}
+
+
 export function handleSaveSchema(data,schema) {
   return function (dispatch) {
     dispatch(handleSaveSchemaStart())
@@ -72,10 +87,12 @@ export function handleSaveSchema(data,schema) {
       return dispatch(handleSaveSchemaEnd())
     })
     .catch((err) => {
-      //todo
+      return dispatch(handleSaveSchemaError(err.message))
     })
   }
 }
+
+
 
 export function handleLoadSchema(data) {
   return {

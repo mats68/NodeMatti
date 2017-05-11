@@ -1,6 +1,7 @@
 import React from 'react';
 import AddItemModal from '../modals/AddItemModal';
-import {handleNewSchema,handleSaveSchema} from './actions';
+import {handleNewSchema,handleSaveSchema,handleSaveSchemaEnd,handleSaveSchemaErrorClose} from './actions';
+import ModalMessage from '../modals/ModalMessage'
 
 const ToolBox = (props) => {
   const addItemModal = () => {
@@ -20,6 +21,11 @@ const ToolBox = (props) => {
     if (val) {
     props.dispatch(handleSaveSchema(val,props.formSchema))
     }
+  }
+  const closeError = () => {
+    props.dispatch(handleSaveSchemaErrorClose())
+    props.dispatch(handleSaveSchemaEnd())
+    
   }
 
   return (
@@ -44,7 +50,8 @@ const ToolBox = (props) => {
 
 
 
-      <AddItemModal isOpen={props.designerOptions.newItem.ModalIsOpen} onClose={props.CloseAddItemModal}></AddItemModal>
+      <AddItemModal isOpen={props.designerOptions.newItem.ModalIsOpen} onClose={props.handleCloseAddItemModal}></AddItemModal>
+      <ModalMessage isOpen={props.designerOptions.errorItem.ModalIsOpen} title={"Error on Save"} message={props.designerOptions.errorItem.message} onClose={closeError}></ModalMessage>
     </div>
   )
 }
