@@ -83,10 +83,10 @@ const functions = {
   },
 
   handleSaveSchema: function (data, schema) {
-    return function (dispatch) {
+    return function (dispatch, getState) {
       dispatch(functions.handleSaveSchemaStart())
       let url = 'http://localhost:3001/api/'
-      let s = { name: 'data', schema: schema.schema }
+      let s = { name: 'data', schema: getState().formSchema.present.formSchema.schema }
 
       axios.post(url + 'insert/' + cn.MONGO_TBL_FORMSCHEMA, s)
         .then((response) => {

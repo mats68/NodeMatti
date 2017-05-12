@@ -22,7 +22,7 @@ const ToolBox = (props) => {
   const saveSchema = (e) => {
     let val = prompt('Name:')
     if (val) {
-    props.dispatch(actions.handleSaveSchema(val,props.formSchema))
+    props.dispatch(actions.handleSaveSchema(val))
     }
   }
   const closeError = () => {

@@ -1,12 +1,13 @@
-let person = {name: '', vorname: ''}
+var attitude = function(original, replacement) {
+  return function(source) {
+    return source.replace(original, replacement);
+  };
+};
 
-let p2 = Object.assign({},person)
+var snakify = attitude(/millenials/ig, "Snake People");
+var hippify = attitude(/baby boomers/ig, "Aging Hippies");
 
-p2.name = 'thaler'
-
-p2.vorname = 'matti'
-
-
-
-
-
+console.log(snakify("The Millenials are always up to something."));
+// The Snake People are always up to something.
+console.log(hippify("The Baby Boomers just look the other way."));
+// The Aging Hippies just look the other way.
