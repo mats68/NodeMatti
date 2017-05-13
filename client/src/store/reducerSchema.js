@@ -21,9 +21,9 @@ let UIFieldInfo = {
 }
 
 function iterateUiSchemaRecursive(UIschema, parentSchema, parentId, schema, fun, args) {
-  Object.keys(UIschema).forEach(name => {
+  Object.keys(UIschema.fields).forEach(name => {
     let fi = {}
-    fi.uiField = UIschema[name]
+    fi.uiField = UIschema.fields[name]
     fi.uiFieldId = name
     fi.uiParentSchema = parentSchema
     fi.uiParentSchemaId = parentId
@@ -31,25 +31,28 @@ function iterateUiSchemaRecursive(UIschema, parentSchema, parentId, schema, fun,
     fi.uiSchema = UIschema
 
     fun(fi, ...args)
-    if (UIschema[name].type === cn.container) {
-      iterateUiSchemaRecursive(UIschema[name][cn.fields], parentSchema, name, schema, fun, args)
+    debugger
+    if (UIschema.fields[name].type === cn.container) {
+      iterateUiSchemaRecursive(UIschema.fields[name], parentSchema, name, schema, fun, args)
     }
   })
 }
 
 function iterateSchemaRecursive(schema, uischema, fun, args, execFunOnUISchema = true, parentId = '') {
-  Object.keys(schema).forEach(name => {
-    if (!execFunOnUISchema) {
-      let fi = {}
-      fi.schema = schema
-      fi.uiSchema = uischema
-      fi.fieldId = name
-      fi.parentId = parentId
+  Object.keys(schema.fields).forEach(name => {
+    if (typeof schema.fields[name].type === 'object') {
+      console.log('uischema[name]', uischema, name)
+      iterateSchemaRecursive(schema.fields[name].type, uischema.fields[name], fun, args, execFunOnUISchema, name)
+    } else {
+      if (!execFunOnUISchema) {
+        let fi = {}
+        fi.schema = schema
+        fi.uiSchema = uischema
+        fi.fieldId = name
+        fi.parentId = parentId
 
-      fun(fi, ...args)
-    }
-    if (typeof schema[name].type === 'object') {
-      iterateSchemaRecursive(schema[name].type[cn.fields], schema[name].type[cn.ui][cn.fields], fun, args, name )
+        fun(fi, ...args)
+      }
     }
   })
   if (execFunOnUISchema) {
@@ -94,9 +97,9 @@ function getHighPos(fInf, newitem) {
 function checkUIField(fInf, UIFields, uiSchema, pos) {
   //todo if not schema.inherits...
   let name = fInf.parentId ? fInf.parentId + '.' + fInf.fieldId : fInf.fieldId
-  let v = utils.getValueFromDottedKey(name,UIFields)
+  let v = utils.getValueFromDottedKey(name, UIFields)
   if (!v) {
-    uiSchema[name] = {label: name, pos}
+    uiSchema[name] = { label: name, pos }
     pos++
   }
 }
@@ -105,26 +108,26 @@ function checkUIField(fInf, UIFields, uiSchema, pos) {
 
 function addNewItem(newState, data) {
   //todo test name vorhanden
-  let schema = newState.formSchema.schema[cn.fields]
-  let uischema = newState.formSchema.schema[cn.ui][cn.fields]
+  let schema = newState.formSchema.schema
+  let uischema = newState.formSchema.schema[cn.ui]
   data.pos = 0
   iterateSchemaRecursive(schema, uischema, getHighPos, [data])
   data.pos += 1
   let newSchemaItem = { type: "text" }
   let newUiSchemaItem = { label: data.label, pos: data.pos }
-  schema[data.id] = newSchemaItem
-  uischema[data.id] = newUiSchemaItem
+  schema[cn.fields][data.id] = newSchemaItem
+  uischema[cn.fields][data.id] = newUiSchemaItem
 }
 
 function repairSchema(newState) {
-  let schema = newState.formSchema.schema[cn.fields]
-  if (!newState.formSchema.schema[cn.ui]) {
-    newState.formSchema.schema[cn.ui] = {}
+  let schema = newState.formSchema.schema
+  if (!schema[cn.ui]) {
+    schema[cn.ui] = {}
   }
-  if (!newState.formSchema.schema[cn.ui][cn.fields]) {
-    newState.formSchema.schema[cn.ui][cn.fields] = {}
+  if (!schema[cn.ui][cn.fields]) {
+    schema[cn.ui][cn.fields] = {}
   }
-  let uischema = newState.formSchema.schema[cn.ui][cn.fields]
+  let uischema = schema[cn.ui]
   let item = { pos: 0 }
   iterateSchemaRecursive(schema, uischema, getHighPos, [item.pos])
   item.pos++
@@ -132,13 +135,13 @@ function repairSchema(newState) {
   let UIFields = []
   iterateSchemaRecursive(schema, uischema, fillArry, [UIFields])
   iterateSchemaRecursive(schema, uischema, checkUIField, [UIFields, uischema, item.pos], false)
-  
+
 }
 
 function updateSortPos(newState, data) {
   const { sourceItem, targetItem, dropBefore } = data
-  let schema = newState.formSchema.schema[cn.fields]
-  let uischema = newState.formSchema.schema[cn.ui][cn.fields]
+  let schema = newState.formSchema.schema
+  let uischema = newState.formSchema.schema[cn.ui]
   //let pos = 1
   let itemInfo = {
     sourceItemId: sourceItem.id,

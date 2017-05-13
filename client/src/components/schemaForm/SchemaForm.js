@@ -47,7 +47,8 @@ class SchemaForm extends Component {
         item.id = name + this.containerCount.toString()
         item.type = cn.container
         item.pos = _uiItems[name].pos
-        item.options = _uiItems[name].options
+        item.containertype = _uiItems[name].containertype
+        //item.options = _uiItems[name].options
         item.items = []
         this.buildItemsFromUISchema(_schemaItems, _uiItems[name][cn.fields], item.items, prefix)
         item.items.sort((a, b) => {
@@ -66,7 +67,7 @@ class SchemaForm extends Component {
         item.value = val
 
         uiItems.push(item)
-        console.log('item', item)
+        // console.log('item', item)
       }
     })
   }
@@ -79,7 +80,6 @@ class SchemaForm extends Component {
     this.buildItemsFromUISchema(schemaList, uiList, uiItems, prefix)
     uiItems.sort((a, b) => {
       return a.pos - b.pos
-
     })
 
     Object.keys(schemaList).forEach(name => {
@@ -97,7 +97,7 @@ class SchemaForm extends Component {
     // console.log(this.items)
     this.buildItemsRecursive(this.items, uiItemList, '')
 
-    //console.log('uilist', uiItemList)
+    console.log('uilist', uiItemList)
     return (
       <form onSubmit={this.handleSubmit} >
         <div className="container-fluid">

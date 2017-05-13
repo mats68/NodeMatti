@@ -51,7 +51,7 @@ export class Tab extends React.Component {
 
   render() {
     return (
-      <div className={utils.getColumnWidths(this.props.item.options.cols)}>
+      <div className={utils.getColumnWidths(this.props.item.cols)}>
         <ul className="nav nav-tabs">
           {this.renderTabs()}
         </ul>

@@ -21,15 +21,21 @@ export const SchemaGroup = (props) => {
 
   renderItem = (item) => {
     if (item.type === cn.container) {
-      if (item.options.type === cn.panel) {
+      if (item.containertype === cn.panel) {
         return (
           <Panel key={item.id} item={item}>
             {renderItems(item.items)}
           </Panel>
         )
-      } else if (item.options.type === cn.tab) {
+      } else if (item.containertype === cn.tab) {
         return (
           <Tab key={item.id} item={item} renderItems={renderItems}></Tab>
+        )
+      } else if (item.containertype === cn.subschema) {
+        return (
+          <div>
+            {renderItems(item.items)}
+          </div>
         )
       }
     } else {

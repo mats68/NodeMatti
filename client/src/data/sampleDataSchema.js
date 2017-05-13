@@ -6,21 +6,6 @@ The field names cannot contain the dot (.) character.
 The field names cannot contain the null character.
 */
 
-
-export const adress = {
-  fields: {
-    strasse: {
-      type: "text"
-    },
-    plz: {
-      type: "text"
-    },
-    ort: {
-      type: "text"
-    }
-  }
-}
-
 export const dataFilled = {
   _id: '100',
   name: 'Thaler',
@@ -33,6 +18,74 @@ export const dataFilled = {
   bem1: 'wichtige Bemerkung: mache das',
   bem2: ''
 }
+
+
+export const zusatz = {
+  fields: {
+    email: {
+      type: "text"
+    }
+  }
+}
+
+
+export const adress = {
+  fields: {
+    strasse: {
+      type: "text"
+    },
+    plz: {
+      type: "text"
+    },
+    ort: {
+      type: "text"
+    },
+    zusatzAngaben:
+    {
+      type: zusatz
+    }
+  }
+}
+//Alle Felder müssen im gleichen UI sein wegen Tree-Struktur
+//Subschemas: ui innerhalb container; felder können nicht verschoben werden 
+//Subschemas und implements können keine Subschemas ihrerseits haben (Rekursion möglich)
+export const zusatzUi = {
+  fields: {
+    email: {
+      label: "Email"
+    },
+    telefon: {
+      label: "Telefon"
+    }
+  }
+}
+
+export const adressUi = {
+  fields: {
+    strasse: {
+      label: "Strasse",
+      pos: 1,
+      //cols: [6,6,6,6]
+    },
+    plz: {
+      label: "PLZ",
+      pos: 2,
+    },
+    ort: {
+      label: "Ort",
+      pos: 3,
+    },
+    zusatzAngaben: {
+      type: "_container",
+      containertype: "subschema",
+      pos: 4,
+      fields: zusatzUi.fields
+    }
+  }
+}
+
+
+/*
 
 export const tabShema = {
   fields: {
@@ -272,4 +325,4 @@ export const adressUi = {
     }
   }
 }
-
+*/

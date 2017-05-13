@@ -8,6 +8,7 @@ const constants = {
   panel: 'panel',
   tab: 'tab',
   tabPanel: 'tabPanel',
+  subschema: 'subschema',
 
 
   INPUT: 'input',
