@@ -3,17 +3,16 @@ import {utils} from '../../imports'
 
 
 export const Panel = (props) => {
-  const { options } = props.item
   return (
-    <div className={utils.getColumnWidths(options.cols)}>
+    <div className={utils.getColumnWidths(props.item.cols)}>
       <div className="card">
-        {options.showHeader ? <div className="card-header">{options.headerText}</div> : null}
+        {props.item.showHeader ? <div className="card-header">{props.item.headerText}</div> : null}
         <div className="card-block">
           <div className="row">
             {props.children}
           </div>
         </div>
-        {options.showFooter ? <div className="card-footer">{options.footerText}</div> : null}
+        {props.item.showFooter ? <div className="card-footer">{props.item.footerText}</div> : null}
       </div>
     </div>
   )

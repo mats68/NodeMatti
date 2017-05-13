@@ -31,7 +31,6 @@ function iterateUiSchemaRecursive(UIschema, parentSchema, parentId, schema, fun,
     fi.uiSchema = UIschema
 
     fun(fi, ...args)
-    debugger
     if (UIschema.fields[name].type === cn.container) {
       iterateUiSchemaRecursive(UIschema.fields[name], parentSchema, name, schema, fun, args)
     }
@@ -80,9 +79,9 @@ function fillArry(fInf, arr) {
 function changePos(fInf, itemInfo, dropBefore) {
   if (fInf.uiFieldId === itemInfo.sourceItemId) {
     if (dropBefore) {
-      fInf.uiFieldId.pos = itemInfo.targetItem.pos - 1
+      fInf.uiField.pos = itemInfo.targetItem.pos - 1
     } else {
-      fInf.uiFieldId.pos = itemInfo.targetItem.pos + 1
+      fInf.uiField.pos = itemInfo.targetItem.pos + 1
     }
   }
 }

@@ -77,6 +77,7 @@ export const adressUi = {
     },
     zusatzAngaben: {
       type: "_container",
+      label: "Zuastzangaben",
       containertype: "subschema",
       pos: 4,
       fields: zusatzUi.fields

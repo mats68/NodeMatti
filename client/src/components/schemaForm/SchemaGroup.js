@@ -33,9 +33,9 @@ export const SchemaGroup = (props) => {
         )
       } else if (item.containertype === cn.subschema) {
         return (
-          <div>
+          <Panel key={item.id} item={item}>
             {renderItems(item.items)}
-          </div>
+          </Panel>
         )
       }
     } else {
