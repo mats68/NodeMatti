@@ -95,7 +95,6 @@ class SchemaForm extends Component {
     this.uiItems = []
     let uiItemList = [];
     // console.log(this.items)
-    debugger
     this.buildItemsRecursive(this.items, uiItemList, '')
 
     console.log('uilist', uiItemList)

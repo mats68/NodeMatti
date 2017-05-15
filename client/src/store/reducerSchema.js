@@ -205,7 +205,6 @@ const reducer = (state = initialState, action) => {
       repairSchema(newState)
       return newState
     case cn.LOAD_SCHEMA:
-    debugger
       newState = {}
       newState.formSchema = {}
       newState.formSchema.schema = action.data.schema

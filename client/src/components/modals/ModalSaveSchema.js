@@ -6,8 +6,8 @@ class ModalSaveSchema extends React.Component {
     let item = {
       isOk: true,
       ModalIsOpen: false,
-      collectionId: this.refs.collectionId.value,
-      schemaName: this.refs.schemaName.value
+      collection: this.refs.collection.value,
+      name: this.refs.schemaName.value
     }
     this.props.onClose(item)
 
@@ -32,7 +32,7 @@ class ModalSaveSchema extends React.Component {
         <div className="col-12">
           <div className="form-group">
             <label htmlFor="feld">Collection Id</label>
-            <input type="text" id="feld" ref="collectionId" className="form-control" />
+            <input type="text" id="feld" ref="collection" className="form-control" />
           </div>
         </div>
       </ModalOkCancel>

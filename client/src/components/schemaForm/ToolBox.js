@@ -35,7 +35,7 @@ class ToolBox extends React.Component {
   }
 
   changeSchema = (val) => {
-    this.props.dispatch(actions.handleLoadSchema(val))
+    this.props.dispatch(actions.handleLoadSchema({name: val.label, id: val.value}))
 
   }
 
@@ -47,7 +47,7 @@ class ToolBox extends React.Component {
     let options = []
 
     this.props.schemaList.forEach(function (item) {
-      options.push({ value: item._id, label: item.schemaName })
+      options.push({ value: item._id, label: item.name })
     }, this);
     return (
       <div className="form-inline">
