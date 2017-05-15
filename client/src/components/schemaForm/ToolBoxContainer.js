@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { ActionCreators as UndoActionCreators } from 'redux-undo'
-import { actions } from './../../imports'
+import { actions, cn } from './../../imports'
 import ToolBox from './ToolBox';
 
 const mapStateToProps = (state) => {
@@ -22,6 +22,9 @@ const mapDispatchToProps = (dispatch) => {
       if (data.isOK) {
         dispatch(actions.handleAddItem(data))
       }
+    },
+    handleCloseSchemaSaveModal: (data) => {
+      dispatch(actions.handleSaveSchema(cn.HTTP_STATUS.LOADING,data))
     },
     handleUndoClick: () => {
       dispatch(UndoActionCreators.undo())

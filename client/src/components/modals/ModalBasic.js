@@ -13,33 +13,23 @@ const customStyles = {
 };
 
 
-class ModalBasic extends React.Component {
-  constructor(props) {
-    super(props)
-    this.closeModal = this.closeModal.bind(this)
-    this.cancelModal = this.cancelModal.bind(this)
-  }
-
-  closeModal() {
-  }
-
-  cancelModal() {
-  }
-
-  render() {
-    return (
-      <div>
-        <Modal
-          isOpen={this.props.isOpen}
-          shouldCloseOnOverlayClick={false}
-          style={customStyles}
-          contentLabel="Basic"
-        >
-          {this.props.children}
-        </Modal>
-      </div>
-    )
-  }
+const ModalBasic = (props) => {
+  return (
+    <div>
+      <Modal
+        isOpen={props.isOpen}
+        shouldCloseOnOverlayClick={false}
+        style={customStyles}
+        contentLabel="Basic"
+      >
+        <div className="container-fluid">
+          <div className="row">
+            {props.children}
+          </div>
+        </div>
+      </Modal>
+    </div>
+  )
 }
 
 export default ModalBasic

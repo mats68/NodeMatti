@@ -11,6 +11,7 @@ export const SchemaGroup = (props) => {
   let renderItem
   let renderItems
 
+
   const renderInput = (item) => {
     if (designerMode) {
       return <InputDnD key={item.id} item={item} value={item.value} handleChange={handleChange} designFunktionen={designFunktionen} />

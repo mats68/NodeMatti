@@ -182,7 +182,6 @@ function updateSortPos(newState, data) {
   return newState
 }
 
-//todo save ui of subschema in general ui
 const reducer = (state = initialState, action) => {
   let newState
   switch (action.type) {

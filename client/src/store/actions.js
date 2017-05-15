@@ -82,19 +82,36 @@ const functions = {
     }
   },
 
-  handleSaveSchema: function (data, schema) {
-    return function (dispatch, getState) {
-      dispatch(functions.handleSaveSchemaStart())
-      let url = 'http://localhost:3001/api/'
-      let s = { name: 'data', schema: getState().formSchema.present.formSchema.schema }
 
-      axios.post(url + 'insert/' + cn.MONGO_TBL_FORMSCHEMA, s)
-        .then((response) => {
-          return dispatch(functions.handleSaveSchemaEnd())
-        })
-        .catch((err) => {
-          return dispatch(functions.handleSaveSchemaError(err.message))
-        })
+  handleSaveSchemaErrorAction: function (data) {
+    return {
+      type: cn.SAVE_SCHEMA_ERROR_CLOSE,
+      data
+    }
+  },
+
+
+  handleSaveSchema: function (status = cn.HTTP_STATUS.START, data) {
+    const doAction = (dispatch, status, err) => dispatch({ type: cn.SAVE_SCHEMA, data: { status, data, err } })
+
+    return function (dispatch, getState) {
+      if (status === cn.HTTP_STATUS.START) {
+        doAction(dispatch, cn.HTTP_STATUS.START)
+      } else if (status === cn.HTTP_STATUS.LOADING) {
+        doAction(dispatch, cn.HTTP_STATUS.LOADING)
+        if (data.isOK) {
+          let url = 'http://localhost:3001/api/'
+          let s = { collectionId: data.collectionId, schemaName: data.schemaName, schema: getState().formSchema.present.formSchema.schema }
+
+          return axios.post(url + 'insert/' + cn.MONGO_TBL_FORMSCHEMA, s)
+            .then((response) => {
+              doAction(dispatch, cn.HTTP_STATUS.FINISHED)
+            })
+            .catch((err) => {
+              doAction(dispatch, cn.HTTP_STATUS.ERROR, err.message)
+            })
+        }
+      }
     }
   },
 

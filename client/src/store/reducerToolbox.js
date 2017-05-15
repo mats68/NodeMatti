@@ -6,6 +6,11 @@ const initialState = {
   saving: false,
   selectedItemId: 0,
   selectedItemLabel: '',
+  newSchema: {
+    ModalIsOpen: false,
+    id: '',
+    label: ''
+  },
   newItem: {
     ModalIsOpen: false,
     id: '',
@@ -31,6 +36,24 @@ const reducer = (state = initialState, action) => {
       return newState
     case cn.CLOSE_ADD_ITEM_MODAL:
       newState.newItem.ModalIsOpen = false
+      return newState
+    case cn.SAVE_SCHEMA:
+      if (action.data.status === cn.HTTP_STATUS.START) {
+        newState.newSchema.ModalIsOpen = true
+      }
+      if (action.data.status === cn.HTTP_STATUS.LOADING) {
+        if (action.data.data.isOK) {newState.saving = true}
+        newState.newSchema.ModalIsOpen = false
+      } else if (action.data.status === cn.HTTP_STATUS.FINISHED) {
+        newState.saving = false
+       
+      } else if (action.data.status === cn.HTTP_STATUS.ERROR) {
+        newState.saving = false
+        newState.errorItem.ModalIsOpen = true
+        newState.errorItem.title = 'Error'
+        newState.errorItem.message = action.data.err
+      }
+
       return newState
     case cn.SAVE_SCHEMA_START:
       newState.saving = true
