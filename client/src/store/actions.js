@@ -58,15 +58,28 @@ const functions = {
       } else if (status === cn.STATUS.ACTION_START) {
         doAction(dispatch, cn.STATUS.HTTP_LOADING)
         let url = 'http://localhost:3001/api/'
-        let s = { collection: data.collection, name: data.name, schema: getState().formSchema.present.formSchema.schema }
+        let formSchema = getState().formSchema.present.formSchema
+        let s
+        if (!data) { //update
+          s = { collection: formSchema.collection, name: formSchema.name, schema: formSchema.schema }
+          axios.put(url + 'update/' + cn.MONGO_TBL_FORMSCHEMA + '/' + formSchema._id, s)
+            .then((response) => {
+              doAction(dispatch, cn.STATUS.HTTP_FINISHED)
+            })
+            .catch((err) => {
+              doAction(dispatch, cn.STATUS.HTTP_ERROR, {}, err.message)
+            })
+        } else {
+          s = { collection: data.collection, name: data.name, schema: formSchema.schema }
+          axios.post(url + 'insert/' + cn.MONGO_TBL_FORMSCHEMA, s)
+            .then((response) => {
+              doAction(dispatch, cn.STATUS.HTTP_FINISHED)
+            })
+            .catch((err) => {
+              doAction(dispatch, cn.STATUS.HTTP_ERROR, {}, err.message)
+            })
+        }
 
-        return axios.post(url + 'insert/' + cn.MONGO_TBL_FORMSCHEMA, s)
-          .then((response) => {
-            doAction(dispatch, cn.STATUS.HTTP_FINISHED)
-          })
-          .catch((err) => {
-            doAction(dispatch, cn.STATUS.HTTP_ERROR, {}, err.message)
-          })
       }
     }
   },

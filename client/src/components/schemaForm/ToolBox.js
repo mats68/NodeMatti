@@ -14,7 +14,7 @@ class ToolBox extends React.Component {
   addItem = (data) => {
     this.props.dispatch(actions.handleAddItem(cn.STATUS.MODAL_CLOSE))
     if (data.isOk) {
-      this.props.dispatch(actions.handleAddItem(cn.STATUS.ACTION_START,data))
+      this.props.dispatch(actions.handleAddItem(cn.STATUS.ACTION_START, data))
     }
 
   }
@@ -32,12 +32,16 @@ class ToolBox extends React.Component {
     this.props.dispatch(actions.handleRepairSchema())
   }
   saveSchemaModal = () => {
-    this.props.dispatch(actions.handleSaveSchema(cn.STATUS.MODAL_OPEN))
+    if (this.props.currentformSchemaId) {
+      this.props.dispatch(actions.handleSaveSchema(cn.STATUS.ACTION_START))
+    } else {
+      this.props.dispatch(actions.handleSaveSchema(cn.STATUS.MODAL_OPEN))
+    }
   }
   saveSchema = (data) => {
     this.props.dispatch(actions.handleSaveSchema(cn.STATUS.MODAL_CLOSE))
     if (data.isOk) {
-      this.props.dispatch(actions.handleSaveSchema(cn.STATUS.ACTION_START,data))
+      this.props.dispatch(actions.handleSaveSchema(cn.STATUS.ACTION_START, data))
     }
   }
   closeError = () => {
@@ -66,12 +70,13 @@ class ToolBox extends React.Component {
           style={{ minWidth: 150 }}
           options={options}
           onChange={this.changeSchema}
+          placeholder="Schema laden.."
         />
         <button className="btn btn-primary mb-2 mr-2 ml-2" onClick={this.addNewSchema}>
-          Add new Schemna
+          Add new Schema
         </button>
         <button className="btn btn-primary mb-2 mr-2 ml-2" onClick={this.repairSchema}>
-          Repair Schemna
+          Repair Schema
         </button>
         <button className="btn btn-primary mb-2 mr-2 ml-2" onClick={this.addItemModal}>
           Add Item

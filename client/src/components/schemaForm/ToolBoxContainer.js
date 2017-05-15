@@ -6,6 +6,7 @@ import ToolBox from './ToolBox';
 const mapStateToProps = (state) => {
   return {
     schemaList: state.schemaList,
+    currentformSchemaId: state.formSchema.present.formSchema._id,
     designerOptions: state.designerOptions,
     canUndo: state.formSchema.past.length > 0,
     canRedo: state.formSchema.future.length > 0

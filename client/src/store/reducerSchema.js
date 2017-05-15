@@ -1,13 +1,13 @@
 import undoable, { excludeAction } from 'redux-undo'
 import { cn, utils } from '../imports'
-import { formSchema } from '../data/sampleDataForm'
+//import { formSchema } from '../data/sampleDataForm'
 //import merge from 'lodash/merge'
 
 
 //todo save ui of subschema in general ui
 
 const initialState = {
-  formSchema: formSchema
+  formSchema: {},
 }
 
 /*let UIFieldInfo = {
@@ -49,7 +49,6 @@ function iterateSchemaRecursive(schema, uischema, fun, args, execFunOnUISchema =
         fi.uiSchema = uischema
         fi.fieldId = name
         fi.parentId = parentId
-
         fun(fi, ...args)
       }
     }
@@ -103,11 +102,28 @@ function checkUIField(fInf, UIFields, uiSchema, pos) {
   }
 }
 
+function checkSchema(formSchema) {
+  if (!formSchema.schema) {
+    formSchema.schema = {}
+  }
+  if (!formSchema.schema.fields) {
+    formSchema.schema.fields = {}
+  }
+  if (!formSchema.schema[cn.ui]) {
+    formSchema.schema[cn.ui] = {}
+  }
+  if (!formSchema.schema[cn.ui].fields) {
+    formSchema.schema[cn.ui].fields = {}
+  }
+
+}
 
 
 function addNewItem(newState, data) {
   //todo test name vorhanden
+  checkSchema(newState.formSchema)
   let schema = newState.formSchema.schema
+
   let uischema = newState.formSchema.schema[cn.ui]
   data.pos = 0
   iterateSchemaRecursive(schema, uischema, getHighPos, [data])
@@ -119,13 +135,8 @@ function addNewItem(newState, data) {
 }
 
 function repairSchema(newState) {
+  checkSchema(newState.formSchema)
   let schema = newState.formSchema.schema
-  if (!schema[cn.ui]) {
-    schema[cn.ui] = {}
-  }
-  if (!schema[cn.ui][cn.fields]) {
-    schema[cn.ui][cn.fields] = {}
-  }
   let uischema = schema[cn.ui]
   let item = { pos: 0 }
   iterateSchemaRecursive(schema, uischema, getHighPos, [item.pos])
@@ -197,11 +208,7 @@ const reducer = (state = initialState, action) => {
       return state
     case cn.ADD_SCHEMA:
       newState = utils.mergeRecursive({}, state)
-      newState.formSchema = {}
-      newState.formSchema.schema = {}
-      newState.formSchema.schema[cn.fields] = {}
-      newState.formSchema.schema[cn.ui] = {}
-      newState.formSchema.schema[cn.ui][cn.fields] = {}
+      checkSchema(newState.formSchema)
       return newState
     case cn.REPAIR_SCHEMA:
       newState = utils.mergeRecursive({}, state)
@@ -210,8 +217,7 @@ const reducer = (state = initialState, action) => {
     case cn.LOAD_SCHEMA:
       newState = {}
       newState.formSchema = {}
-      newState.formSchema.schema = action.data.schema
-      //newState.formSchema.schema[cn.ui] =
+      newState.formSchema = action.data
       return newState
     default:
       return state
