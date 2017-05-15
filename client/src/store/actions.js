@@ -53,14 +53,14 @@ const functions = {
   },
 
 
-  handleSaveSchema: function (status = cn.HTTP_STATUS.START, data) {
-    const doAction = (dispatch, status, err) => dispatch({ type: cn.SAVE_SCHEMA, data: { status, data, err } })
+  handleSaveSchema: function (status, data) {
+    const doAction = (dispatch, status, data, err) => dispatch({ type: cn.SAVE_SCHEMA, data: { status, data, err } })
 
     return function (dispatch, getState) {
       if (status === cn.HTTP_STATUS.START) {
         doAction(dispatch, cn.HTTP_STATUS.START)
       } else if (status === cn.HTTP_STATUS.LOADING) {
-        doAction(dispatch, cn.HTTP_STATUS.LOADING)
+        doAction(dispatch, cn.HTTP_STATUS.LOADING, data)
         if (data.isOk) {
           let url = 'http://localhost:3001/api/'
           let s = { collectionId: data.collectionId, schemaName: data.schemaName, schema: getState().formSchema.present.formSchema.schema }
@@ -70,17 +70,45 @@ const functions = {
               doAction(dispatch, cn.HTTP_STATUS.FINISHED)
             })
             .catch((err) => {
-              doAction(dispatch, cn.HTTP_STATUS.ERROR, err.message)
+              doAction(dispatch, cn.HTTP_STATUS.ERROR, {}, err.message)
             })
         }
       }
     }
   },
 
+  handleLoadSchemaList: function (status, data) {
+    const doAction = (dispatch, status, data, err) => dispatch({ type: cn.LOAD_SCHEMA_LIST, data: { status, data, err } })
+
+    return function (dispatch, getState) {
+      let url = 'http://localhost:3001/api/'
+      doAction(dispatch, cn.HTTP_STATUS.LOADING)
+      axios.get(url + 'query/' + cn.MONGO_TBL_FORMSCHEMA)
+        .then(res => {
+          doAction(dispatch, cn.HTTP_STATUS.FINISHED, res.data)
+        })
+        .catch(err => {
+          doAction(dispatch, cn.HTTP_STATUS.ERROR, {}, err.message)
+        })
+
+    }
+  },
+
+
   handleLoadSchema: function (data) {
-    return {
-      type: cn.LOAD_SCHEMA,
-      data
+    return function (dispatch, getState) {
+      let schema = getState().schemaList.filter((item) => {
+        return item._id === data.value
+      })
+      if (schema.length === 0) {
+        //todo suche nach name
+      }
+
+      if (schema.length > 0) {
+        dispatch({ type: cn.LOAD_SCHEMA, data: schema[0] })
+      }
+
+
     }
   }
 }

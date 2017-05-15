@@ -1,14 +1,18 @@
 import { createStore, combineReducers, applyMiddleware  } from 'redux'
-import formSchema from './reducerSchema';
 import {createLogger} from 'redux-logger'
-import designerOptions from './reducerToolbox';
 import thunkMiddleware from 'redux-thunk'
+
+import formSchema from './reducerSchema';
+import designerOptions from './reducerToolbox';
+import schemaList from './reducerSchemaList';
+
 
 const loggerMiddleware = createLogger()
 
 const reducer = combineReducers({
   formSchema,
-  designerOptions
+  designerOptions,
+  schemaList
 })
 
 const store = createStore(

@@ -204,6 +204,13 @@ const reducer = (state = initialState, action) => {
       newState = utils.mergeRecursive({}, state)
       repairSchema(newState)
       return newState
+    case cn.LOAD_SCHEMA:
+    debugger
+      newState = {}
+      newState.formSchema = {}
+      newState.formSchema.schema = action.data.schema
+      //newState.formSchema.schema[cn.ui] =
+      return newState
     default:
       return state
   }

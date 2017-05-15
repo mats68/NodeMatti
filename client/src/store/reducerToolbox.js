@@ -46,7 +46,7 @@ const reducer = (state = initialState, action) => {
         newState.newSchema.ModalIsOpen = false
       } else if (action.data.status === cn.HTTP_STATUS.FINISHED) {
         newState.saving = false
-       
+
       } else if (action.data.status === cn.HTTP_STATUS.ERROR) {
         newState.saving = false
         newState.errorItem.ModalIsOpen = true
