@@ -1,5 +1,6 @@
 import { cn } from '../imports'
-import axios from 'axios';
+import axios from 'axios'
+import { ActionCreators as UndoActionCreators } from 'redux-undo'
 
 const functions = {
   handleSwitchPosition: function (data) {
@@ -68,6 +69,7 @@ const functions = {
               let d = response.data
               d._id = formSchema._id
               dispatch({type: cn.SCHEMA_LIST_UPDATE, data: d})
+              dispatch(UndoActionCreators.clearHistory())
             })
             .catch((err) => {
               doAction(dispatch, cn.STATUS.HTTP_ERROR, {}, err.message)
@@ -80,6 +82,7 @@ const functions = {
               if (response.data && response.data.ops && response.data.ops.length > 0) {
                 dispatch({type: cn.SCHEMA_LIST_ADD, data: response.data.ops[0]})
               }
+              dispatch(UndoActionCreators.clearHistory())
             })
             .catch((err) => {
               doAction(dispatch, cn.STATUS.HTTP_ERROR, {}, err.message)
@@ -120,6 +123,7 @@ const functions = {
 
       if (schema.length > 0) {
         dispatch({ type: cn.LOAD_SCHEMA, data: schema[0] })
+        dispatch(UndoActionCreators.clearHistory())
       }
 
 

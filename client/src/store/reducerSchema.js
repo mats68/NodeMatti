@@ -207,9 +207,22 @@ const reducer = (state = initialState, action) => {
       }
       return state
     case cn.ADD_SCHEMA:
-      newState = utils.mergeRecursive({}, state)
+      newState = {}
+      newState.formSchema = {}
       checkSchema(newState.formSchema)
-      return newState
+      newState.formSchema._id = ''
+      newState.formSchema.name = ''
+      newState.formSchema.collection = ''
+
+/*      newState.formSchema = {}
+      newState.formSchema._id = ''
+      newState.formSchema.name = ''
+      newState.formSchema.collection = ''
+      newState.formSchema.schema = {}
+      newState.formSchema.schema[cn.fields] = {}
+      newState.formSchema.schema[cn.ui] = {}
+      newState.formSchema.schema[cn.ui][cn.fields] = {}
+*/      return newState
     case cn.REPAIR_SCHEMA:
       newState = utils.mergeRecursive({}, state)
       repairSchema(newState)

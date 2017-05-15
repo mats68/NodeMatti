@@ -21,7 +21,11 @@ const mapDispatchToProps = (dispatch) => {
     },
     handleRedoClick: () => {
       dispatch(UndoActionCreators.redo())
+    },
+    handleUndoClearHistory: () => {
+      dispatch(UndoActionCreators.clearHistory())
     }
+
   }
 }
 

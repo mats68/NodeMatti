@@ -25,6 +25,7 @@ class ToolBox extends React.Component {
   }
   addNewSchema = () => {
     this.props.dispatch(actions.handleNewSchema())
+    this.props.handleUndoClearHistory()
   }
   repairSchema = () => {
     this.props.dispatch(actions.handleRepairSchema())
