@@ -55,11 +55,10 @@ const ToolBox = (props) => {
       <input type="text" id='selid' value={props.designerOptions.selectedItemText} className="form-control mb-2 mr-4 ml-2" />
 
       <button className="btn btn-primary  mb-2 mr-2 ml-2" onClick={saveSchemaModal}>{props.designerOptions.saving ? "saving..." : "save"}</button>
-      <input type="text" id='save' placeholder="Name eingeben" className="form-control mb-2 mr-2 ml-2" />
 
 
 
-      {/*<AddItemModal isOpen={props.designerOptions.newItem.ModalIsOpen} onClose={props.handleCloseAddItemModal}></AddItemModal>*/}
+      <AddItemModal isOpen={props.designerOptions.newItem.ModalIsOpen} onClose={props.handleCloseAddItemModal}></AddItemModal>
       <ModalMessage isOpen={props.designerOptions.errorItem.ModalIsOpen} title={"Error on Save"} message={props.designerOptions.errorItem.message} onClose={closeError}></ModalMessage>
       <ModalSaveSchema isOpen={props.designerOptions.newSchema.ModalIsOpen} title={"Save Schema"} onClose={saveSchema}></ModalSaveSchema>
 

@@ -42,7 +42,7 @@ const reducer = (state = initialState, action) => {
         newState.newSchema.ModalIsOpen = true
       }
       if (action.data.status === cn.HTTP_STATUS.LOADING) {
-        if (action.data.data.isOK) {newState.saving = true}
+        if (action.data.data.isOk) {newState.saving = true}
         newState.newSchema.ModalIsOpen = false
       } else if (action.data.status === cn.HTTP_STATUS.FINISHED) {
         newState.saving = false
@@ -55,23 +55,6 @@ const reducer = (state = initialState, action) => {
       }
 
       return newState
-    case cn.SAVE_SCHEMA_START:
-      newState.saving = true
-      return newState
-    case cn.SAVE_SCHEMA_END:
-      newState.saving = false
-      return newState
-    case cn.SAVE_SCHEMA_ERROR:
-      newState.errorItem.ModalIsOpen = true
-      newState.errorItem.title = 'Error'
-      newState.errorItem.message = action.data
-      return newState
-    case cn.SAVE_SCHEMA_ERROR_CLOSE:
-      newState.errorItem.ModalIsOpen = false
-      newState.errorItem.title = ''
-      newState.errorItem.message = ''
-      return newState
-     
     default:
       return state
   }

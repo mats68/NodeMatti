@@ -1,16 +1,10 @@
 import React from 'react';
 import ModalOkCancel from './ModalOkCancel';
 
-/*class ModalAddItem extends React.component {
-  constructor(props) {
-    super(props)
-    this.onOkClick = this.onOkClick.bind(this)
-    this.onCancelClick = this.onCancelClick.bind(this)
-  }
-
-  onOkClick() {
+class ModalAddItem extends React.Component {
+  onOkClick = () => {
     let item = {
-      isOK: true,
+      isOk: true,
       ModalIsOpen: false,
       id: this.refs.feld.value,
       label: this.refs.label.value
@@ -19,9 +13,9 @@ import ModalOkCancel from './ModalOkCancel';
 
   }
 
-  onCancelClick() {
+  onCancelClick = () => {
     let item = {}
-    item.isOK = false
+    item.isOk = false
     item.ModalIsOpen = false
     this.props.onClose(item)
   }
@@ -29,7 +23,7 @@ import ModalOkCancel from './ModalOkCancel';
 
   render() {
     return (
-      <ModalOkCancel {...this.props}>
+      <ModalOkCancel {...this.props} onOKClick={this.onOKClick} onCancelClick={this.onCancelClick}>
         <div className="col-12">
           <div className="form-group">
             <label htmlFor="label">Label</label>
@@ -48,5 +42,3 @@ import ModalOkCancel from './ModalOkCancel';
 }
 
 export default ModalAddItem
-
-*/

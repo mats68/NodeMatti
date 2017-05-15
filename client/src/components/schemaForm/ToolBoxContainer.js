@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     handleCloseAddItemModal: (data) => {
       dispatch(actions.handleCloseAddItemModal(data))
-      if (data.isOK) {
+      if (data.isOk) {
         dispatch(actions.handleAddItem(data))
       }
     },

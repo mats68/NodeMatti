@@ -3,9 +3,8 @@ import ModalOkCancel from './ModalOkCancel';
 
 class ModalSaveSchema extends React.Component {
   onOKClick = () => {
-    debugger
     let item = {
-      isOK: true,
+      isOk: true,
       ModalIsOpen: false,
       collectionId: this.refs.collectionId.value,
       schemaName: this.refs.schemaName.value
@@ -16,7 +15,7 @@ class ModalSaveSchema extends React.Component {
 
   onCancelClick = () => {
     let item = {}
-    item.isOK = false
+    item.isOk = false
     item.ModalIsOpen = false
     this.props.onClose(item)
   }

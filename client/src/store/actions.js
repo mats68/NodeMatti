@@ -52,44 +52,6 @@ const functions = {
     }
   },
 
-  handleSaveSchemaStart: function (data) {
-    return {
-      type: cn.SAVE_SCHEMA_START,
-      data
-    }
-
-  },
-
-  handleSaveSchemaEnd: function (data) {
-    return {
-      type: cn.SAVE_SCHEMA_END,
-      data
-    }
-  },
-
-
-  handleSaveSchemaError: function (data) {
-    return {
-      type: cn.SAVE_SCHEMA_ERROR,
-      data
-    }
-  },
-
-  handleSaveSchemaErrorClose: function (data) {
-    return {
-      type: cn.SAVE_SCHEMA_ERROR_CLOSE,
-      data
-    }
-  },
-
-
-  handleSaveSchemaErrorAction: function (data) {
-    return {
-      type: cn.SAVE_SCHEMA_ERROR_CLOSE,
-      data
-    }
-  },
-
 
   handleSaveSchema: function (status = cn.HTTP_STATUS.START, data) {
     const doAction = (dispatch, status, err) => dispatch({ type: cn.SAVE_SCHEMA, data: { status, data, err } })
@@ -99,7 +61,7 @@ const functions = {
         doAction(dispatch, cn.HTTP_STATUS.START)
       } else if (status === cn.HTTP_STATUS.LOADING) {
         doAction(dispatch, cn.HTTP_STATUS.LOADING)
-        if (data.isOK) {
+        if (data.isOk) {
           let url = 'http://localhost:3001/api/'
           let s = { collectionId: data.collectionId, schemaName: data.schemaName, schema: getState().formSchema.present.formSchema.schema }
 
