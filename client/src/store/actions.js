@@ -2,28 +2,6 @@ import { cn } from '../imports'
 import axios from 'axios';
 
 const functions = {
-  handleAddItemModal: function (data) {
-    return {
-      type: cn.ADD_ITEM_MODAL,
-      data
-    }
-  },
-
-  handleCloseAddItemModal: function (data) {
-    return {
-      type: cn.CLOSE_ADD_ITEM_MODAL,
-      data
-    }
-  },
-
-  handleAddItem: function (data) {
-    return {
-      type: cn.ADD_ITEM,
-      data
-    }
-  },
-
-
   handleSwitchPosition: function (data) {
     return {
       type: cn.SWITCH_POSITION,
@@ -53,26 +31,42 @@ const functions = {
   },
 
 
+  handleAddItem: function (status, data) {
+
+    const doAction = (dispatch, status, data) => dispatch({ type: cn.ADD_ITEM, data: { status, data } })
+    return function (dispatch, getState) {
+      if (status === cn.STATUS.MODAL_OPEN) {
+        doAction(dispatch, cn.STATUS.MODAL_OPEN)
+      } else if (status === cn.STATUS.MODAL_CLOSE) {
+        doAction(dispatch, cn.STATUS.MODAL_CLOSE)
+      } else if (status === cn.STATUS.ACTION_START) {
+        doAction(dispatch, cn.STATUS.ACTION_START, data)
+      }
+    }
+
+  },
+
+
   handleSaveSchema: function (status, data) {
     const doAction = (dispatch, status, data, err) => dispatch({ type: cn.SAVE_SCHEMA, data: { status, data, err } })
 
     return function (dispatch, getState) {
-      if (status === cn.HTTP_STATUS.START) {
-        doAction(dispatch, cn.HTTP_STATUS.START)
-      } else if (status === cn.HTTP_STATUS.LOADING) {
-        doAction(dispatch, cn.HTTP_STATUS.LOADING, data)
-        if (data.isOk) {
-          let url = 'http://localhost:3001/api/'
-          let s = { collection: data.collection, name: data.name, schema: getState().formSchema.present.formSchema.schema }
+      if (status === cn.STATUS.MODAL_OPEN) {
+        doAction(dispatch, cn.STATUS.MODAL_OPEN)
+      } else if (status === cn.STATUS.MODAL_CLOSE) {
+        doAction(dispatch, cn.STATUS.MODAL_CLOSE)
+      } else if (status === cn.STATUS.ACTION_START) {
+        doAction(dispatch, cn.STATUS.HTTP_LOADING)
+        let url = 'http://localhost:3001/api/'
+        let s = { collection: data.collection, name: data.name, schema: getState().formSchema.present.formSchema.schema }
 
-          return axios.post(url + 'insert/' + cn.MONGO_TBL_FORMSCHEMA, s)
-            .then((response) => {
-              doAction(dispatch, cn.HTTP_STATUS.FINISHED)
-            })
-            .catch((err) => {
-              doAction(dispatch, cn.HTTP_STATUS.ERROR, {}, err.message)
-            })
-        }
+        return axios.post(url + 'insert/' + cn.MONGO_TBL_FORMSCHEMA, s)
+          .then((response) => {
+            doAction(dispatch, cn.STATUS.HTTP_FINISHED)
+          })
+          .catch((err) => {
+            doAction(dispatch, cn.STATUS.HTTP_ERROR, {}, err.message)
+          })
       }
     }
   },
@@ -81,16 +75,17 @@ const functions = {
     const doAction = (dispatch, status, data, err) => dispatch({ type: cn.LOAD_SCHEMA_LIST, data: { status, data, err } })
 
     return function (dispatch, getState) {
-      let url = 'http://localhost:3001/api/'
-      doAction(dispatch, cn.HTTP_STATUS.LOADING)
-      axios.get(url + 'query/' + cn.MONGO_TBL_FORMSCHEMA)
-        .then(res => {
-          doAction(dispatch, cn.HTTP_STATUS.FINISHED, res.data)
-        })
-        .catch(err => {
-          doAction(dispatch, cn.HTTP_STATUS.ERROR, {}, err.message)
-        })
-
+      if (status === cn.STATUS.HTTP_LOADING) {
+        let url = 'http://localhost:3001/api/'
+        doAction(dispatch, cn.STATUS.HTTP_LOADING)
+        axios.get(url + 'query/' + cn.MONGO_TBL_FORMSCHEMA)
+          .then(res => {
+            doAction(dispatch, cn.STATUS.HTTP_FINISHED, res.data)
+          })
+          .catch(err => {
+            doAction(dispatch, cn.STATUS.HTTP_ERROR, {}, err.message)
+          })
+      }
     }
   },
 

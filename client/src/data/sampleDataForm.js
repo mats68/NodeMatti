@@ -1,5 +1,4 @@
 import * as data from './sampleDataSchema'
-import {cn} from '../imports'
 
 // data.schema[cn.ui] = data.schemaUi
 // data.schema.fields.adresse.type[cn.ui] = data.adressUi

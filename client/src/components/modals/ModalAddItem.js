@@ -23,7 +23,7 @@ class ModalAddItem extends React.Component {
 
   render() {
     return (
-      <ModalOkCancel {...this.props} onOKClick={this.onOKClick} onCancelClick={this.onCancelClick}>
+      <ModalOkCancel {...this.props} onOkClick={this.onOkClick} onCancelClick={this.onCancelClick}>
         <div className="col-12">
           <div className="form-group">
             <label htmlFor="label">Label</label>

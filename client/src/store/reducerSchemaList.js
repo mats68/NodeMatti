@@ -10,9 +10,9 @@ const reducer = (state = initialState, action) => {
 
   switch (action.type) {
     case cn.LOAD_SCHEMA_LIST:
-      if (action.data.status === cn.HTTP_STATUS.LOADING) {
+      if (action.data.status === cn.STATUS.HTTP_LOADING) {
 
-      } else if (action.data.status === cn.HTTP_STATUS.FINISHED) {
+      } else if (action.data.status === cn.STATUS.HTTP_FINISHED) {
           newState = action.data.data
       }
       return newState;

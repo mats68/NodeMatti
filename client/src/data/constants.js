@@ -28,12 +28,15 @@ const constants = {
 
   MONGO_TBL_FORMSCHEMA: '_formSchemas',
 
-  HTTP_STATUS: {
-    START: 0,
-    LOADING: 1,
-    FINISHED: 2,
-    ERROR: 3
-  }             
+
+  STATUS: {
+    MODAL_OPEN: 'MODAL_OPEN',
+    MODAL_CLOSE: 'MODAL_CLOSE',
+    ACTION_START: 'ACTION_START',
+    HTTP_LOADING: 'HTTP_LOADING',
+    HTTP_FINISHED: 'HTTP_FINISHED',
+    HTTP_ERROR: 'HTTP_ERROR'
+  }
 }
 
 

@@ -90,6 +90,7 @@ class SchemaForm extends Component {
   }
 
   render() {
+
     this.containerCount = 0;
     this.items = utils.mergeRecursive({}, this.props.formSchema.schema, ...this.props.formSchema.implements || {})
     this.uiItems = []

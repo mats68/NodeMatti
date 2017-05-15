@@ -2,7 +2,7 @@ import React from 'react';
 import ModalOkCancel from './ModalOkCancel';
 
 class ModalSaveSchema extends React.Component {
-  onOKClick = () => {
+  onOkClick = () => {
     let item = {
       isOk: true,
       ModalIsOpen: false,
@@ -22,7 +22,7 @@ class ModalSaveSchema extends React.Component {
 
   render() {
     return (
-      <ModalOkCancel {...this.props} onOKClick={this.onOKClick} onCancelClick={this.onCancelClick}>
+      <ModalOkCancel {...this.props} onOkClick={this.onOkClick} onCancelClick={this.onCancelClick}>
         <div className="col-12">
           <div className="form-group">
             <label htmlFor="label">Schema Name</label>

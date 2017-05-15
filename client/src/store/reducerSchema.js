@@ -10,7 +10,7 @@ const initialState = {
   formSchema: formSchema
 }
 
-let UIFieldInfo = {
+/*let UIFieldInfo = {
   uiField: {},
   uiFieldId: '',
   uiParentSchema: {},
@@ -19,7 +19,7 @@ let UIFieldInfo = {
   schema: {},
   uiSchema: {}
 }
-
+*/
 function iterateUiSchemaRecursive(UIschema, parentSchema, parentId, schema, fun, args) {
   Object.keys(UIschema.fields).forEach(name => {
     let fi = {}
@@ -189,9 +189,12 @@ const reducer = (state = initialState, action) => {
       newState = utils.mergeRecursive({}, state)
       return updateSortPos(newState, action.data)
     case cn.ADD_ITEM:
-      newState = utils.mergeRecursive({}, state)
-      addNewItem(newState, action.data)
-      return newState
+      if (action.data.status === cn.STATUS.ACTION_START) {
+        newState = utils.mergeRecursive({}, state)
+        addNewItem(newState, action.data.data)
+        return newState
+      }
+      return state
     case cn.ADD_SCHEMA:
       newState = utils.mergeRecursive({}, state)
       newState.formSchema = {}

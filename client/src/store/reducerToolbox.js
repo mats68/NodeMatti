@@ -1,4 +1,4 @@
-import {cn,utils} from '../imports'
+import { cn, utils } from '../imports'
 //todo import merge from 'lodash/merge'
 
 
@@ -31,23 +31,23 @@ const reducer = (state = initialState, action) => {
       newState.selectedItemId = action.data.id
       newState.selectedItemText = action.data.label
       return newState
-    case cn.ADD_ITEM_MODAL:
-      newState.newItem.ModalIsOpen = true
-      return newState
-    case cn.CLOSE_ADD_ITEM_MODAL:
-      newState.newItem.ModalIsOpen = false
+    case cn.ADD_ITEM:
+      if (action.data.status === cn.STATUS.MODAL_OPEN) {
+        newState.newItem.ModalIsOpen = true
+      } else if (action.data.status === cn.STATUS.MODAL_CLOSE) {
+        newState.newItem.ModalIsOpen = false
+      }
       return newState
     case cn.SAVE_SCHEMA:
-      if (action.data.status === cn.HTTP_STATUS.START) {
+      if (action.data.status === cn.STATUS.MODAL_OPEN) {
         newState.newSchema.ModalIsOpen = true
-      }
-      if (action.data.status === cn.HTTP_STATUS.LOADING) {
-        if (action.data.data.isOk) {newState.saving = true}
+      } else if (action.data.status === cn.STATUS.MODAL_CLOSE) {
         newState.newSchema.ModalIsOpen = false
-      } else if (action.data.status === cn.HTTP_STATUS.FINISHED) {
+      } else if (action.data.status === cn.STATUS.HTTP_LOADING) {
+        newState.saving = true
+      } else if (action.data.status === cn.STATUS.HTTP_FINISHED) {
         newState.saving = false
-
-      } else if (action.data.status === cn.HTTP_STATUS.ERROR) {
+      } else if (action.data.status === cn.STATUS.HTTP_ERROR) {
         newState.saving = false
         newState.errorItem.ModalIsOpen = true
         newState.errorItem.title = 'Error'

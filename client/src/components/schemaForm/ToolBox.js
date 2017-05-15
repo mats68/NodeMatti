@@ -1,15 +1,24 @@
 import React from 'react';
-import AddItemModal from '../modals/AddItemModal';
-import { actions, cn } from './../../imports'
-import ModalMessage from '../modals/ModalMessage'
-import ModalOkCancel from '../modals/ModalOkCancel'
-import ModalSaveSchema from '../modals/ModalSaveSchema'
 import Select from 'react-select';
+
+import { actions, cn } from './../../imports'
+import ModalAddItem from '../modals/ModalAddItem';
+import ModalMessage from '../modals/ModalMessage'
+import ModalSaveSchema from '../modals/ModalSaveSchema'
 
 class ToolBox extends React.Component {
   addItemModal = () => {
-    this.props.handleAddItemModal()
+    this.props.dispatch(actions.handleAddItem(cn.STATUS.MODAL_OPEN))
   }
+
+  addItem = (data) => {
+    this.props.dispatch(actions.handleAddItem(cn.STATUS.MODAL_CLOSE))
+    if (data.isOk) {
+      this.props.dispatch(actions.handleAddItem(cn.STATUS.ACTION_START,data))
+    }
+
+  }
+
   undoClick = () => {
     this.props.handleUndoClick()
   }
@@ -23,10 +32,13 @@ class ToolBox extends React.Component {
     this.props.dispatch(actions.handleRepairSchema())
   }
   saveSchemaModal = () => {
-    this.props.dispatch(actions.handleSaveSchema(cn.HTTP_STATUS.START))
+    this.props.dispatch(actions.handleSaveSchema(cn.STATUS.MODAL_OPEN))
   }
   saveSchema = (data) => {
-    this.props.dispatch(actions.handleSaveSchema(cn.HTTP_STATUS.LOADING, data))
+    this.props.dispatch(actions.handleSaveSchema(cn.STATUS.MODAL_CLOSE))
+    if (data.isOk) {
+      this.props.dispatch(actions.handleSaveSchema(cn.STATUS.ACTION_START,data))
+    }
   }
   closeError = () => {
     this.props.dispatch(actions.handleSaveSchemaErrorClose())
@@ -35,24 +47,23 @@ class ToolBox extends React.Component {
   }
 
   changeSchema = (val) => {
-    this.props.dispatch(actions.handleLoadSchema({name: val.label, id: val.value}))
+    this.props.dispatch(actions.handleLoadSchema({ name: val.label, id: val.value }))
 
   }
 
   componentDidMount() {
-    this.props.dispatch(actions.handleLoadSchemaList(cn.HTTP_STATUS.LOADING))
+    this.props.dispatch(actions.handleLoadSchemaList(cn.STATUS.HTTP_LOADING))
   }
 
   render() {
     let options = []
-
-    this.props.schemaList.forEach(function (item) {
-      options.push({ value: item._id, label: item.name })
-    }, this);
+    if (this.props.schemaList) {
+      this.props.schemaList.forEach(item => options.push({ value: item._id, label: item.name }))
+    }
     return (
       <div className="form-inline">
         <Select className="mb-2 mr-2 ml-2"
-          style={{minWidth: 150}}
+          style={{ minWidth: 150 }}
           options={options}
           onChange={this.changeSchema}
         />
@@ -76,7 +87,7 @@ class ToolBox extends React.Component {
 
         <button className="btn btn-primary  mb-2 mr-2 ml-2" onClick={this.saveSchemaModal}>{this.props.designerOptions.saving ? "saving..." : "save"}</button>
 
-        <AddItemModal isOpen={this.props.designerOptions.newItem.ModalIsOpen} onClose={this.props.handleCloseAddItemModal}></AddItemModal>
+        <ModalAddItem isOpen={this.props.designerOptions.newItem.ModalIsOpen} onClose={this.addItem}></ModalAddItem>
         <ModalMessage isOpen={this.props.designerOptions.errorItem.ModalIsOpen} title={"Error on Save"} message={this.props.designerOptions.errorItem.message} onClose={this.closeError}></ModalMessage>
         <ModalSaveSchema isOpen={this.props.designerOptions.newSchema.ModalIsOpen} title={"Save Schema"} onClose={this.saveSchema}></ModalSaveSchema>
 
