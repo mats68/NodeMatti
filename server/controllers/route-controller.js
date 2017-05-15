@@ -11,7 +11,7 @@ exports.insertData = function (req, res, next) {
   const coll = db.get().collection(req.params.collection)
   coll.insert(req.body, (err, result) => {
     if (err) { return res.send(err) }
-    console.log(result)
+    //console.log(result)
     res.send(result)
   })
 }

@@ -65,6 +65,9 @@ const functions = {
           axios.put(url + 'update/' + cn.MONGO_TBL_FORMSCHEMA + '/' + formSchema._id, s)
             .then((response) => {
               doAction(dispatch, cn.STATUS.HTTP_FINISHED)
+              let d = response.data
+              d._id = formSchema._id
+              dispatch({type: cn.SCHEMA_LIST_UPDATE, data: d})
             })
             .catch((err) => {
               doAction(dispatch, cn.STATUS.HTTP_ERROR, {}, err.message)
@@ -75,7 +78,7 @@ const functions = {
             .then((response) => {
               doAction(dispatch, cn.STATUS.HTTP_FINISHED)
               if (response.data && response.data.ops && response.data.ops.length > 0) {
-                doAction(dispatch, cn.STATUS.ACTION_END,response.data.ops[0])
+                dispatch({type: cn.SCHEMA_LIST_ADD, data: response.data.ops[0]})
               }
             })
             .catch((err) => {
