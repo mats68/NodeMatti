@@ -219,6 +219,14 @@ const reducer = (state = initialState, action) => {
       newState.formSchema = {}
       newState.formSchema = action.data
       return newState
+    case cn.SAVE_SCHEMA:
+      if (action.data.status === cn.STATUS.ACTION_END) {
+        newState = {}
+        newState.formSchema = Object.assign({}, state.formSchema, action.data.data)
+        newState.formSchema.schema = state.formSchema.schema
+        return newState
+      }
+      return state
     default:
       return state
   }

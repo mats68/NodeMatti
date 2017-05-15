@@ -17,13 +17,6 @@ class SchemaForm extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    //todo renderer schlecht
-    // renderer.events.handleChange = this.handleChange
-
-    // renderer.events.designerMode = props.designerMode
-    // renderer.events.funktionen = props.funktionen
-
-    //this.fillItemsRecursive = this.fillItemsRecursive.bind(this)
     this.buildItemsFromUISchema = this.buildItemsFromUISchema.bind(this)
     this.buildItemsRecursive = this.buildItemsRecursive.bind(this)
   }

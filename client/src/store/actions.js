@@ -74,6 +74,9 @@ const functions = {
           axios.post(url + 'insert/' + cn.MONGO_TBL_FORMSCHEMA, s)
             .then((response) => {
               doAction(dispatch, cn.STATUS.HTTP_FINISHED)
+              if (response.data && response.data.ops && response.data.ops.length > 0) {
+                doAction(dispatch, cn.STATUS.ACTION_END,response.data.ops[0])
+              }
             })
             .catch((err) => {
               doAction(dispatch, cn.STATUS.HTTP_ERROR, {}, err.message)

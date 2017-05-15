@@ -16,9 +16,7 @@ class ToolBox extends React.Component {
     if (data.isOk) {
       this.props.dispatch(actions.handleAddItem(cn.STATUS.ACTION_START, data))
     }
-
   }
-
   undoClick = () => {
     this.props.handleUndoClick()
   }
@@ -37,6 +35,9 @@ class ToolBox extends React.Component {
     } else {
       this.props.dispatch(actions.handleSaveSchema(cn.STATUS.MODAL_OPEN))
     }
+  }
+  saveSchemaModalAs = () => {
+    this.props.dispatch(actions.handleSaveSchema(cn.STATUS.MODAL_OPEN))
   }
   saveSchema = (data) => {
     this.props.dispatch(actions.handleSaveSchema(cn.STATUS.MODAL_CLOSE))
@@ -90,7 +91,8 @@ class ToolBox extends React.Component {
         <label htmlFor="selid" className="mb-2 mr-2 ml-2">Selected ID</label>
         <input type="text" id='selid' value={this.props.designerOptions.selectedItemText} className="form-control mb-2 mr-4 ml-2" />
 
-        <button className="btn btn-primary  mb-2 mr-2 ml-2" onClick={this.saveSchemaModal}>{this.props.designerOptions.saving ? "saving..." : "save"}</button>
+        <button className="btn btn-primary  mb-2 mr-2 ml-2" onClick={this.saveSchemaModal}>{this.props.designerOptions.saving ? "saving..." : "Save"}</button>
+        <button className="btn btn-primary  mb-2 mr-2 ml-2" onClick={this.saveSchemaModalAs}>{this.props.designerOptions.saving ? "saving..." : "Save as..."}</button>
 
         <ModalAddItem isOpen={this.props.designerOptions.newItem.ModalIsOpen} onClose={this.addItem}></ModalAddItem>
         <ModalMessage isOpen={this.props.designerOptions.errorItem.ModalIsOpen} title={"Error on Save"} message={this.props.designerOptions.errorItem.message} onClose={this.closeError}></ModalMessage>
