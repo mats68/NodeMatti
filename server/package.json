@@ -10,8 +10,10 @@
     "mongodb": "^2.2.26"
   },
   "scripts": {
+    "start": "concurrently --kill-others \"npm run mongo\" \"npm run server\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "server": "nodemon server.js",
+    "mongo": "d:\\dev\\MongoDB\\mongod.exe --dbpath=\"d:\\dev\\mongo-data\""
   },
   "keywords": [],
   "author": "",
