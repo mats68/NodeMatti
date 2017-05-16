@@ -20,6 +20,7 @@ const initialState = {
   uiSchema: {}
 }
 */
+
 function iterateUiSchemaRecursive(UIschema, parentSchema, parentId, schema, fun, args) {
   Object.keys(UIschema.fields).forEach(name => {
     let fi = {}
@@ -213,16 +214,7 @@ const reducer = (state = initialState, action) => {
       newState.formSchema._id = ''
       newState.formSchema.name = ''
       newState.formSchema.collection = ''
-
-/*      newState.formSchema = {}
-      newState.formSchema._id = ''
-      newState.formSchema.name = ''
-      newState.formSchema.collection = ''
-      newState.formSchema.schema = {}
-      newState.formSchema.schema[cn.fields] = {}
-      newState.formSchema.schema[cn.ui] = {}
-      newState.formSchema.schema[cn.ui][cn.fields] = {}
-*/      return newState
+      return newState
     case cn.REPAIR_SCHEMA:
       newState = utils.mergeRecursive({}, state)
       repairSchema(newState)

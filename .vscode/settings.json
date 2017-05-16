@@ -12,7 +12,8 @@
         "**/node_modules": true,
         "**/.chrome": true,
         "**/client/build": true,
-        "**/.vscode": true
+        "**/.vscode": true,
+        "**/etc": true
     },
     "search.exclude": {
         "**/node_modules": true,

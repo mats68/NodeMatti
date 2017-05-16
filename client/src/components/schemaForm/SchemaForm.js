@@ -91,7 +91,7 @@ class SchemaForm extends Component {
     // console.log(this.items)
     this.buildItemsRecursive(this.items, uiItemList, '')
 
-    console.log('uilist', uiItemList)
+    // console.log('uilist', uiItemList)
     return (
       <form onSubmit={this.handleSubmit} >
         <div className="container-fluid">

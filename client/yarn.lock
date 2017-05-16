@@ -1049,8 +1049,8 @@ caniuse-api@^1.5.2:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000618, caniuse-db@^1.0.30000639:
-  version "1.0.30000669"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000669.tgz#dbe8f25700ecda631dfb05cb71027762bd4b03e5"
+  version "1.0.30000670"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000670.tgz#90d33b79e3090e25829c311113c56d6b1788bf43"
 
 cardinal@^1.0.0:
   version "1.0.0"
@@ -1117,9 +1117,9 @@ classnames@^2.2.4:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
 
-clean-css@4.0.x:
-  version "4.0.13"
-  resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.0.13.tgz#feb2a176062d72a6c3e624d9213cac6a0c485e80"
+clean-css@4.1.x:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.1.2.tgz#6029aea30b1d9520a968a3caee0dabb1184e353a"
   dependencies:
     source-map "0.5.x"
 
@@ -1226,7 +1226,7 @@ combined-stream@^1.0.5, combined-stream@~1.0.5:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@2.9.x:
+commander@2.9.x, commander@~2.9.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.9.0.tgz#9c99094176e12240cb22d6c5146098400fe0f7d4"
   dependencies:
@@ -1727,8 +1727,8 @@ error-ex@^1.2.0:
     is-arrayish "^0.2.1"
 
 es5-ext@^0.10.14, es5-ext@^0.10.9, es5-ext@~0.10.14:
-  version "0.10.16"
-  resolved "https://registry.yarnpkg.com/es5-ext/-/es5-ext-0.10.16.tgz#1ef1b04f3d09db6a5d630226d62202f2e425e45a"
+  version "0.10.18"
+  resolved "https://registry.yarnpkg.com/es5-ext/-/es5-ext-0.10.18.tgz#dc239d3dce4c22b9c939aa180878837a3c0b5c92"
   dependencies:
     es6-iterator "2"
     es6-symbol "~3.1"
@@ -2414,6 +2414,16 @@ he@1.1.x:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
 
+history@^4.5.1, history@^4.6.0:
+  version "4.6.1"
+  resolved "https://registry.yarnpkg.com/history/-/history-4.6.1.tgz#911cf8eb65728555a94f2b12780a0c531a14d2fd"
+  dependencies:
+    invariant "^2.2.1"
+    loose-envify "^1.2.0"
+    resolve-pathname "^2.0.0"
+    value-equal "^0.2.0"
+    warning "^3.0.0"
+
 hoek@2.x.x:
   version "2.16.3"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
@@ -2448,17 +2458,17 @@ html-entities@1.2.0:
   resolved "https://registry.yarnpkg.com/html-entities/-/html-entities-1.2.0.tgz#41948caf85ce82fed36e4e6a0ed371a6664379e2"
 
 html-minifier@^3.1.0:
-  version "3.4.4"
-  resolved "https://registry.yarnpkg.com/html-minifier/-/html-minifier-3.4.4.tgz#616fe3e3ef16da02b393d9a6099eeff468a35df0"
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/html-minifier/-/html-minifier-3.5.0.tgz#98be1b18f87443592722f654e67a1541f22018cb"
   dependencies:
     camel-case "3.0.x"
-    clean-css "4.0.x"
+    clean-css "4.1.x"
     commander "2.9.x"
     he "1.1.x"
     ncname "1.0.x"
     param-case "2.1.x"
     relateurl "0.2.x"
-    uglify-js "~2.8.22"
+    uglify-js "3.0.x"
 
 html-webpack-plugin@2.24.0:
   version "2.24.0"
@@ -2602,7 +2612,7 @@ interpret@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.0.3.tgz#cbc35c62eeee73f19ab7b10a801511401afc0f90"
 
-invariant@^2.0.0, invariant@^2.1.0, invariant@^2.2.0, invariant@^2.2.2:
+invariant@^2.0.0, invariant@^2.1.0, invariant@^2.2.0, invariant@^2.2.1, invariant@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.2.tgz#9e1f56ac0acdb6bf303306f338be3b204ae60360"
   dependencies:
@@ -3315,7 +3325,7 @@ longest@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/longest/-/longest-1.0.1.tgz#30a0b2da38f73770e8294a0d22e6625ed77d0097"
 
-loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.3.1:
+loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.2.0, loose-envify@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.3.1.tgz#d1a8ad33fa9ce0e713d65fdd0ac8b748d478c848"
   dependencies:
@@ -3412,7 +3422,11 @@ micromatch@^2.1.5, micromatch@^2.3.11:
     parse-glob "^3.0.4"
     regex-cache "^0.4.2"
 
-"mime-db@>= 1.27.0 < 2", mime-db@~1.27.0:
+"mime-db@>= 1.27.0 < 2":
+  version "1.28.0"
+  resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.28.0.tgz#fedd349be06d2865b7fc57d837c6de4f17d7ac3c"
+
+mime-db@~1.27.0:
   version "1.27.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.27.0.tgz#820f572296bbd20ec25ed55e5b5de869e5436eb1"
 
@@ -3787,6 +3801,12 @@ path-to-regexp@0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
 
+path-to-regexp@^1.5.3:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-1.7.0.tgz#59fde0f435badacba103a84e9d3bc64e96b9937d"
+  dependencies:
+    isarray "0.0.1"
+
 path-type@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-1.1.0.tgz#59c44f7ee491da704da415da5a4070ba4f8fe441"
@@ -4150,7 +4170,7 @@ promise@7.1.1, promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.0.0, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@~15.5.7:
+prop-types@^15.0.0, prop-types@^15.5.4, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@~15.5.7:
   version "15.5.10"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
   dependencies:
@@ -4300,6 +4320,27 @@ react-redux@^5.0.4:
     lodash-es "^4.2.0"
     loose-envify "^1.1.0"
     prop-types "^15.0.0"
+
+react-router-dom@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-4.1.1.tgz#3021ade1f2c160af97cf94e25594c5f294583025"
+  dependencies:
+    history "^4.5.1"
+    loose-envify "^1.3.1"
+    prop-types "^15.5.4"
+    react-router "^4.1.1"
+
+react-router@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-4.1.1.tgz#d448f3b7c1b429a6fbb03395099949c606b1fe95"
+  dependencies:
+    history "^4.6.0"
+    hoist-non-react-statics "^1.2.0"
+    invariant "^2.2.2"
+    loose-envify "^1.3.1"
+    path-to-regexp "^1.5.3"
+    prop-types "^15.5.4"
+    warning "^3.0.0"
 
 react-scripts@0.9.5:
   version "0.9.5"
@@ -4608,6 +4649,10 @@ requires-port@1.0.x, requires-port@1.x.x:
 resolve-from@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-1.0.1.tgz#26cbfe935d1aeeeabb29bc3fe5aeb01e93d44226"
+
+resolve-pathname@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/resolve-pathname/-/resolve-pathname-2.1.0.tgz#e8358801b86b83b17560d4e3c382d7aef2100944"
 
 resolve@1.1.7:
   version "1.1.7"
@@ -5117,16 +5162,14 @@ ua-parser-js@^0.7.9:
   version "0.7.12"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.12.tgz#04c81a99bdd5dc52263ea29d24c6bf8d4818a4bb"
 
-uglify-js@^2.6, uglify-js@~2.8.22:
-  version "2.8.24"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.8.24.tgz#48eb5175cf32e22ec11a47e638d7c8b4e0faf2dd"
+uglify-js@3.0.x:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.0.6.tgz#17a673f64a78d8807fbda1b4c9ffce114c6febfd"
   dependencies:
+    commander "~2.9.0"
     source-map "~0.5.1"
-    yargs "~3.10.0"
-  optionalDependencies:
-    uglify-to-browserify "~1.0.0"
 
-uglify-js@~2.7.3:
+uglify-js@^2.6, uglify-js@~2.7.3:
   version "2.7.5"
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.7.5.tgz#4612c0c7baaee2ba7c487de4904ae122079f2ca8"
   dependencies:
@@ -5236,6 +5279,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "~1.0.0"
     spdx-expression-parse "~1.0.0"
 
+value-equal@^0.2.0:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/value-equal/-/value-equal-0.2.1.tgz#c220a304361fce6994dbbedaa3c7e1a1b895871d"
+
 vary@~1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.1.tgz#67535ebb694c1d52257457984665323f587e8d37"
@@ -5261,6 +5308,12 @@ walker@~1.0.5:
   resolved "https://registry.yarnpkg.com/walker/-/walker-1.0.7.tgz#2f7f9b8fd10d677262b18a884e28d19618e028fb"
   dependencies:
     makeerror "1.0.x"
+
+warning@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/warning/-/warning-3.0.0.tgz#32e5377cb572de4ab04753bdf8821c01ed605b7c"
+  dependencies:
+    loose-envify "^1.0.0"
 
 watch@~0.10.0:
   version "0.10.0"
