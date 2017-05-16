@@ -1,0 +1,20 @@
+{
+  "name": "Matti",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently --kill-others \"npm run mongo\" \"npm run server\" \"npm run client\"",
+    "server": "nodemon server\\server.js",
+    "client": "npm start --prefix \"D:\\dev\\node\\Matti\\client\"",
+    "mongo": "d:\\dev\\MongoDB\\mongod.exe --dbpath=\"d:\\dev\\mongo-data\"",
+    "kill": "concurrently --kill-others"
+  },
+  "repository": {
+    "type": "git",
+    "url": "C:\\\\Users\\\\Matthias\\\\Dropbox\\\\dev\\\\Node\\\\NodeMatti"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
