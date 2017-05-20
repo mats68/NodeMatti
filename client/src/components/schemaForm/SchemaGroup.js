@@ -2,7 +2,7 @@ import React from 'react'
 import Input from './SchemaInput'
 import InputDnD from './SchemaInputDnD'
 import { Panel } from './SchemaPanel'
-import { cn } from '../../imports'
+import { cn } from 'imports'
 import { Tab } from './Tab'
 
 export const SchemaGroup = (props) => {

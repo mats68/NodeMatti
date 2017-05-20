@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {utils} from '../../imports'
+import {utils} from 'imports'
 
 class Input extends Component {
   constructor(props) {

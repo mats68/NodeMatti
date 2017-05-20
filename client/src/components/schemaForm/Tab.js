@@ -1,6 +1,6 @@
 import React from 'react'
 import './Tab.css'
-import { utils } from '../../imports'
+import { utils } from 'imports'
 
 
 export class Tab extends React.Component {

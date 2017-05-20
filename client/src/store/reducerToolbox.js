@@ -1,4 +1,4 @@
-import { cn, utils } from '../imports'
+import { cn, utils } from 'imports'
 //todo import merge from 'lodash/merge'
 
 

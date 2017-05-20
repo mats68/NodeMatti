@@ -1,10 +1,10 @@
 import React from 'react';
 import Select from 'react-select';
 
-import { actions, cn } from './../../imports'
-import ModalAddItem from '../modals/ModalAddItem';
-import ModalMessage from '../modals/ModalMessage'
-import ModalSaveSchema from '../modals/ModalSaveSchema'
+import { actions, cn } from 'imports'
+import ModalAddItem from 'components/modals/ModalAddItem';
+import ModalMessage from 'components/modals/ModalMessage'
+import ModalSaveSchema from 'components/modals/ModalSaveSchema'
 
 class ToolBox extends React.Component {
   addItemModal = () => {

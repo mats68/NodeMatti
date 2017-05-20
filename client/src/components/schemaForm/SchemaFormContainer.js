@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { actions } from './../../imports'
+import { actions } from 'imports'
 
 import SchemaFormDnD from './SchemaFormDnD'
 
@@ -32,4 +32,4 @@ const SchemaFormContainer = connect(
   mapDispatchToProps
 )(SchemaFormDnD)
 
-export default SchemaFormContainer 
+export default SchemaFormContainer

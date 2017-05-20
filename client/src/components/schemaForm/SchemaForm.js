@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { cn, utils } from '../../imports'
+import { cn, utils } from 'imports'
 import SchemaGroup from './SchemaGroup';
 
 

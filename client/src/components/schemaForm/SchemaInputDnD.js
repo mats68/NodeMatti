@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { DragSource, DropTarget } from 'react-dnd'
 import flow from 'lodash/flow'
 
-import {cn} from '../../imports'
+import {cn} from 'imports'
 import Input from './SchemaInput'
 
 

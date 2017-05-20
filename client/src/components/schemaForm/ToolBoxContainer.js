@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import { ActionCreators as UndoActionCreators } from 'redux-undo'
-//import { actions, cn } from './../../imports'
 import ToolBox from './ToolBox';
 
 const mapStateToProps = (state) => {

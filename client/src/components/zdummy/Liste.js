@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import './../app.css'
+import 'app.css'
 
 class Liste extends Component {
   constructor(props) {
@@ -75,7 +75,7 @@ class Liste extends Component {
         .catch(err => {
           console.error(err);
         });
-      
+
     }
   }
 

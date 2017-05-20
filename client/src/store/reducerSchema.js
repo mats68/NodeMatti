@@ -1,6 +1,5 @@
 import undoable, { excludeAction } from 'redux-undo'
-import { cn, utils } from '../imports'
-//import { formSchema } from '../data/sampleDataForm'
+import { cn, utils } from 'imports'
 //import merge from 'lodash/merge'
 
 

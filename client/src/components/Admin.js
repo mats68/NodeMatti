@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 
 import SchemaFormContainer from './schemaForm/SchemaFormContainer';
 import ToolBoxContainer from './schemaForm/ToolBoxContainer';
-import store from '../store/configureStore';
+import store from 'store/configureStore';
 
 
 const Admin = (props) => {

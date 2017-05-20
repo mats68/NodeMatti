@@ -1,4 +1,4 @@
-import { cn } from '../imports'
+import { cn } from 'imports'
 import axios from 'axios'
 import { ActionCreators as UndoActionCreators } from 'redux-undo'
 
