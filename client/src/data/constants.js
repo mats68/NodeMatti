@@ -4,10 +4,10 @@ const constants = {
   fields: 'fields',
   type: 'type',
 
-  container: '_container',
+  form: 'form',
   panel: 'panel',
+  tabControl: 'tabControl',
   tab: 'tab',
-  tabPanel: 'tabPanel',
   subschema: 'subschema',
 
 

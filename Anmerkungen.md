@@ -33,6 +33,13 @@
   https://github.com/mobxjs/mobx/issues/521
   You can add the transform-decorators-legacy yourself in node_modules/react-scripts/config/babel.dev.js
 
+# eval
+   var meth = 'onShow() {alert("1a")}'
+    var cl = '(class Neu {' + meth + '})';
+    var k = eval(cl)
+    var x = new (k)
+    x.onShow()
+
 # flattend structur of ui-data
 - uischema.containers.form is entry point
 - iterate over containers.fields
@@ -41,10 +48,11 @@
 
 
 
-uischema = {
+UIschema = {
   containers: {
     "form": {
       label: "Kunden",
+      type: "form",
       fields: ["name", "panel1"]
     },
     "panel1": {
@@ -59,10 +67,12 @@ uischema = {
     },
     "tab1": {
       label: "Hobbies",
+      type: "tab",
       fields: ["Hobby1", "Hobby2"]
     },
     "tab2": {
       label: "Beruf",
+      type: "tab",
       fields: ["Berufalt", "Berufneu"]
     },
     //containers = ["form","panel1",tab","tab1","tab2"]

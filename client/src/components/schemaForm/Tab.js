@@ -13,10 +13,12 @@ export class Tab extends React.Component {
     this.renderInhalt = this.renderInhalt.bind(this)
   }
   linkClick(e) {
+    const { item, schema } = this.props
     e.preventDefault()
     let ind = 0
-    for (var i = 0; i < this.props.item.items.length; i++) {
-      if (this.props.item.items[i].id === e.target.id) {
+    for (var i = 0; i < item.fields.length; i++) {
+      const sItem = utils.getItemFromSchema(item.fields[i], schema)
+      if (sItem.id === e.target.id) {
         ind = i
         break
       }
@@ -26,23 +28,27 @@ export class Tab extends React.Component {
   }
 
   renderTabs() {
-    //console.log('item',this.props.item)
-    return this.props.item.items.map((item, ind) => {
-      //console.log('item',item)
+    const { item, schema } = this.props
+
+    return item.fields.map((it, ind) => {
+      const sItem = utils.getItemFromSchema(it, schema)
+      //todo error if not type = tab
       return (
-        <li key={'tab_' + item.id} className="nav-item">
-          <a id={item.id} onClick={this.linkClick} className={this.state.activeTab === ind ? "nav-link active" : "nav-link"} href="#">{item.options.title}</a>
+        <li key={sItem.id} className="nav-item">
+          <a id={sItem.id} onClick={this.linkClick} className={this.state.activeTab === ind ? "nav-link active" : "nav-link"} href="#">{sItem.label}</a>
         </li>
       )
     })
   }
 
   renderInhalt() {
-    return this.props.item.items.map((item, ind) => {
-      // console.log('it', item)
+    const { item, schema, renderItems } = this.props
+
+    return item.fields.map((it, ind) => {
+      const sItem = utils.getItemFromSchema(it, schema)
       return (
-        <div key={item.id} className={this.state.activeTab === ind ? "" : "hide-true"}>
-          {this.props.renderItems(item.items)}
+        <div key={sItem.id} className={this.state.activeTab === ind ? "" : "hide-true"}>
+          {renderItems(sItem.fields)}
         </div>
       )
     })

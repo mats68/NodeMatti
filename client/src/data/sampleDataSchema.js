@@ -6,6 +6,76 @@ The field names cannot contain the dot (.) character.
 The field names cannot contain the null character.
 */
 
+export const neuSchema = {
+  schema: {
+    fields: {
+      name: {
+        type: "text"
+      },
+      plz: {
+        type: "text"
+      },
+      ort: {
+        type: "text"
+      },
+      ftab1: {
+        type: "text"
+      },
+      ftab2: {
+        type: "text"
+      }
+    }
+  },
+  UIschema: {
+    containers: {
+      "form": {
+        label: "Kunden",
+        type: "form",
+        fields: ["name", "panel1", "tabControl1"]
+      },
+      "panel1": {
+        label: "Panel",
+        type: "panel",
+        fields: ["plz", "ort"]
+      },
+      "tabControl1": {
+        type: "tabControl",
+        fields: ["tab1", "tab2"]
+      },
+      "tab1": {
+        type: "tab",
+        label: "Tab 1",
+        fields: ["ftab1"]
+      },
+      "tab2": {
+        type: "tab",
+        label: "Tab 2",
+        fields: ["ftab2"]
+      }
+
+    },
+    fields: {
+      name: {
+        label: "Name"
+      },
+      plz: {
+        label: "PLZ"
+      },
+      ort: {
+        label: "Ort"
+      },
+      ftab1: {
+        label: "auf Tab 1"
+      },
+      ftab2: {
+        label: "auf Tab 2"
+      }
+
+    }
+  }
+}
+
+
 export const dataFilled = {
   _id: '100',
   name: 'Thaler',
@@ -47,7 +117,7 @@ export const adress = {
   }
 }
 //Alle Felder müssen im gleichen UI sein wegen Tree-Struktur
-//Subschemas: ui innerhalb container; felder können nicht verschoben werden 
+//Subschemas: ui innerhalb container; felder können nicht verschoben werden
 //Subschemas und implements können keine Subschemas ihrerseits haben (Rekursion möglich)
 export const zusatzUi = {
   fields: {

@@ -1,24 +1,20 @@
 import React, { Component } from 'react'
 import { cn, utils } from 'imports'
 import SchemaGroup from './SchemaGroup';
+import merge from 'lodash/merge'
 
 
 class SchemaForm extends Component {
   constructor(props) {
-    console.log('props', props)
     super(props)
     this.data = props.data
     //todo check same names of schemas
-    this.items = {}
-    this.uiItems = []
-    this.containerCount = 0;
-    //}
-    //console.dir(JSON.stringify(this.items))
+    this.schema = {}
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.buildItemsFromUISchema = this.buildItemsFromUISchema.bind(this)
-    this.buildItemsRecursive = this.buildItemsRecursive.bind(this)
+    // this.buildItemsFromUISchema = this.buildItemsFromUISchema.bind(this)
+    // this.buildItemsRecursive = this.buildItemsRecursive.bind(this)
   }
 
   handleSubmit(e) {
@@ -31,7 +27,7 @@ class SchemaForm extends Component {
     utils.setValueFromDottedKey(key, data, value)
   }
 
-  buildItemsFromUISchema(_schemaItems, _uiItems, uiItems, prefix) {
+/*  buildItemsFromUISchema(_schemaItems, _uiItems, uiItems, prefix) {
     if (!_schemaItems || !_uiItems) { return }
     Object.keys(_uiItems).forEach(name => {
       let item = {}
@@ -81,21 +77,22 @@ class SchemaForm extends Component {
       }
     })
   }
-
+*/
   render() {
 
-    this.containerCount = 0;
-    this.items = utils.mergeRecursive({}, this.props.formSchema.schema, ...this.props.formSchema.implements || {})
-    this.uiItems = []
-    let uiItemList = [];
-    // console.log(this.items)
-    this.buildItemsRecursive(this.items, uiItemList, '')
+    //merge formSchema.schema.fields with formSchema.UIschema.fields
+    this.schema = merge({}, this.props.formSchema.schema, this.props.formSchema.UIschema)
+    Object.keys(this.schema.containers).forEach(name => this.schema.containers[name].id = name)
+    Object.keys(this.schema.fields).forEach(name => this.schema.fields[name].id = name)
+
+
+    //this.schema = utils.mergeRecursive({}, this.props.formSchema.schema, ...this.props.formSchema.implements || {})
 
     // console.log('uilist', uiItemList)
     return (
       <form onSubmit={this.handleSubmit} >
         <div className="container-fluid">
-          <SchemaGroup items={uiItemList} handleChange={this.handleChange} designFunktionen={this.props.designFunktionen} designerMode={this.props.designerMode}></SchemaGroup>
+          <SchemaGroup schema={this.schema} handleChange={this.handleChange} designFunktionen={this.props.designFunktionen} designerMode={this.props.designerMode}></SchemaGroup>
           <div className="row">
             <p></p>
           </div>

@@ -1,12 +1,13 @@
 import undoable, { excludeAction } from 'redux-undo'
 import { cn, utils } from 'imports'
 //import merge from 'lodash/merge'
+import {neuSchema} from '../data/sampleDataSchema'
 
 
 //todo save ui of subschema in general ui
 
 const initialState = {
-  formSchema: {},
+  formSchema: neuSchema,
 }
 
 /*let UIFieldInfo = {

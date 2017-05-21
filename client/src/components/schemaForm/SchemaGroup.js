@@ -2,15 +2,12 @@ import React from 'react'
 import Input from './SchemaInput'
 import InputDnD from './SchemaInputDnD'
 import { Panel } from './SchemaPanel'
-import { cn } from 'imports'
+import { cn, utils } from 'imports'
 import { Tab } from './Tab'
 
 export const SchemaGroup = (props) => {
 
-  const { handleChange, designFunktionen, designerMode } = props
-  let renderItem
-  let renderItems
-
+  const { schema, handleChange, designFunktionen, designerMode } = props
 
   const renderInput = (item) => {
     if (designerMode) {
@@ -20,37 +17,32 @@ export const SchemaGroup = (props) => {
     }
   }
 
-  renderItem = (item) => {
-    if (item.type === cn.container) {
-      if (item.containertype === cn.panel) {
+  const renderItem = (item) => {
+    const sItem = utils.getItemFromSchema(item, schema)
+    if (utils.isContainer(sItem)) {
+      if (sItem.type === cn.panel) {
         return (
-          <Panel key={item.id} item={item}>
-            {renderItems(item.items)}
+          <Panel key={item} item={sItem}>
+            {renderItems(schema.containers[item].fields)}
           </Panel>
         )
-      } else if (item.containertype === cn.tab) {
+      } else if (sItem.type === cn.tabControl) {
         return (
-          <Tab key={item.id} item={item} renderItems={renderItems}></Tab>
-        )
-      } else if (item.containertype === cn.subschema) {
-        return (
-          <Panel key={item.id} item={item}>
-            {renderItems(item.items)}
-          </Panel>
+          <Tab key={item} item={sItem} schema={schema} renderItems={renderItems}></Tab>
         )
       }
     } else {
-      return renderInput(item)
+      return renderInput(sItem)
     }
   }
 
-  renderItems = (items) => {
+  const renderItems = (items) => {
     return items.map(item => renderItem(item))
   }
 
   return (
     <div className="row">
-      {renderItems(props.items)}
+      {renderItems(schema.containers.form.fields)}
     </div>
   )
 }

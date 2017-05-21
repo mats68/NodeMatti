@@ -64,13 +64,20 @@ const utils = {
     res += check(2, 'md')
     res += check(3, 'sm')
     return res
+  },
 
-
-
-
-
+  getItemFromSchema(item, schema) {
+    if (schema.containers[item]) {
+      return schema.containers[item]
+    } else {
+      return schema.fields[item]
+    }
+  },
+  isContainer(item) {
+    return (item.type === "form" || item.type === "panel" || item.type === "tabControl" || item.type === "tab")
   }
-
 }
+
+
 
 export default utils
