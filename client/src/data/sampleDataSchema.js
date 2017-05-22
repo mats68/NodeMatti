@@ -24,6 +24,7 @@ export const neuSchema = {
       ftab2: {
         type: "text"
       }
+
     }
   },
   UIschema: {
@@ -31,7 +32,7 @@ export const neuSchema = {
       "form": {
         label: "Kunden",
         type: "form",
-        fields: ["name", "panel1", "tabControl1"]
+        fields: ["name", "tabControl1"]
       },
       "panel1": {
         label: "Panel",
@@ -45,7 +46,7 @@ export const neuSchema = {
       "tab1": {
         type: "tab",
         label: "Tab 1",
-        fields: ["ftab1"]
+        fields: ["ftab1", "panel1"]
       },
       "tab2": {
         type: "tab",
