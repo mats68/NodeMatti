@@ -73,6 +73,17 @@ const utils = {
       return schema.fields[item]
     }
   },
+
+  getParentItemFromSchema(item, schema) {
+    let res
+    Object.keys(schema.containers).forEach((name) => {
+      if (schema.containers[name].fields.indexOf(item) !== -1) {
+        return res = schema.containers[name]
+      }
+    })
+    return res
+  },
+
   isContainer(item) {
     return (item.type === "form" || item.type === "panel" || item.type === "tabControl" || item.type === "tab")
   }

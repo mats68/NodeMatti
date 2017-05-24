@@ -23,6 +23,12 @@ export const neuSchema = {
       },
       ftab2: {
         type: "text"
+      },
+      hund: {
+        type: "text"
+      },
+      keinContainer: {
+        type: "text"
       }
 
     }
@@ -70,6 +76,9 @@ export const neuSchema = {
       },
       ftab2: {
         label: "auf Tab 2"
+      },
+      keinContainer: {
+        label: "Kein Container"
       }
 
     }

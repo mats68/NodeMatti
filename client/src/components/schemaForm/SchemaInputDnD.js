@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { DragSource, DropTarget } from 'react-dnd'
 import flow from 'lodash/flow'
 
-import {cn} from 'imports'
+import { cn } from 'imports'
 import Input from './SchemaInput'
 
 
@@ -30,18 +30,12 @@ const inputTarget = {
     const sourceItem = sourceItemProps.item
     if (targetItem.id === sourceItem.id) { return }
 
-    let dropBefore = true;
-    if (targetItem.pos === (sourceItem.pos + 1)) {
-      dropBefore = false;
-    } else if (targetItem.pos === (sourceItem.pos - 1)) {
-      dropBefore = true;
-    } else {
-      const hoverBoundingRect = component.decoratedComponentInstance.node.getBoundingClientRect();
-      const clientOffset = monitor.getClientOffset();
-      let middle = ((hoverBoundingRect.right - hoverBoundingRect.left) / 2) + hoverBoundingRect.left
-      if (clientOffset.x > middle) {
-        dropBefore = false;
-      }
+    let dropBefore = true
+    const hoverBoundingRect = component.decoratedComponentInstance.node.getBoundingClientRect();
+    const clientOffset = monitor.getClientOffset();
+    let middle = ((hoverBoundingRect.right - hoverBoundingRect.left) / 2) + hoverBoundingRect.left
+    if (clientOffset.x > middle) {
+      dropBefore = false
     }
     const data = { sourceItem, targetItem, dropBefore }
     sourceItemProps.designFunktionen.handleSwitchPosition(data)
@@ -71,7 +65,7 @@ class InputDnD extends Component {
   render() {
     const { connectDragSource, connectDropTarget } = this.props;
     return connectDragSource(connectDropTarget(
-      <div ref={node => (this.node = node)} onClick={(e) => {this.props.designFunktionen.handleChangeSelectedItem(this.props.item) }}>
+      <div ref={node => (this.node = node)} onClick={(e) => { this.props.designFunktionen.handleChangeSelectedItem(this.props.item) }}>
         <Input {...this.props} />
       </div>
     ))
