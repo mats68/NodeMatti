@@ -117,7 +117,7 @@ function checkSchema(formSchema) {
     formSchema.UIschema.containers = {}
   }
   if (!formSchema.UIschema.containers.form) {
-    formSchema.UIschema.containers.form = {type: "form", fields: []}
+    formSchema.UIschema.containers.form = { type: "form", fields: [] }
   }
 
   if (!formSchema.UIschema.fields) {
@@ -147,25 +147,13 @@ function repairSchema(newState) {
   Object.keys(schema.fields).forEach((name) => {
     item = utils.getItemFromSchema(name, uischema)
     if (!item) {
-      uischema.fields[name] = {label: name}
+      uischema.fields[name] = { label: name }
     }
     pitem = utils.getParentItemFromSchema(name, uischema)
     if (!pitem) {
       uischema.containers.form.fields.push(name)
     }
-
-
-
   })
-
-  // let item = { pos: 0 }
-  // iterateSchemaRecursive(schema, uischema, getHighPos, [item.pos])
-  // item.pos++
-  // //let tempSchema = utils.mergeRecursive({}, schema)
-  // let UIFields = []
-  // iterateSchemaRecursive(schema, uischema, fillArry, [UIFields])
-  // iterateSchemaRecursive(schema, uischema, checkUIField, [UIFields, uischema, item.pos], false)
-
 }
 
 function changePos(newState, data) {
@@ -177,7 +165,6 @@ function changePos(newState, data) {
   if (ps && pt) {
     let psi = ps.fields.indexOf(sourceItem.id)
     let pti = pt.fields.indexOf(targetItem.id)
-    debugger
     let df = dropBefore
     if (ps === pt && pti === (psi + 1)) { df = false }
     if (ps === pt && pti === (psi - 1)) { df = true }
@@ -186,9 +173,6 @@ function changePos(newState, data) {
     if (!df) { newPos++ }
     pt.fields.splice(newPos, 0, sourceItem.id)
   }
-
-
-
   return newState
 }
 

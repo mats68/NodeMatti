@@ -49,8 +49,8 @@ class ToolBox extends React.Component {
   closeError = () => {
     this.props.dispatch(actions.handleSaveSchemaErrorClose())
     this.props.dispatch(actions.handleSaveSchemaEnd())
-
   }
+
 
   changeSchema = (val) => {
     this.props.dispatch(actions.handleLoadSchema({ name: val.label, id: val.value }))
