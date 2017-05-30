@@ -170,7 +170,6 @@ function repairSchema(newState) {
 
 function changePos(newState, data) {
   const { sourceItem, targetItem, dropBefore } = data
-  let schema = newState.formSchema.schema
   let uischema = newState.formSchema.UIschema
   let ps = utils.getParentItemFromSchema(sourceItem.id, uischema)
   let pt = utils.getParentItemFromSchema(targetItem.id, uischema)
