@@ -1,13 +1,8 @@
-import { cn, utils } from 'imports'
+import { cn } from 'imports'
 //todo import merge from 'lodash/merge'
 
 
 const initialState = []
-
-function updateList(formSchema) {
-
-}
-
 
 const reducer = (state = initialState, action) => {
   let newState

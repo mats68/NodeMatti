@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { cn, utils } from 'imports'
+import { utils } from 'imports'
 import SchemaGroup from './SchemaGroup';
 import merge from 'lodash/merge'
 
