@@ -8,7 +8,7 @@ import Admin from './Admin'
 const App = (props) => {
   return (
     <Router>
-      <div classname="main">
+      <div className="main">
         <div>
           <ul className="header">
             <li><Link to="/">Home</Link></li>

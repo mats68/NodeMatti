@@ -47,6 +47,12 @@ const functions = {
 
   },
 
+  handleSchemaJSON: function (status, data) {
+    return {
+      type: cn.SCHEMA_JSON,
+      data: { status, data }
+    }
+  },
 
   handleSaveSchema: function (status, data) {
     const doAction = (dispatch, status, data, err) => dispatch({ type: cn.SAVE_SCHEMA, data: { status, data, err } })

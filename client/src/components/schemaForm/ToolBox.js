@@ -5,6 +5,7 @@ import { actions, cn } from 'imports'
 import ModalAddItem from 'components/modals/ModalAddItem';
 import ModalMessage from 'components/modals/ModalMessage'
 import ModalSaveSchema from 'components/modals/ModalSaveSchema'
+import ModalSchema from 'components/modals/ModalSchema'
 
 class ToolBox extends React.Component {
   addItemModal = () => {
@@ -46,6 +47,12 @@ class ToolBox extends React.Component {
       this.props.dispatch(actions.handleSaveSchema(cn.STATUS.ACTION_START, data))
     }
   }
+  schemaJSONOpen = (action,data) => {
+    this.props.dispatch(actions.handleSchemaJSON(cn.STATUS.MODAL_OPEN,data))
+  }
+  schemaJSONClose = (action,data) => {
+    this.props.dispatch(actions.handleSchemaJSON(cn.STATUS.MODAL_CLOSE,data))
+  }
   closeError = () => {
     this.props.dispatch(actions.handleSaveSchemaErrorClose())
     this.props.dispatch(actions.handleSaveSchemaEnd())
@@ -83,6 +90,9 @@ class ToolBox extends React.Component {
         <button className="btn btn-primary mb-2 mr-2 ml-2" onClick={this.addItemModal}>
           Add Item
         </button>
+        <button className="btn btn-primary mb-2 mr-2 ml-2" onClick={this.schemaJSONOpen}>
+          Schema Text
+        </button>
         <button className="btn btn-primary  mb-2 mr-2 ml-2" disabled={!this.props.canUndo} onClick={this.undoClick}>
           Undo
         </button>
@@ -98,6 +108,7 @@ class ToolBox extends React.Component {
         <ModalAddItem isOpen={this.props.designerOptions.newItem.ModalIsOpen} onClose={this.addItem}></ModalAddItem>
         <ModalMessage isOpen={this.props.designerOptions.errorItem.ModalIsOpen} title={"Error on Save"} message={this.props.designerOptions.errorItem.message} onClose={this.closeError}></ModalMessage>
         <ModalSaveSchema isOpen={this.props.designerOptions.newSchema.ModalIsOpen} title={"Save Schema"} onClose={this.saveSchema}></ModalSaveSchema>
+        <ModalSchema schema={this.props.currentformSchema} isOpen={this.props.designerOptions.schemaJSON.ModalIsOpen} title={"Schema JSON"} onClose={this.schemaJSONClose}></ModalSchema>
 
       </div>
     )
