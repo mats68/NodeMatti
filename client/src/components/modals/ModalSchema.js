@@ -1,5 +1,6 @@
 import React from 'react';
 import ModalOkCancel from './ModalOkCancel';
+import CodeMirror from 'components/CodeMirror';
 
 
 const ModalSchema = (props) => {
@@ -13,8 +14,7 @@ const ModalSchema = (props) => {
     <ModalOkCancel  {...props} onClose={onClose}>
       <div className="col-12">
           <div className="form-group">
-            <label htmlFor="label">Schema</label>
-            <textarea rows={20} cols={200} id="label" className="form-control">{JSON.stringify(props.schema)}</textarea> 
+            <CodeMirror code={JSON.stringify(props.schema, null, 2)}></CodeMirror>
           </div>
       </div>
     </ModalOkCancel>
