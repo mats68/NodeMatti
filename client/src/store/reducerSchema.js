@@ -176,7 +176,6 @@ function changePos(newState, data) {
   if (ps && pt) {
     let psi = ps.fields.indexOf(sourceItem.id)
     let pti = pt.fields.indexOf(targetItem.id)
-    debugger
     let df = dropBefore
     if (ps === pt && pti === (psi + 1)) { df = false }
     if (ps === pt && pti === (psi - 1)) { df = true }

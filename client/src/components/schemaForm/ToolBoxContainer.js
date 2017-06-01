@@ -6,6 +6,7 @@ const mapStateToProps = (state) => {
   return {
     schemaList: state.schemaList,
     currentformSchemaId: state.formSchema.present.formSchema._id,
+    currentformSchema: state.formSchema.present.formSchema,
     designerOptions: state.designerOptions,
     canUndo: state.formSchema.past.length > 0,
     canRedo: state.formSchema.future.length > 0

@@ -16,6 +16,9 @@ const initialState = {
     id: '',
     label: ''
   },
+  schemaJSON: {
+    ModalIsOpen: false,
+  },
   errorItem: {
     ModalIsOpen: false,
     title: '',
@@ -54,6 +57,13 @@ const reducer = (state = initialState, action) => {
         newState.errorItem.message = action.data.err
       }
 
+      return newState
+    case cn.SCHEMA_JSON:
+      if (action.data.status === cn.STATUS.MODAL_OPEN) {
+        newState.schemaJSON.ModalIsOpen = true
+      } else if (action.data.status === cn.STATUS.MODAL_CLOSE) {
+        newState.schemaJSON.ModalIsOpen = false
+      } 
       return newState
     default:
       return state
