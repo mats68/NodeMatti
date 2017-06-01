@@ -14,6 +14,7 @@ class CM extends React.Component {
     this.setState({
       code: newCode
     });
+    this.props.onChange(newCode)
   }
 
   componentDidMount() {
@@ -28,7 +29,7 @@ class CM extends React.Component {
       readOnly: false,
       mode: this.state.mode
     };
-    return <CodeMirror ref="editor" style={{height: "auto"}} value={this.state.code} onChange={this.updateCode} options={options} autoFocus/>
+    return <CodeMirror ref="editor" value={this.state.code} onChange={this.updateCode} options={options} autoFocus/>
   }
 }
 

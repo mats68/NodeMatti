@@ -3,20 +3,13 @@ import ModalBasic from './ModalBasic';
 
 
 const ModalOkCancel = (props) => {
+
 const onOkClick = () => {
-    let item = {
-      isOk: true,
-      ModalIsOpen: false,
-    }
-    props.onClose(item)
+    props.onClose({isOk: true})
   }
 
 const onCancelClick = () => {
-    let item = {
-      isOk: false,
-      ModalIsOpen: false,
-    }
-    props.onClose(item)
+    props.onClose({isOk: false})
   }
 
 

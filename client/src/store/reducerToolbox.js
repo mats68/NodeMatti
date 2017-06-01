@@ -63,7 +63,7 @@ const reducer = (state = initialState, action) => {
         newState.schemaJSON.ModalIsOpen = true
       } else if (action.data.status === cn.STATUS.MODAL_CLOSE) {
         newState.schemaJSON.ModalIsOpen = false
-      } 
+      }
       return newState
     default:
       return state

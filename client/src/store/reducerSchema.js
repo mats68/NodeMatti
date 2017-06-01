@@ -213,6 +213,13 @@ const reducer = (state = initialState, action) => {
         return newState
       }
       return state
+    case cn.SCHEMA_JSON:
+      if (action.data.status === cn.STATUS.MODAL_CLOSE) {
+        newState = {}
+        newState.formSchema = action.data.data.code
+        return newState
+      }
+      return state
     default:
       return state
   }

@@ -47,17 +47,17 @@ class ToolBox extends React.Component {
       this.props.dispatch(actions.handleSaveSchema(cn.STATUS.ACTION_START, data))
     }
   }
-  schemaJSONOpen = (action,data) => {
-    this.props.dispatch(actions.handleSchemaJSON(cn.STATUS.MODAL_OPEN,data))
+  schemaJSONOpen = (action, data) => {
+    this.props.dispatch(actions.handleSchemaJSON(cn.STATUS.MODAL_OPEN, data))
   }
-  schemaJSONClose = (action,data) => {
-    this.props.dispatch(actions.handleSchemaJSON(cn.STATUS.MODAL_CLOSE,data))
+  schemaJSONClose = (data) => {
+    this.props.dispatch(actions.handleSchemaJSON(cn.STATUS.MODAL_CLOSE, data))
   }
+
   closeError = () => {
     this.props.dispatch(actions.handleSaveSchemaErrorClose())
     this.props.dispatch(actions.handleSaveSchemaEnd())
   }
-
 
   changeSchema = (val) => {
     this.props.dispatch(actions.handleLoadSchema({ name: val.label, id: val.value }))
