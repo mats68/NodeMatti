@@ -18,6 +18,7 @@ const initialState = {
   },
   schemaJSON: {
     ModalIsOpen: false,
+    error: ''
   },
   errorItem: {
     ModalIsOpen: false,
@@ -59,10 +60,18 @@ const reducer = (state = initialState, action) => {
 
       return newState
     case cn.SCHEMA_JSON:
+
       if (action.data.status === cn.STATUS.MODAL_OPEN) {
         newState.schemaJSON.ModalIsOpen = true
       } else if (action.data.status === cn.STATUS.MODAL_CLOSE) {
-        newState.schemaJSON.ModalIsOpen = false
+        if (action.data.data.isOk) {
+          newState.schemaJSON.error = utils.validateJSON(action.data.data.code)
+          if (newState.schemaJSON.error === '') {
+            newState.schemaJSON.ModalIsOpen = false
+          }
+        } else {
+          newState.schemaJSON.ModalIsOpen = false
+        }
       }
       return newState
     default:

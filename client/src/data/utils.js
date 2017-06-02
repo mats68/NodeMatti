@@ -1,3 +1,5 @@
+import jsonlint from 'jsonlint-mod';
+
 const utils = {
   mergeRecursive: function () {
 
@@ -86,6 +88,14 @@ const utils = {
 
   isContainer(item) {
     return (item.type === "form" || item.type === "panel" || item.type === "tabControl" || item.type === "tab")
+  },
+  validateJSON(text) {
+     try {
+       jsonlint.parse(text)
+       return ''
+     } catch (error) {
+       return error.message
+     }
   }
 }
 

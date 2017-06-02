@@ -215,9 +215,13 @@ const reducer = (state = initialState, action) => {
       return state
     case cn.SCHEMA_JSON:
       if (action.data.status === cn.STATUS.MODAL_CLOSE && action.data.data.isOk) {
-        newState = {}
-        newState.formSchema = action.data.data.code
-        return newState
+        try {
+          newState = {}
+          newState.formSchema = JSON.parse(action.data.data.code)
+          return newState
+        } catch (error) {
+
+        }
       }
       return state
     default:

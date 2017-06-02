@@ -108,7 +108,7 @@ class ToolBox extends React.Component {
         <ModalAddItem isOpen={this.props.designerOptions.newItem.ModalIsOpen} onClose={this.addItem}></ModalAddItem>
         <ModalMessage isOpen={this.props.designerOptions.errorItem.ModalIsOpen} title={"Error on Save"} message={this.props.designerOptions.errorItem.message} onClose={this.closeError}></ModalMessage>
         <ModalSaveSchema isOpen={this.props.designerOptions.newSchema.ModalIsOpen} title={"Save Schema"} onClose={this.saveSchema}></ModalSaveSchema>
-        <ModalSchema schema={this.props.currentformSchema} isOpen={this.props.designerOptions.schemaJSON.ModalIsOpen} title={"Schema JSON"} onClose={this.schemaJSONClose}></ModalSchema>
+        <ModalSchema code={JSON.stringify(this.props.currentformSchema, null, 2)} isOpen={this.props.designerOptions.schemaJSON.ModalIsOpen} error={this.props.designerOptions.schemaJSON.error} title={"Schema JSON"} onClose={this.schemaJSONClose}></ModalSchema>
 
       </div>
     )

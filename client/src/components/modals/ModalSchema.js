@@ -3,27 +3,48 @@ import ModalOkCancel from './ModalOkCancel';
 import CodeMirror from 'components/CodeMirror';
 
 
-const ModalSchema = (props) => {
-  let code = JSON.stringify(props.schema, null, 2)
-  const onClose = (item) => {
-    if (item.isOk) {
-      item.code =  JSON.parse(code)
-    }
-    props.onClose(item)
-  }
-  const onChange = (newCode) => {
-    code = newCode
+
+class ModalSchema extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { code: props.code }
   }
 
-  return (
-    <ModalOkCancel  {...props} onClose={onClose}>
-      <div className="col-12">
-          <div className="form-group">
-            <CodeMirror code={code} onChange={onChange}></CodeMirror>
+  onClose = (item) => {
+    if (item.isOk) {
+      item.code = this.state.code
+    }
+    this.props.onClose(item)
+
+  }
+
+  onChange = (newCode) => {
+    this.setState({ code: newCode })
+  }
+
+  render() {
+    const renderError = () => {
+      if (this.props.error) {
+        return (
+          <div className="alert alert-danger">
+            {this.props.error}
           </div>
-      </div>
-    </ModalOkCancel>
-  )
+        )
+      } else {
+        return null
+      }
+    }
+    return (
+      <ModalOkCancel  {...this.props} onClose={this.onClose}>
+        <div className="col-12">
+          <div className="form-group">
+            <CodeMirror code={this.state.code} onChange={this.onChange}></CodeMirror>
+          </div>
+          {renderError()}
+        </div>
+      </ModalOkCancel>
+    )
+  }
 }
 
 export default ModalSchema
